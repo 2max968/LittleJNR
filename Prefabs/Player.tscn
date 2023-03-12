@@ -1,0 +1,106 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Sounds/jump.wav" type="AudioStream" id=1]
+[ext_resource path="res://Sounds/step0.wav" type="AudioStream" id=2]
+[ext_resource path="res://Sounds/hurt.wav" type="AudioStream" id=3]
+[ext_resource path="res://Sounds/land.wav" type="AudioStream" id=4]
+[ext_resource path="res://Materials/Rainbow.tres" type="Material" id=5]
+[ext_resource path="res://Shaders/SingleColor.gdshader" type="Shader" id=6]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=7]
+[ext_resource path="res://Sprites/Player/Blue.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Light256.png" type="Texture" id=10]
+
+[sub_resource type="ShaderMaterial" id=29]
+shader = ExtResource( 6 )
+shader_param/Color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="RectangleShape2D" id=30]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="OccluderPolygon2D" id=31]
+polygon = PoolVector2Array( -16, 0, -16, -32, 16, -32, 16, 0 )
+
+[node name="Player" type="KinematicBody2D"]
+collision_layer = 2
+script = ExtResource( 7 )
+
+[node name="RotationPivot" type="Node2D" parent="."]
+position = Vector2( 0, -16 )
+
+[node name="Sprites" type="Node2D" parent="RotationPivot"]
+position = Vector2( 0, 16 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="RotationPivot/Sprites"]
+position = Vector2( 0, -16 )
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SpriteRainbow" type="Sprite" parent="RotationPivot/Sprites"]
+visible = false
+material = ExtResource( 5 )
+position = Vector2( 0, -16 )
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HitIndicator" type="Sprite" parent="RotationPivot/Sprites"]
+visible = false
+material = SubResource( 29 )
+position = Vector2( 0, -16 )
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sounds" type="Node2D" parent="."]
+position = Vector2( 0, -16 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="audioJump" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="audioLand" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="audioStep" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource( 2 )
+volume_db = -26.757
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="audioHurt" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -16 )
+shape = SubResource( 30 )
+
+[node name="Light2D" type="Light2D" parent="."]
+visible = false
+position = Vector2( 0, -16 )
+texture = ExtResource( 10 )
+texture_scale = 0.25
+shadow_enabled = true
+shadow_filter = 3
+shadow_filter_smooth = 42.8
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource( 31 )

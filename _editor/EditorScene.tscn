@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://_editor/TileList.gd" type="Script" id=1]
+
+[node name="EditorScene" type="Node2D"]
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 250.0
+margin_bottom = 400.0
+
+[node name="ItemList" type="ItemList" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_columns = 0
+script = ExtResource( 1 )
