@@ -44,6 +44,9 @@ var walkParticlesPrefab = preload("res://Prefabs/WalkParticles.tscn");
 var spriteBlue = preload("res://Sprites/Player/Blue.png");
 var spriteRed = preload("res://Sprites/Player/Red.png");
 var spriteGreen = preload("res://Sprites/Player/Green.png");
+var spriteBlueOutline = preload("res://Sprites/Player/BlueOutline.png");
+var spriteRedOutline = preload("res://Sprites/Player/RedOutline.png");
+var spriteGreenOutline = preload("res://Sprites/Player/GreenOutline.png");
 
 func _init():
 	add_to_group("colorhandler");
@@ -280,10 +283,14 @@ func SetColor(c : String):
 	color = c;
 	if(color == "green"):
 		$RotationPivot/Sprites/Sprite.texture = spriteGreen;
+		$RotationPivot/Sprites/Outline.texture = spriteGreenOutline;
 	if(color == "blue"):
 		$RotationPivot/Sprites/Sprite.texture = spriteBlue;
+		$RotationPivot/Sprites/Outline.texture = spriteBlueOutline;
 	if(color == "red"):
 		$RotationPivot/Sprites/Sprite.texture = spriteRed;
+		$RotationPivot/Sprites/Outline.texture = spriteRedOutline;
+		
 	
 	if(color == "rainbow"):
 		$RotationPivot/Sprites/Sprite.visible = false;

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Sprites/Enemies/BlueSlime.png" type="Texture" id=1]
 [ext_resource path="res://Materials/Rainbow.tres" type="Material" id=2]
 [ext_resource path="res://Scripts/PatrolingEnemy.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Unmodulated.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 16, 16 )
@@ -21,9 +22,11 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
+light_mask = 2
 material = ExtResource( 2 )
 position = Vector2( 0, -16 )
 texture = ExtResource( 1 )
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }

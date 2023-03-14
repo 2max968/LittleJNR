@@ -28,6 +28,25 @@ func _ready():
 	selIndicator.stretch_mode = TextureRect.STRETCH_SCALE
 	#selIndicator.color = Color(0, 0.601563, 0.051697)
 	add_child(selIndicator)
+	
+	if(Config.touchInput):
+		var btnUp := TouchScreenButton.new()
+		var btnDown := TouchScreenButton.new()
+		var btnEnter = TouchScreenButton.new()
+		var icoUp : Texture = load("res://Sprites/UI/TouchUp.png")
+		var icoEnter : Texture = load("res://Sprites/UI/TouchEnter.png")
+		btnUp.normal = icoUp;
+		btnDown.normal = load("res://Sprites/UI/TouchDown.png")
+		btnEnter.normal = icoEnter;
+		add_child(btnUp)
+		add_child(btnDown)
+		add_child(btnEnter)
+		btnUp.position = Vector2(0, -icoUp.get_height())
+		btnDown.position = Vector2(0, spacing*menuLength)
+		btnEnter.global_position = Vector2(800 - 1.5 * icoEnter.get_width(), 450 - 1.5 * icoEnter.get_height())
+		btnUp.action = "ui_up"
+		btnDown.action = "ui_down"
+		btnEnter.action = "ui_accept"
 
 func _process(delta):
 	if(not is_visible_in_tree()):

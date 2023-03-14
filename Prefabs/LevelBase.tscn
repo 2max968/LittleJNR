@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/TilemapOnOffManager.gd" type="Script" id=2]
@@ -20,9 +20,12 @@
 [ext_resource path="res://Sprites/UI/TouchLeft.png" type="Texture" id=18]
 [ext_resource path="res://Sprites/UI/TouchRight.png" type="Texture" id=19]
 [ext_resource path="res://Scripts/Menu/TouchButtons.gd" type="Script" id=20]
+[ext_resource path="res://Sprites/UI/TouchLeftPressed.png" type="Texture" id=21]
+[ext_resource path="res://Sprites/UI/TouchJumpPressed.png" type="Texture" id=22]
+[ext_resource path="res://Sprites/UI/TouchRightPressed.png" type="Texture" id=23]
 
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0, 0, 0, 0.482353 )
+bg_color = Color( 0, 0, 0, 0.658824 )
 
 [sub_resource type="DynamicFont" id=9]
 size = 24
@@ -192,6 +195,7 @@ script = ExtResource( 20 )
 modulate = Color( 1, 1, 1, 0.352941 )
 position = Vector2( 16, 304 )
 normal = ExtResource( 18 )
+pressed = ExtResource( 21 )
 passby_press = true
 action = "move_left"
 
@@ -199,6 +203,7 @@ action = "move_left"
 modulate = Color( 1, 1, 1, 0.352941 )
 position = Vector2( 144, 304 )
 normal = ExtResource( 19 )
+pressed = ExtResource( 23 )
 passby_press = true
 action = "move_right"
 
@@ -206,6 +211,7 @@ action = "move_right"
 modulate = Color( 1, 1, 1, 0.352941 )
 position = Vector2( 656, 304 )
 normal = ExtResource( 17 )
+pressed = ExtResource( 22 )
 action = "move_jump"
 
 [connection signal="item_selected" from="CanvasLayer/PauseMenu/Panel2/Menu" to="CanvasLayer/PauseMenu" method="_on_Menu_item_selected"]
