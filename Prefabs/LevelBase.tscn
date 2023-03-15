@@ -5,29 +5,29 @@
 [ext_resource path="res://Scripts/PauseMenu.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/UILayer.gd" type="Script" id=4]
 [ext_resource path="res://Other/UITheme.tres" type="Theme" id=5]
-[ext_resource path="res://Sprites/UI/heartFull.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/UI/heartFull.png" type="Texture2D" id=6]
 [ext_resource path="res://Scripts/GUI.gd" type="Script" id=7]
-[ext_resource path="res://Sprites/UI/heartNone.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/UI/heartNone.png" type="Texture2D" id=8]
 [ext_resource path="res://Prefabs/KeysView.gd" type="Script" id=9]
-[ext_resource path="res://Sprites/Key.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/KeyOutline.png" type="Texture" id=11]
-[ext_resource path="res://Other/dogicabold.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://Sprites/Key.png" type="Texture2D" id=10]
+[ext_resource path="res://Sprites/KeyOutline.png" type="Texture2D" id=11]
+[ext_resource path="res://Other/dogicabold.ttf" type="FontFile" id=12]
 [ext_resource path="res://Shaders/LevelRoll.gdshader" type="Shader" id=13]
 [ext_resource path="res://Scripts/LevelRoll.gd" type="Script" id=14]
 [ext_resource path="res://Scripts/LblTimer.gd" type="Script" id=15]
 [ext_resource path="res://Scripts/Menu/SelectionMenu.gd" type="Script" id=16]
-[ext_resource path="res://Sprites/UI/TouchJump.png" type="Texture" id=17]
-[ext_resource path="res://Sprites/UI/TouchLeft.png" type="Texture" id=18]
-[ext_resource path="res://Sprites/UI/TouchRight.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/UI/TouchJump.png" type="Texture2D" id=17]
+[ext_resource path="res://Sprites/UI/TouchLeft.png" type="Texture2D" id=18]
+[ext_resource path="res://Sprites/UI/TouchRight.png" type="Texture2D" id=19]
 [ext_resource path="res://Scripts/Menu/TouchButtons.gd" type="Script" id=20]
-[ext_resource path="res://Sprites/UI/TouchLeftPressed.png" type="Texture" id=21]
-[ext_resource path="res://Sprites/UI/TouchJumpPressed.png" type="Texture" id=22]
-[ext_resource path="res://Sprites/UI/TouchRightPressed.png" type="Texture" id=23]
+[ext_resource path="res://Sprites/UI/TouchLeftPressed.png" type="Texture2D" id=21]
+[ext_resource path="res://Sprites/UI/TouchJumpPressed.png" type="Texture2D" id=22]
+[ext_resource path="res://Sprites/UI/TouchRightPressed.png" type="Texture2D" id=23]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 0.658824 )
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="FontFile" id=9]
 size = 24
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
@@ -36,7 +36,7 @@ font_data = ExtResource( 12 )
 [sub_resource type="InputEventAction" id=3]
 action = "ui_cancel"
 
-[sub_resource type="ShortCut" id=4]
+[sub_resource type="Shortcut" id=4]
 shortcut = SubResource( 3 )
 
 [sub_resource type="ShaderMaterial" id=7]
@@ -45,11 +45,11 @@ shader_param/left = 0.0
 shader_param/right = 1.0
 shader_param/color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="FontFile" id=8]
 size = 24
 font_data = ExtResource( 12 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="FontFile" id=5]
 size = 24
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
@@ -60,7 +60,7 @@ font_data = ExtResource( 12 )
 [node name="TilemapOnOffManager" type="Node2D" parent="."]
 script = ExtResource( 2 )
 
-[node name="Camera" type="Node2D" parent="."]
+[node name="Camera3D" type="Node2D" parent="."]
 script = ExtResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -68,22 +68,22 @@ layer = 100
 script = ExtResource( 4 )
 
 [node name="PauseMenu" type="Control" parent="CanvasLayer"]
-pause_mode = 2
+process_mode = 2
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+offset_right = 40.0
+offset_bottom = 40.0
 script = ExtResource( 3 )
 
 [node name="Panel2" type="Panel" parent="CanvasLayer/PauseMenu"]
-margin_right = 800.0
-margin_bottom = 450.0
+offset_right = 800.0
+offset_bottom = 450.0
 custom_styles/panel = SubResource( 2 )
 
 [node name="Menu" type="Control" parent="CanvasLayer/PauseMenu/Panel2"]
-margin_left = 285.0
-margin_top = 201.0
-margin_right = 325.0
-margin_bottom = 241.0
+offset_left = 285.0
+offset_top = 201.0
+offset_right = 325.0
+offset_bottom = 241.0
 script = ExtResource( 16 )
 items = "Continue
 Restart
@@ -93,33 +93,33 @@ spacing = 32
 
 [node name="Panel" type="Panel" parent="CanvasLayer/PauseMenu"]
 visible = false
-margin_left = 128.0
-margin_top = 64.0
-margin_right = 672.0
-margin_bottom = 384.0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 672.0
+offset_bottom = 384.0
 
 [node name="btnContinue" type="Button" parent="CanvasLayer/PauseMenu/Panel"]
-margin_left = 21.0
-margin_top = 85.0
-margin_right = 277.0
-margin_bottom = 117.0
+offset_left = 21.0
+offset_top = 85.0
+offset_right = 277.0
+offset_bottom = 117.0
 theme = ExtResource( 5 )
 shortcut = SubResource( 4 )
 text = "Continue"
 
 [node name="btnRestart" type="Button" parent="CanvasLayer/PauseMenu/Panel"]
-margin_left = 21.0
-margin_top = 125.0
-margin_right = 277.0
-margin_bottom = 157.0
+offset_left = 21.0
+offset_top = 125.0
+offset_right = 277.0
+offset_bottom = 157.0
 theme = ExtResource( 5 )
 text = "Restart"
 
 [node name="btnExit" type="Button" parent="CanvasLayer/PauseMenu/Panel"]
-margin_left = 21.0
-margin_top = 165.0
-margin_right = 277.0
-margin_bottom = 197.0
+offset_left = 21.0
+offset_top = 165.0
+offset_right = 277.0
+offset_bottom = 197.0
 theme = ExtResource( 5 )
 text = "Exit"
 
@@ -127,27 +127,27 @@ text = "Exit"
 position = Vector2( 8, 24 )
 script = ExtResource( 7 )
 
-[node name="Heart1" type="Sprite" parent="CanvasLayer/HealthView"]
+[node name="Heart1" type="Sprite2D" parent="CanvasLayer/HealthView"]
 position = Vector2( 16, 0 )
 texture = ExtResource( 6 )
 
-[node name="Heart2" type="Sprite" parent="CanvasLayer/HealthView"]
+[node name="Heart2" type="Sprite2D" parent="CanvasLayer/HealthView"]
 position = Vector2( 56, 0 )
 texture = ExtResource( 6 )
 
-[node name="Heart3" type="Sprite" parent="CanvasLayer/HealthView"]
+[node name="Heart3" type="Sprite2D" parent="CanvasLayer/HealthView"]
 position = Vector2( 96, 0 )
 texture = ExtResource( 6 )
 
-[node name="Empty1" type="Sprite" parent="CanvasLayer/HealthView"]
+[node name="Empty1" type="Sprite2D" parent="CanvasLayer/HealthView"]
 position = Vector2( 16, 0 )
 texture = ExtResource( 8 )
 
-[node name="Empty2" type="Sprite" parent="CanvasLayer/HealthView"]
+[node name="Empty2" type="Sprite2D" parent="CanvasLayer/HealthView"]
 position = Vector2( 56, 0 )
 texture = ExtResource( 8 )
 
-[node name="Empty3" type="Sprite" parent="CanvasLayer/HealthView"]
+[node name="Empty3" type="Sprite2D" parent="CanvasLayer/HealthView"]
 position = Vector2( 96, 0 )
 texture = ExtResource( 8 )
 
@@ -158,18 +158,18 @@ KeySlotEmpty = ExtResource( 11 )
 KeySlotFull = ExtResource( 10 )
 
 [node name="LevelRoll" type="ColorRect" parent="CanvasLayer"]
-pause_mode = 2
+process_mode = 2
 visible = false
 material = SubResource( 7 )
-margin_right = 800.0
-margin_bottom = 450.0
+offset_right = 800.0
+offset_bottom = 450.0
 script = ExtResource( 14 )
 
 [node name="Menu" type="Control" parent="CanvasLayer/LevelRoll"]
-margin_left = 206.0
-margin_top = 180.0
-margin_right = 596.0
-margin_bottom = 358.0
+offset_left = 206.0
+offset_top = 180.0
+offset_right = 596.0
+offset_bottom = 358.0
 script = ExtResource( 16 )
 items = "Next level
 Try again"
@@ -177,17 +177,17 @@ menuFont = SubResource( 8 )
 spacing = 32
 
 [node name="LblTimer" type="Label" parent="CanvasLayer"]
-margin_left = 140.0
-margin_top = 12.0
-margin_right = 784.0
-margin_bottom = 30.0
+offset_left = 140.0
+offset_top = 12.0
+offset_right = 784.0
+offset_bottom = 30.0
 custom_fonts/font = SubResource( 5 )
 text = "00.00"
 align = 2
 script = ExtResource( 15 )
 
 [node name="TouchButtons" type="Node2D" parent="CanvasLayer"]
-pause_mode = 2
+process_mode = 2
 visible = false
 script = ExtResource( 20 )
 

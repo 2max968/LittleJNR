@@ -1,9 +1,9 @@
 extends Node2D
 class_name GravitationField
 
-export var angle = 180;
-export var rect : Rect2;
-export var color = "";
+@export var angle = 180;
+@export var rect : Rect2;
+@export var color = "";
 var active = false;
 
 func getAngle():

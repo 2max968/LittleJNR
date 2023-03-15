@@ -1,0 +1,17 @@
+res://default_env.tres
+res://Scenes/Title.tscn
+res://Scripts/Player.gd
+res://Scripts/Goal.gd
+res://Scripts/Config.gd
+res://Scripts/Menu/SelectionMenu.gd
+res://Scenes/Levels/World1/Level01.tscn
+res://Tilesets/BlueOn.tres
+res://Tilesets/BlueOff.tres
+res://Tilesets/RedOn.tres
+res://Tilesets/RedOff.tres
+res://Tilesets/GreenOn.tres
+res://Tilesets/GreenOff.tres
+res://Tilesets/Tileset.tres
+res://Other/UITheme.tres
+res://Tilesets/Ice.tres
+res://Scenes/Levels/World1/Level06.tscn

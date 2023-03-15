@@ -9,8 +9,7 @@ func _on_Goal_body_entered(body):
 		if(_str.length() < 2):
 			_str = "0" + _str;
 		var newName = currentName.substr(0, currentName.length() - 7) + _str + ".tscn";
-		var file = File.new();
-		if(file.file_exists(newName)):
+		if(FileAccess.file_exists(newName)):
 			get_tree().call_group("levelControl", "finishLevel", newName);
 		else:
 			get_tree().call_group("levelControl", "finishLevel", "res://Scenes/Menu.tscn");

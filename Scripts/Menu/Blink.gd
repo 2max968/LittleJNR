@@ -1,6 +1,6 @@
 extends Label
 
-export var period : float = 0.5;
+@export var period : float = 0.5;
 
 var timeout : float = 0;
 var on : bool = true;

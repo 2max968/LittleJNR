@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/GravitationField.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/UpsideDownRedOn.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/UpsideDownRedOff.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/UpsideDownRedOn.png" type="Texture2D" id=2]
+[ext_resource path="res://Sprites/UpsideDownRedOff.png" type="Texture2D" id=3]
 
 [node name="UpsideDownRed" type="Node2D"]
 position = Vector2( 640, 480 )
@@ -10,14 +10,14 @@ script = ExtResource( 1 )
 rect = Rect2( 0, 0, 64, 64 )
 color = "red"
 
-[node name="On" type="Sprite" parent="."]
+[node name="On" type="Sprite2D" parent="."]
 position = Vector2( 32, 32 )
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Off" type="Sprite" parent="."]
+[node name="Off" type="Sprite2D" parent="."]
 position = Vector2( 32, 32 )
 texture = ExtResource( 3 )
 __meta__ = {

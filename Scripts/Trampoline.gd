@@ -14,4 +14,4 @@ func _process(delta):
 	var y = 1 - sin(bounce * 2 * PI * BOUNCEFREQ) * exp(-bounce) / 3;
 	var x = 1 / y;
 	var s = Vector2(x, y);
-	$Sprite.scale = s;
+	$Sprite2D.scale = s;

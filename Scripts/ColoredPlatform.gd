@@ -1,14 +1,14 @@
 extends Node2D
 class_name ColoredPlatform
 
-export var color : String;
+@export var color : String;
 var staticBody : StaticBody2D;
 
 func _init():
 	add_to_group("colorhandler");
 
 func _ready():
-	staticBody = $StaticBody;
+	staticBody = $StaticBody3D;
 	_deactivate();
 
 func _activate():

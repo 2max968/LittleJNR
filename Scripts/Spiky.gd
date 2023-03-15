@@ -1,6 +1,6 @@
 extends Node2D
 
-export var color : String;
+@export var color : String;
 var killArea : Area2D;
 
 func _init():

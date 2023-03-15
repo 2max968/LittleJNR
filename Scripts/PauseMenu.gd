@@ -31,7 +31,7 @@ func _on_btnRestart_pressed():
 
 func _on_btnExit_pressed():
 	get_tree().paused = false;
-	get_tree().change_scene("res://Scenes/Menu.tscn");
+	get_tree().change_scene_to_file("res://Scenes/Menu.tscn");
 
 
 func _on_Menu_item_selected(index):

@@ -7,19 +7,19 @@
 [ext_resource path="res://Materials/Rainbow.tres" type="Material" id=5]
 [ext_resource path="res://Shaders/SingleColor.gdshader" type="Shader" id=6]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=7]
-[ext_resource path="res://Sprites/Player/Blue.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Player/Blue.png" type="Texture2D" id=8]
 [ext_resource path="res://Scripts/Unmodulated.gd" type="Script" id=9]
-[ext_resource path="res://Sprites/Player/BlueOutline.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Light256.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Player/BlueOutline.png" type="Texture2D" id=10]
+[ext_resource path="res://Sprites/Light256.png" type="Texture2D" id=11]
 
 [sub_resource type="ShaderMaterial" id=29]
 shader = ExtResource( 6 )
 shader_param/Color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="RectangleShape2D" id=30]
-extents = Vector2( 16, 16 )
+size = Vector2( 16, 16 )
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource( 7 )
 
@@ -32,14 +32,14 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Sprite" type="Sprite" parent="RotationPivot/Sprites"]
+[node name="Sprite2D" type="Sprite2D" parent="RotationPivot/Sprites"]
 position = Vector2( 0, -16 )
 texture = ExtResource( 8 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Outline" type="Sprite" parent="RotationPivot/Sprites"]
+[node name="Outline" type="Sprite2D" parent="RotationPivot/Sprites"]
 self_modulate = Color( 1, 1, 1, 0.352941 )
 light_mask = 2
 position = Vector2( 0, -16 )
@@ -49,7 +49,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="SpriteRainbow" type="Sprite" parent="RotationPivot/Sprites"]
+[node name="SpriteRainbow" type="Sprite2D" parent="RotationPivot/Sprites"]
 visible = false
 light_mask = 2
 material = ExtResource( 5 )
@@ -60,7 +60,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Light2D" type="Light2D" parent="RotationPivot/Sprites/SpriteRainbow"]
+[node name="PointLight2D" type="PointLight2D" parent="RotationPivot/Sprites/SpriteRainbow"]
 texture = ExtResource( 11 )
 texture_scale = 0.5
 energy = 4.87
@@ -69,7 +69,7 @@ shadow_gradient_length = 1.0
 shadow_filter = 5
 shadow_filter_smooth = 12.9
 
-[node name="HitIndicator" type="Sprite" parent="RotationPivot/Sprites"]
+[node name="HitIndicator" type="Sprite2D" parent="RotationPivot/Sprites"]
 visible = false
 light_mask = 2
 material = SubResource( 29 )

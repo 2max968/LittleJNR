@@ -19,12 +19,12 @@ func UnlockKey():
 		add_child(t)
 		t.wait_time = distToPlayer * .001
 		t.one_shot = true
-		t.connect("timeout", self, "openLock")
+		t.connect("timeout",Callable(self,"openLock"))
 		t.start()
 		#openLock()
 
 func openLock():
-	var instance = particles.instance();
+	var instance = particles.instantiate();
 	instance.global_position = global_position + Vector2(16, 16)
 	instance.get_node("part").emitting = true;
 	get_parent().add_child(instance);

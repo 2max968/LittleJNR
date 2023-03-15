@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 class_name PatrolingEnemy, "res://Sprites/Enemies/Slime.png"
 
 enum DIRECTION {LEFT, RIGHT}
@@ -8,7 +8,7 @@ const WALKSPEED = 100.0;
 
 var velocity : Vector2;
 var direction = DIRECTION.RIGHT;
-export var color : String;
+@export var color : String;
 var particles = preload("res://Prefabs/DeathParticles.tscn");
 var deathSoundPrefab = preload("res://Prefabs/EnemyDeathSound.tscn");
 
@@ -17,10 +17,10 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
-	if(direction == DIRECTION.LEFT && $Sprite.scale.x < 1):
-		$Sprite.scale.x = min(1, $Sprite.scale.x + delta * 6);
-	if(direction == DIRECTION.RIGHT && $Sprite.scale.x > -1):
-		$Sprite.scale.x = max(-1, $Sprite.scale.x - delta * 6);
+	if(direction == DIRECTION.LEFT && $Sprite2D.scale.x < 1):
+		$Sprite2D.scale.x = min(1, $Sprite2D.scale.x + delta * 6);
+	if(direction == DIRECTION.RIGHT && $Sprite2D.scale.x > -1):
+		$Sprite2D.scale.x = max(-1, $Sprite2D.scale.x - delta * 6);
 
 func _physics_process(delta):
 	var accel = Vector2(0, GRAVITY);
@@ -46,24 +46,27 @@ func _physics_process(delta):
 	var resultRight = space_state.intersect_ray(posRight, posRight + Vector2(0,1), [self], 1);
 	
 	if(is_on_floor()):
-		if(resultLeft.empty()):
+		if(resultLeft.is_empty()):
 			direction = DIRECTION.RIGHT;
-		if(resultRight.empty()):
+		if(resultRight.is_empty()):
 			direction = DIRECTION.LEFT;
 	
-	var actualMovement = move_and_slide(.5 * accel * delta + velocity, Vector2(0,-1));
+	set_velocity(.5 * accel * delta + velocity)
+	set_up_direction(Vector2(0,-1))
+	move_and_slide()
+	var actualMovement = velocity;
 	velocity += accel * delta;
 
 func _on_Body_body_entered(body):
 	if(body is Player):
 		if(body.position.y < position.y - 8):
 			body.JumpOnEnemy(color);
-			var instance = particles.instance();
+			var instance = particles.instantiate();
 			instance.global_position = global_position - Vector2(0,16);
 			instance.get_node("part").emitting = true;
 			get_parent().add_child(instance);
 			queue_free();
-			var deathSound = deathSoundPrefab.instance();
+			var deathSound = deathSoundPrefab.instantiate();
 			deathSound.global_position = global_position;
 			$"..".add_child(deathSound);
 			deathSound.get_node("audio").play();

@@ -5,12 +5,18 @@ var fullscreen := false;
 
 func _init():
 	loadCfg();
-	OS.window_fullscreen = fullscreen;
+#	if fullscreen:
+#		get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN
+#	else:
+#		get_window().mode = Window.MODE_WINDOWED
 	
 func _process(delta):
 	if( Input.is_action_just_pressed("game_togglefullscreen")):
 		fullscreen = !fullscreen;
-		OS.window_fullscreen = fullscreen;
+		if fullscreen:
+			get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN
+		else:
+			get_window().mode = Window.MODE_WINDOWED
 		saveCfg()
 
 func loadCfg():

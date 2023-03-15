@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform vec4 Color : hint_color;
+uniform vec4 Color : source_color;
 
 void fragment()
 {

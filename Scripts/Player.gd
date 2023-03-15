@@ -1,5 +1,5 @@
-extends KinematicBody2D
-class_name Player, "res://Sprites/Player/Blue.png"
+extends CharacterBody2D
+class_name Player#, "res://Sprites/Player/Blue.png"
 
 const JUMPGRAVITY = 750.0;
 const FALLGRAVITY = JUMPGRAVITY * 3;
@@ -18,7 +18,7 @@ const TRAMPOLINEBOUNCE = 64.0;
 const TRAMPOLINEBOOST = JUMPHEIGHT * 1.5;
 const INVINCIBLETIME = 1.0;
 
-var velocity = Vector2(0,0);
+var _velocity = Vector2(0,0);
 var gravity = FALLGRAVITY;
 var jumping = -1;
 var grounded = -1;
@@ -35,7 +35,7 @@ var invincible = -1;
 var colors = ["blue", "green", "red"];
 var worldColor : String;
 var up = Vector2(0,-1);
-export var defaultRotation : int = 0;
+@export var defaultRotation : int = 0;
 var lastRotation = 0;
 
 var jumpParticlesPrefab = preload("res://Prefabs/JumpParticles.tscn");
@@ -53,17 +53,17 @@ func _init():
 	add_to_group("player");
 
 func _ready():
-	vlimitNode = get_tree().get_root().find_node("VLimit", true, false);
-	hlimitNode = get_tree().get_root().find_node("HLimit", true, false);
-	var camera = get_tree().get_root().find_node("Camera", true, false);
+	vlimitNode = get_tree().get_root().find_child("VLimit", true, false);
+	hlimitNode = get_tree().get_root().find_child("HLimit", true, false);
+	var camera = get_tree().get_root().find_child("Camera3D", true, false);
 	camera.followObject(self);
 	get_tree().call_group("colorhandler", "SetColor", "blue");
 
 func _process(delta):
 	$RotationPivot.rotation_degrees = getGravitation();
-	# Transform Movement to new rotation
+	# Transform3D Movement to new rotation
 	if(lastRotation != $RotationPivot.rotation):
-		velocity = rotatevector(velocity, -$RotationPivot.rotation+lastRotation);
+		_velocity = rotatevector(_velocity, -$RotationPivot.rotation+lastRotation);
 		lastRotation = $RotationPivot.rotation;
 	
 	if(yScale < $RotationPivot/Sprites.scale.x):
@@ -135,17 +135,17 @@ func _physics_process(delta):
 	
 	if(is_on_floor() || is_on_ceiling()):
 		# Play crash sound
-		if(abs(up.dot(velocity)) > 100):
+		if(abs(up.dot(_velocity)) > 100):
 			$Sounds/audioLand.play();
 			lengthStrech = -1;
-		if(up.dot(velocity) < -100):
+		if(up.dot(_velocity) < -100):
 			jumpParticles();
 		# Stop player on ground or ceiling
-		velocity.y = 0;
+		_velocity.y = 0;
 	
 	if(is_on_wall()):
 		# Stop player on wall
-		velocity.x = 0;
+		_velocity.x = 0;
 		# Make maximum fall speed slower at walls
 		if(Input.is_action_pressed(move_left) != Input.is_action_pressed(move_right)):
 			terminalvelocity = WALLSLIDEVELOCITY;
@@ -160,12 +160,12 @@ func _physics_process(delta):
 	if(Input.is_action_pressed(move_left)):
 		targetX = -movespeed;
 		yScale = -1;
-		if(velocity.x > 0):
+		if(_velocity.x > 0):
 			friction *= STOP_FRICTION_FACTOR;
 	elif(Input.is_action_pressed(move_right)):
 		targetX = movespeed;
 		yScale = 1;
-		if(velocity.x < 0):
+		if(_velocity.x < 0):
 			friction *= STOP_FRICTION_FACTOR;
 	
 	if(grounded >= 0 && jumping >= 0):
@@ -173,7 +173,7 @@ func _physics_process(delta):
 		jumping = -1;
 		gravity = JUMPGRAVITY;
 		accel.y = 0;
-		velocity.y = -calcJumpForce(JUMPHEIGHT);
+		_velocity.y = -calcJumpForce(JUMPHEIGHT);
 		$Sounds/audioJump.play();
 		lengthStrech = 1;
 		jumpParticles();
@@ -193,46 +193,49 @@ func _physics_process(delta):
 		if(ileft && !iright):
 			var jumpforce = calcJumpForce(WALLKICKHEIGHT);
 			accel = Vector2(0,0);
-			velocity = Vector2(jumpforce, -jumpforce);
+			_velocity = Vector2(jumpforce, -jumpforce);
 			gravity = JUMPGRAVITY;
 			lengthStrech = 1;
 			$Sounds/audioJump.play();
 		if(iright && !ileft):
 			var jumpforce = calcJumpForce(WALLKICKHEIGHT);
 			accel = Vector2(0,0);
-			velocity = Vector2(-jumpforce, -jumpforce);
+			_velocity = Vector2(-jumpforce, -jumpforce);
 			gravity = JUMPGRAVITY;
 			lengthStrech = 1;
 			$Sounds/audioJump.play();
 		
-	if(!(Input.is_action_pressed("move_jump") || Input.is_action_pressed(jump_alt)) || velocity.y >= 0):
+	if(!(Input.is_action_pressed("move_jump") || Input.is_action_pressed(jump_alt)) || _velocity.y >= 0):
 		gravity = FALLGRAVITY;
 	
 	if(jumping >= 0 && trampolinetime >= 0):
-		velocity.y = -calcJumpForce(TRAMPOLINEBOOST);
+		_velocity.y = -calcJumpForce(TRAMPOLINEBOOST);
 		gravity = JUMPGRAVITY;
 	
-	if(velocity.x < targetX):
-		velocity.x = min(velocity.x + friction * delta, targetX);
-	elif(velocity.x > targetX):
-		velocity.x = max(velocity.x - friction * delta, targetX);
+	if(_velocity.x < targetX):
+		_velocity.x = min(_velocity.x + friction * delta, targetX);
+	elif(_velocity.x > targetX):
+		_velocity.x = max(_velocity.x - friction * delta, targetX);
 		
-	if(velocity.y > terminalvelocity):
-		velocity.y = terminalvelocity;
+	if(_velocity.y > terminalvelocity):
+		_velocity.y = terminalvelocity;
 		accel.y = 0;
 	
 	var _rot = $RotationPivot.rotation;
 	var _accel = rotatevector(accel, _rot);
-	var _vel = rotatevector(velocity, _rot);
+	var _vel = rotatevector(_velocity, _rot);
 	var _up = Vector2(sin(_rot), -cos(_rot));
-	var actualMovement = move_and_slide(.5 * _accel * delta + _vel, _up);
-	velocity += accel * delta;
+	set_velocity(.5 * _accel * delta + _vel)
+	set_up_direction(_up)
+	move_and_slide()
+	var actualMovement = _velocity;
+	_velocity += accel * delta;
 	if(is_on_floor()):
 		steptime -= abs(actualMovement.x) * delta;
 	if(steptime <= 0):
 		steptime = 48;
 		walkParticles();
-		$Sounds/audioStep.pitch_scale = rand_range(.5, 2);
+		$Sounds/audioStep.pitch_scale = randf_range(.5, 2);
 		$Sounds/audioStep.play();
 	
 	# Handle outside world
@@ -252,13 +255,13 @@ func Kill():
 	get_tree().call_group("levelControl", "die");
 
 func jumpParticles():
-	var instance = jumpParticlesPrefab.instance();
+	var instance = jumpParticlesPrefab.instantiate();
 	instance.global_position = $RotationPivot/Sprites.global_position;
 	instance.emitting = true;
 	$"..".add_child(instance);
 
 func walkParticles():
-	var instance = walkParticlesPrefab.instance();
+	var instance = walkParticlesPrefab.instantiate();
 	instance.global_position = $RotationPivot/Sprites.global_position;
 	instance.emitting = true;
 	$"..".add_child(instance);
@@ -268,7 +271,7 @@ func Damage(amount : int):
 		health = max(0, health - amount);
 		invincible = INVINCIBLETIME;
 	get_tree().call_group("playerstate", "Health", health);
-	velocity *= -1;
+	_velocity *= -1;
 	if(health <= 0):
 		Kill();
 
@@ -282,26 +285,26 @@ func SetColor(c : String):
 		return;
 	color = c;
 	if(color == "green"):
-		$RotationPivot/Sprites/Sprite.texture = spriteGreen;
+		$RotationPivot/Sprites/Sprite2D.texture = spriteGreen;
 		$RotationPivot/Sprites/Outline.texture = spriteGreenOutline;
 	if(color == "blue"):
-		$RotationPivot/Sprites/Sprite.texture = spriteBlue;
+		$RotationPivot/Sprites/Sprite2D.texture = spriteBlue;
 		$RotationPivot/Sprites/Outline.texture = spriteBlueOutline;
 	if(color == "red"):
-		$RotationPivot/Sprites/Sprite.texture = spriteRed;
+		$RotationPivot/Sprites/Sprite2D.texture = spriteRed;
 		$RotationPivot/Sprites/Outline.texture = spriteRedOutline;
 		
 	
 	if(color == "rainbow"):
-		$RotationPivot/Sprites/Sprite.visible = false;
+		$RotationPivot/Sprites/Sprite2D.visible = false;
 		$RotationPivot/Sprites/SpriteRainbow.visible = true;
 	else:
-		$RotationPivot/Sprites/Sprite.visible = true;
+		$RotationPivot/Sprites/Sprite2D.visible = true;
 		$RotationPivot/Sprites/SpriteRainbow.visible = false;
 
 func Trampoline():
 	trampolinetime = JUMPBUFFER;
-	velocity.y = -calcJumpForce(TRAMPOLINEBOUNCE, FALLGRAVITY);
+	_velocity.y = -calcJumpForce(TRAMPOLINEBOUNCE, FALLGRAVITY);
 
 func rotatevector(v : Vector2, a : float):
 	var s = sin(a);

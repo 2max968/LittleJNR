@@ -1,6 +1,6 @@
 extends Node
 
-export var levelPath : String = "res://Scenes/Levels/Demos/LoaderTest.tres"
+@export var levelPath : String = "res://Scenes/Levels/Demos/LoaderTest.tres"
 
 func _ready():
 	loadLevel(levelPath)
@@ -26,7 +26,7 @@ func loadLevel(path : String):
 			break
 		var oText : String = lvl.get_value("Objects", str(i))
 		var words := oText.split(';')
-		var obj = load(words[0]).instance()
+		var obj = load(words[0]).instantiate()
 		obj.position = Vector2(float(words[1]), float(words[2])) * 32
 		$"../Level".add_child(obj)
 		i += 1

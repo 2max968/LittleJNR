@@ -5,8 +5,8 @@
 [node name="EditorScene" type="Node2D"]
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 250.0
-margin_bottom = 400.0
+offset_right = 250.0
+offset_bottom = 400.0
 
 [node name="ItemList" type="ItemList" parent="Panel"]
 anchor_right = 1.0

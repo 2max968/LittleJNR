@@ -4,8 +4,8 @@ var numKeys : = 0;
 var keysUnlocked : = 0;
 var sprites : = [];
 
-export var KeySlotEmpty : Texture;
-export var KeySlotFull : Texture;
+@export var KeySlotEmpty : Texture2D;
+@export var KeySlotFull : Texture2D;
 
 var currentSpriteX : = 0
 
@@ -14,7 +14,7 @@ func _init():
 
 func AddKey():
 	numKeys += 1;
-	var sprite : = Sprite.new();
+	var sprite : = Sprite2D.new();
 	add_child(sprite);
 	sprite.position = Vector2(currentSpriteX, 0);
 	currentSpriteX += 40;

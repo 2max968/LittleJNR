@@ -1,37 +1,44 @@
-[gd_resource type="Theme" load_steps=9 format=2]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://b6hrpq4aefrnh"]
 
-[ext_resource path="res://Sprites/UI/Button.png" type="Texture" id=1]
-[ext_resource path="res://Sprites/UI/ButtonSelected.png" type="Texture" id=2]
-[ext_resource path="res://Other/dogica.ttf" type="DynamicFontData" id=3]
+[ext_resource type="Texture2D" uid="uid://djfs2qkxjttbi" path="res://Sprites/UI/Button.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://8tbrwxvi821g" path="res://Sprites/UI/ButtonSelected.png" id="2"]
+[ext_resource type="FontFile" uid="uid://c8anreyjqakqu" path="res://Other/dogica.ttf" id="3"]
 
-[sub_resource type="DynamicFont" id=9]
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 3 )
+[sub_resource type="FontFile" id="9"]
+fallbacks = Array[Font]([ExtResource("3")])
+face_index = null
+embolden = null
+transform = null
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
-[sub_resource type="StyleBoxTexture" id=6]
-texture = ExtResource( 2 )
-region_rect = Rect2( 0, 0, 96, 32 )
+[sub_resource type="StyleBoxTexture" id="6"]
+texture = ExtResource("2")
+region_rect = Rect2(0, 0, 96, 32)
 
-[sub_resource type="StyleBoxTexture" id=7]
-texture = ExtResource( 2 )
-region_rect = Rect2( 0, 0, 96, 32 )
-modulate_color = Color( 0.372549, 0.372549, 0.372549, 1 )
+[sub_resource type="StyleBoxTexture" id="7"]
+texture = ExtResource("2")
+region_rect = Rect2(0, 0, 96, 32)
+modulate_color = Color(0.372549, 0.372549, 0.372549, 1)
 
-[sub_resource type="StyleBoxTexture" id=5]
-texture = ExtResource( 1 )
-region_rect = Rect2( 0, 0, 96, 32 )
+[sub_resource type="StyleBoxTexture" id="5"]
+texture = ExtResource("1")
 axis_stretch_horizontal = 2
+region_rect = Rect2(0, 0, 96, 32)
 
-[sub_resource type="StyleBoxTexture" id=8]
-texture = ExtResource( 2 )
-region_rect = Rect2( 0, 0, 96, 32 )
-modulate_color = Color( 0.380392, 0.380392, 0.380392, 1 )
+[sub_resource type="StyleBoxTexture" id="8"]
+texture = ExtResource("2")
+region_rect = Rect2(0, 0, 96, 32)
+modulate_color = Color(0.380392, 0.380392, 0.380392, 1)
 
 [resource]
-Button/fonts/font = SubResource( 9 )
+Button/fonts/font = SubResource("9")
 Button/styles/disabled = null
-Button/styles/focus = SubResource( 6 )
-Button/styles/hover = SubResource( 7 )
-Button/styles/normal = SubResource( 5 )
-Button/styles/pressed = SubResource( 8 )
+Button/styles/focus = SubResource("6")
+Button/styles/hover = SubResource("7")
+Button/styles/normal = SubResource("5")
+Button/styles/pressed = SubResource("8")

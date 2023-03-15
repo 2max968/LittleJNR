@@ -2,9 +2,9 @@ extends Control
 
 signal item_selected(index)
 
-export(String, MULTILINE) var items : String;
-export var menuFont : Font = null;
-export var spacing : int = 16;
+@export var items : String; # (String, MULTILINE)
+@export var menuFont : Font = null;
+@export var spacing : int = 16;
 
 var selected : int = 0;
 var selIndicator : TextureRect;
@@ -16,11 +16,11 @@ func _ready():
 	var x = 0;
 	for itm in itmList:
 		var label := Label.new();
-		label.margin_left = 0;
-		label.margin_top = x;
+		label.offset_left = 0;
+		label.offset_top = x;
 		label.text = itm;
 		if(menuFont != null):
-			label.add_font_override("font", menuFont)
+			label.add_theme_font_override("font", menuFont)
 		x += spacing;
 		add_child(label);
 	selIndicator = TextureRect.new();
@@ -33,11 +33,11 @@ func _ready():
 		var btnUp := TouchScreenButton.new()
 		var btnDown := TouchScreenButton.new()
 		var btnEnter = TouchScreenButton.new()
-		var icoUp : Texture = load("res://Sprites/UI/TouchUp.png")
-		var icoEnter : Texture = load("res://Sprites/UI/TouchEnter.png")
-		btnUp.normal = icoUp;
-		btnDown.normal = load("res://Sprites/UI/TouchDown.png")
-		btnEnter.normal = icoEnter;
+		var icoUp : Texture2D = load("res://Sprites/UI/TouchUp.png")
+		var icoEnter : Texture2D = load("res://Sprites/UI/TouchEnter.png")
+		btnUp.texture_normal = icoUp;
+		btnDown.texture_normal = load("res://Sprites/UI/TouchDown.png")
+		btnEnter.texture_normal = icoEnter;
 		add_child(btnUp)
 		add_child(btnDown)
 		add_child(btnEnter)
@@ -56,9 +56,9 @@ func _process(delta):
 	if(Input.is_action_just_pressed("ui_up")):
 		selected = (selected - 1 + menuLength) % menuLength;
 	
-	selIndicator.margin_left = -spacing;
-	selIndicator.margin_right = 0;
-	selIndicator.margin_top = selected * spacing;
-	selIndicator.margin_bottom = selected * spacing + spacing;
+	selIndicator.offset_left = -spacing;
+	selIndicator.offset_right = 0;
+	selIndicator.offset_top = selected * spacing;
+	selIndicator.offset_bottom = selected * spacing + spacing;
 	if(Input.is_action_just_pressed("ui_accept")):
 		emit_signal("item_selected", selected);

@@ -8,21 +8,21 @@ var vlimitNode : Node2D;
 var column1 : ColorRect;
 var column2 : ColorRect;
 var bgrSprite : TextureRect;
-export var blackColumns = true;
+@export var blackColumns = true;
 var uiLayers = [];
 
 func _init():
 	add_to_group("limits")
 
 func updateLimits():
-	hlimitNode = get_tree().get_root().find_node("HLimit", true, false);
-	vlimitNode = get_tree().get_root().find_node("VLimit", true, false);
+	hlimitNode = get_tree().get_root().find_child("HLimit", true, false);
+	vlimitNode = get_tree().get_root().find_child("VLimit", true, false);
 
 func _ready():
-	self.pause_mode = Node.PAUSE_MODE_PROCESS;
+	self.process_mode = Node.PROCESS_MODE_ALWAYS;
 	ViewportSize = Vector2(800, 450);
-	hlimitNode = get_tree().get_root().find_node("HLimit", true, false);
-	vlimitNode = get_tree().get_root().find_node("VLimit", true, false);
+	hlimitNode = get_tree().get_root().find_child("HLimit", true, false);
+	vlimitNode = get_tree().get_root().find_child("VLimit", true, false);
 	
 	uiLayers = get_tree().get_nodes_in_group("uilayer");
 	
@@ -30,8 +30,8 @@ func _ready():
 		column1 = ColorRect.new();
 		column2 = ColorRect.new();
 		bgrSprite = TextureRect.new();
-		column1.color = Color.black;
-		column2.color = Color.black;
+		column1.color = Color.BLACK;
+		column2.color = Color.BLACK;
 		var layer = CanvasLayer.new();
 		var layer2 = CanvasLayer.new();
 		layer.layer = 1;
@@ -91,46 +91,46 @@ func _process(delta : float):
 	if(column1 != null && column2 != null):
 		# Horizontal Columns
 		if(cheight > 0):
-			column1.margin_top = 0;
-			column1.margin_left = 0;
-			column1.margin_bottom = cheight;
-			column1.margin_right = size.x;
-			column2.margin_top = size.y - cheight;
-			column2.margin_left = 0;
-			column2.margin_bottom = size.y;
-			column2.margin_right = size.x;
-			bgrSprite.margin_left = 0;
-			bgrSprite.margin_right = size.x;
-			bgrSprite.margin_top = cheight;
-			bgrSprite.margin_bottom = size.y - cheight;
+			column1.offset_top = 0;
+			column1.offset_left = 0;
+			column1.offset_bottom = cheight;
+			column1.offset_right = size.x;
+			column2.offset_top = size.y - cheight;
+			column2.offset_left = 0;
+			column2.offset_bottom = size.y;
+			column2.offset_right = size.x;
+			bgrSprite.offset_left = 0;
+			bgrSprite.offset_right = size.x;
+			bgrSprite.offset_top = cheight;
+			bgrSprite.offset_bottom = size.y - cheight;
 		# Vertical Columns
 		elif(cwidth > 0):
-			column1.margin_top = 0;
-			column1.margin_left = 0;
-			column1.margin_bottom = size.y;
-			column1.margin_right = cwidth;
-			column2.margin_top = 0;
-			column2.margin_left = size.x - cwidth;
-			column2.margin_bottom = size.y;
-			column2.margin_right = size.x;
-			bgrSprite.margin_left = cwidth;
-			bgrSprite.margin_right = size.x - cwidth;
-			bgrSprite.margin_top = 0;
-			bgrSprite.margin_bottom = size.y;
+			column1.offset_top = 0;
+			column1.offset_left = 0;
+			column1.offset_bottom = size.y;
+			column1.offset_right = cwidth;
+			column2.offset_top = 0;
+			column2.offset_left = size.x - cwidth;
+			column2.offset_bottom = size.y;
+			column2.offset_right = size.x;
+			bgrSprite.offset_left = cwidth;
+			bgrSprite.offset_right = size.x - cwidth;
+			bgrSprite.offset_top = 0;
+			bgrSprite.offset_bottom = size.y;
 		# No Columns
 		else:
-			column1.margin_top = 0;
-			column1.margin_left = 0;
-			column1.margin_bottom = 0;
-			column1.margin_right = 0;
-			column2.margin_top = 0;
-			column2.margin_left = 0;
-			column2.margin_bottom = 0;
-			column2.margin_right = 0;
-			bgrSprite.margin_left = 0;
-			bgrSprite.margin_right = size.x;
-			bgrSprite.margin_top = 0;
-			bgrSprite.margin_bottom = size.y;
+			column1.offset_top = 0;
+			column1.offset_left = 0;
+			column1.offset_bottom = 0;
+			column1.offset_right = 0;
+			column2.offset_top = 0;
+			column2.offset_left = 0;
+			column2.offset_bottom = 0;
+			column2.offset_right = 0;
+			bgrSprite.offset_left = 0;
+			bgrSprite.offset_right = size.x;
+			bgrSprite.offset_top = 0;
+			bgrSprite.offset_bottom = size.y;
 	
 func followObject(node : Node2D):
 	ObjectToFollow = node;
