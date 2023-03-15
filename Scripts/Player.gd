@@ -269,6 +269,7 @@ func Damage(amount : int):
 		invincible = INVINCIBLETIME;
 	get_tree().call_group("playerstate", "Health", health);
 	velocity *= -1;
+	velocity = velocity / velocity.length() * 512;
 	if(health <= 0):
 		Kill();
 

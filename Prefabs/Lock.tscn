@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Sprites/Lock.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Lock.gd" type="Script" id=2]
@@ -6,6 +6,9 @@
 
 [sub_resource type="RectangleShape2D" id=28]
 extents = Vector2( 16, 16 )
+
+[sub_resource type="OccluderPolygon2D" id=29]
+polygon = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [node name="Lock" type="StaticBody2D"]
 script = ExtResource( 2 )
@@ -26,3 +29,6 @@ __meta__ = {
 
 [node name="sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource( 29 )

@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Tilesets/GreenOn.tres" type="TileSet" id=1]
 [ext_resource path="res://Tilesets/Tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Sprites/Finish.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/LightFull.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Particle.png" type="Texture" id=5]
 [ext_resource path="res://Tilesets/BlueOn.tres" type="TileSet" id=6]
 [ext_resource path="res://Tilesets/RedOn.tres" type="TileSet" id=7]
@@ -23,6 +24,7 @@ colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 [node name="Node2D" type="Node2D"]
 
 [node name="Level" type="Node2D" parent="."]
+modulate = Color( 0.290196, 0.290196, 0.290196, 1 )
 
 [node name="HLimit" type="Node2D" parent="Level"]
 position = Vector2( 1312, 0 )
@@ -119,6 +121,17 @@ emission_shape = 2
 emission_rect_extents = Vector2( 32, 1 )
 gravity = Vector2( 0, -50 )
 color_ramp = SubResource( 6 )
+
+[node name="Light2D" type="Light2D" parent="Level"]
+position = Vector2( 3131.13, -3525.52 )
+rotation = 0.565487
+scale = Vector2( 1.22636, 1.78258 )
+texture = ExtResource( 4 )
+offset = Vector2( 0, 2000 )
+texture_scale = 1.82
+energy = 3.22
+shadow_enabled = true
+shadow_filter = 2
 
 [node name="LevelBase" parent="." instance=ExtResource( 15 )]
 position = Vector2( 120, 80 )
