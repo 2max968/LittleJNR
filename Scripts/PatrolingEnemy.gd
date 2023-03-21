@@ -56,7 +56,7 @@ func _physics_process(delta):
 
 func _on_Body_body_entered(body):
 	if(body is Player):
-		if(body.position.y < position.y - 8):
+		if(body.oldPosition.y < position.y - 8):
 			body.JumpOnEnemy(color);
 			var instance = particles.instance();
 			instance.global_position = global_position - Vector2(0,16);

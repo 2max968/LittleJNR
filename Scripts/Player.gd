@@ -37,6 +37,7 @@ var worldColor : String;
 var up = Vector2(0,-1);
 export var defaultRotation : int = 0;
 var lastRotation = 0;
+var oldPosition : Vector2
 
 var jumpParticlesPrefab = preload("res://Prefabs/JumpParticles.tscn");
 var walkParticlesPrefab = preload("res://Prefabs/WalkParticles.tscn");
@@ -225,6 +226,7 @@ func _physics_process(delta):
 	var _accel = rotatevector(accel, _rot);
 	var _vel = rotatevector(velocity, _rot);
 	var _up = Vector2(sin(_rot), -cos(_rot));
+	oldPosition = position
 	var actualMovement = move_and_slide(.5 * _accel * delta + _vel, _up);
 	velocity += accel * delta;
 	if(is_on_floor()):

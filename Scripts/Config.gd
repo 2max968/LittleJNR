@@ -4,6 +4,7 @@ var touchInput := false;
 var fullscreen := false;
 
 func _init():
+	self.set_pause_mode(Node.PAUSE_MODE_PROCESS)
 	loadCfg();
 	OS.window_fullscreen = fullscreen;
 	

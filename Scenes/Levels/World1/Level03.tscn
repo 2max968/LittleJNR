@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Tilesets/GreenOn.tres" type="TileSet" id=1]
 [ext_resource path="res://Tilesets/Tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Sprites/Finish.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Lightmap.gd" type="Script" id=4]
 [ext_resource path="res://Sprites/Particle.png" type="Texture" id=5]
 [ext_resource path="res://Tilesets/BlueOn.tres" type="TileSet" id=6]
 [ext_resource path="res://Tilesets/RedOn.tres" type="TileSet" id=7]
@@ -86,6 +87,12 @@ emission_shape = 2
 emission_rect_extents = Vector2( 32, 1 )
 gravity = Vector2( 0, -50 )
 color_ramp = SubResource( 6 )
+
+[node name="Lightmap" type="TextureRect" parent="Level"]
+visible = false
+margin_right = 1312.0
+margin_bottom = 582.0
+script = ExtResource( 4 )
 
 [node name="LevelBase" parent="." instance=ExtResource( 15 )]
 position = Vector2( 120, 80 )
