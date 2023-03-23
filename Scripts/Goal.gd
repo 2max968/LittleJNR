@@ -13,4 +13,4 @@ func _on_Goal_body_entered(body):
 		if(file.file_exists(newName)):
 			get_tree().call_group("levelControl", "finishLevel", newName);
 		else:
-			get_tree().call_group("levelControl", "finishLevel", "res://Scenes/Menu.tscn");
+			get_tree().call_group("levelControl", "finishLevel", "res://Scenes/LevelSelect.tscn");

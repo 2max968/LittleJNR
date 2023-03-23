@@ -62,3 +62,9 @@ func _process(delta):
 	selIndicator.margin_bottom = selected * spacing + spacing;
 	if(Input.is_action_just_pressed("ui_accept")):
 		emit_signal("item_selected", selected);
+
+func loadItems(items : String):
+	for child in get_children():
+		child.queue_free()
+	self.items = items
+	_ready()
