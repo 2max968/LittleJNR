@@ -7,4 +7,8 @@ func _ready():
 
 func _process(delta):
 	if(Input.is_action_just_pressed("ui_accept")):
-		get_tree().change_scene("res://Scenes/Levels/World1/Level01.tscn");
+		var level := Config.currentLevel
+		var file := File.new()
+		if(level == "" or not file.file_exists(level) or not "Scenes/Levels/" in level):
+			level = "res://Scenes/Levels/World1/Level01.tscn"
+		get_tree().change_scene(level)

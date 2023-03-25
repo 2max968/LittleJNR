@@ -67,6 +67,8 @@ func finishLevel(level : String):
 	io = INOUTRO.Outro;
 	get_tree().paused = true;
 	t = 0;
+	Config.currentLevel = nextLevel
+	Config.saveCfg()
 	
 func die():
 	nextLevel = "";

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Tilesets/GreenOn.tres" type="TileSet" id=1]
 [ext_resource path="res://Tilesets/Tileset.tres" type="TileSet" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Scripts/Goal.gd" type="Script" id=8]
 [ext_resource path="res://Prefabs/BlueSlime.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Prefabs/GreenSlime.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scripts/LevelProperties.gd" type="Script" id=11]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Prefabs/RedSlime.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Prefabs/LevelBase.tscn" type="PackedScene" id=15]
@@ -24,6 +25,7 @@ colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [node name="Level" type="Node2D" parent="."]
 modulate = Color( 0.52549, 0.52549, 0.52549, 1 )
+script = ExtResource( 11 )
 
 [node name="HLimit" type="Node2D" parent="Level"]
 position = Vector2( 2976, 0 )

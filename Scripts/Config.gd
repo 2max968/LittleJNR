@@ -2,6 +2,7 @@ extends Node
 
 var touchInput := false;
 var fullscreen := false;
+var currentLevel := "";
 
 func _init():
 	self.set_pause_mode(Node.PAUSE_MODE_PROCESS)
@@ -19,9 +20,11 @@ func loadCfg():
 	cfg.load("config.ini");
 	touchInput = cfg.get_value("Input", "touch", touchInput);
 	fullscreen = cfg.get_value("View", "fullscreen", fullscreen);
+	currentLevel = cfg.get_value("State", "currentLevel", currentLevel);
 
 func saveCfg():
 	var cfg := ConfigFile.new();
 	cfg.set_value("Input", "touch", touchInput);
 	cfg.set_value("View", "fullscreen", fullscreen);
+	cfg.set_value("State", "currentLevel", currentLevel);
 	cfg.save("config.ini");
