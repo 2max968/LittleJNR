@@ -1,2 +1,5 @@
 [World]
 background = "res://Sprites/Background/DeepCave.png"
+
+[Level01]
+background = "res://Sprites/Background/Black.png"

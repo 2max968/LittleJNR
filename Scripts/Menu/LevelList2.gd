@@ -4,6 +4,9 @@ var worlds := []
 var time := 0.2
 var isReady := false
 
+func _ready():
+	get_tree().paused = false
+
 func _process(delta):
 	time -= delta
 	if(time > 0 or isReady):

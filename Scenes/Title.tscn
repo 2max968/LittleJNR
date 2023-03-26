@@ -39,7 +39,7 @@ period = 1.0
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="CanvasLayer"]
 shape = SubResource( 2 )
-action = "ui_accept"
+action = "ui_touchinp"
 
 [node name="Node2D" type="Node2D" parent="."]
 script = ExtResource( 4 )

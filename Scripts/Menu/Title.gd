@@ -6,7 +6,8 @@ func _ready():
 	OS.window_size = size;
 
 func _process(delta):
-	if(Input.is_action_just_pressed("ui_accept")):
+	if(Input.is_action_just_pressed("ui_touchinp") or Input.is_action_just_pressed("ui_accept")):
+		Config.touchInput = Input.is_action_just_pressed("ui_touchinp")
 		var level := Config.currentLevel
 		var file := File.new()
 		if(level == "" or not file.file_exists(level) or not "Scenes/Levels/" in level):
