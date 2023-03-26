@@ -36,7 +36,9 @@ func _ready():
 		var layer2 = CanvasLayer.new();
 		layer.layer = 1;
 		layer2.layer = -100;
-		bgrSprite.texture = preload("res://Sprites/BgrMountains/Full.png");
+		var levelPath := get_tree().current_scene.filename
+		#bgrSprite.texture = preload("res://Sprites/BgrMountains/Full.png");
+		bgrSprite.texture = load(LevelProperties.GetLevelBackground1(levelPath))
 		bgrSprite.expand = true;
 		add_child(layer);
 		add_child(layer2);

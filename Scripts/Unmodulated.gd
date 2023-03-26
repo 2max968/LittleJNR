@@ -1,4 +1,4 @@
-extends Sprite
+extends Node2D
 
 
 # Declare member variables here. Examples:
@@ -20,4 +20,5 @@ func _process(delta):
 			col *= p.modulate
 		p = p.get_parent()
 	
-	modulate = Color(1/col.r, 1/col.g, 1/col.b);
+	var alpha := modulate.a
+	modulate = Color(1/col.r, 1/col.g, 1/col.b, alpha)

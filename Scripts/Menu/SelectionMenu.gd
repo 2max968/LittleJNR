@@ -51,9 +51,9 @@ func _ready():
 func _process(delta):
 	if(not is_visible_in_tree()):
 		return;
-	if(Input.is_action_just_pressed("ui_down")):
+	if(Input.is_action_just_pressed("ui_down") or Input.is_action_just_pressed("move_down")):
 		selected = (selected + 1) % menuLength
-	if(Input.is_action_just_pressed("ui_up")):
+	if(Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("move_up")):
 		selected = (selected - 1 + menuLength) % menuLength;
 	
 	selIndicator.margin_left = -spacing;

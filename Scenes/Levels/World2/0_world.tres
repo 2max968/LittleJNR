@@ -1,3 +1,2 @@
-[gd_resource type="TextFile" format=2]
-
-[resource]
+[World]
+background = "res://Sprites/Background/DeepCave.png"

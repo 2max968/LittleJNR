@@ -277,7 +277,8 @@ func Damage(amount : int):
 
 func JumpOnEnemy(color : String):
 	Trampoline();
-	get_tree().call_group("colorhandler", "SetColor", color);
+	if(color != ""):
+		get_tree().call_group("colorhandler", "SetColor", color);
 
 func SetColor(c : String):
 	worldColor = c;

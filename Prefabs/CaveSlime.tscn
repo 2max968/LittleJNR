@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Sprites/Enemies/CaveSlime2.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Enemies/CaveSlime1.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/CaveSlime.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Unmodulated.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 12 )
+
+[node name="CaveSlime" type="KinematicBody2D"]
+light_mask = 2
+collision_layer = 2
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -12 )
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SpriteIdle" type="Sprite" parent="."]
+light_mask = 2
+position = Vector2( 0, -16 )
+texture = ExtResource( 2 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SpriteMoveR" type="Sprite" parent="."]
+visible = false
+light_mask = 2
+position = Vector2( 0, -16 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SpriteMoveL" type="Sprite" parent="."]
+visible = false
+light_mask = 2
+position = Vector2( 0, -16 )
+texture = ExtResource( 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 0, -2 )
+cast_to = Vector2( 32, 0 )
+
+[node name="Body" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Body"]
+position = Vector2( 0, -12 )
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="body_entered" from="Body" to="." method="_on_Body_body_entered"]

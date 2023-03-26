@@ -69,6 +69,21 @@ func finishLevel(level : String):
 	t = 0;
 	Config.currentLevel = nextLevel
 	Config.saveCfg()
+	var levelTime : float = $"../LblTimer".time
+	var levelPath := get_tree().current_scene.filename
+	var world := LevelProperties.GetWorldName(levelPath)
+	var levelName := LevelProperties.GetLevelName(levelPath)
+	var bestTime := Savegame.getTime(world, levelName)
+	if not is_nan(bestTime):
+		$"../LblBestTime".text = "Best Time: " + LevelTimer.getFormattedTime(bestTime)
+		$"../LblBestTime".visible = true
+		
+	if is_nan(bestTime) or levelTime < bestTime:
+		Savegame.setTime(world, levelName, levelTime)
+		Savegame.saveGame()
+	
+	if not is_nan(bestTime) and levelTime < bestTime:
+		$"../LblNewBesttime".visible = true
 	
 func die():
 	nextLevel = "";
