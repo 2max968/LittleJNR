@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/TilemapOnOffManager.gd" type="Script" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://Sprites/UI/TouchLeftPressed.png" type="Texture" id=21]
 [ext_resource path="res://Sprites/UI/TouchJumpPressed.png" type="Texture" id=22]
 [ext_resource path="res://Sprites/UI/TouchRightPressed.png" type="Texture" id=23]
+[ext_resource path="res://Sprites/UI/TouchPause.png" type="Texture" id=24]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 0.658824 )
@@ -234,6 +235,12 @@ position = Vector2( 656, 304 )
 normal = ExtResource( 17 )
 pressed = ExtResource( 22 )
 action = "move_jump"
+
+[node name="BtnMenu" type="TouchScreenButton" parent="CanvasLayer/TouchButtons"]
+modulate = Color( 1, 1, 1, 0.352941 )
+position = Vector2( 405, 8 )
+normal = ExtResource( 24 )
+action = "game_pause"
 
 [connection signal="item_selected" from="CanvasLayer/PauseMenu/Panel2/Menu" to="CanvasLayer/PauseMenu" method="_on_Menu_item_selected"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/Panel/btnContinue" to="CanvasLayer/PauseMenu" method="_on_btnContinue_pressed"]

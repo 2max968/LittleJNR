@@ -40,13 +40,17 @@ func _physics_process(delta):
 		if checkStopCondition(true, Vector2.ZERO):
 			switchState(States.IdleRight)
 		else:
-			move_and_collide(Vector2(DASH_SPEED, 0) * delta)
+			var collision := move_and_collide(Vector2(DASH_SPEED, 0) * delta)
+			if(collision != null and collision.normal.x < -0.5):
+				switchState(States.IdleRight)
 	
 	if(state == States.DashLeft):
 		if checkStopCondition(false, Vector2.ZERO):
 			switchState(States.IdleLeft)
 		else:
-			move_and_collide(Vector2(-DASH_SPEED, 0) * delta)
+			var collision := move_and_collide(Vector2(-DASH_SPEED, 0) * delta)
+			if(collision != null and collision.normal.x > 0.5):
+				switchState(States.IdleLeft)
 
 func switchState(state):
 	self.state = state
