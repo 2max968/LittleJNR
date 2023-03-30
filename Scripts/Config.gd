@@ -15,6 +15,12 @@ func _process(delta):
 		OS.window_fullscreen = fullscreen;
 		saveCfg()
 
+func _input(event):
+	if (event is InputEventKey or event is InputEventJoypadButton) and event.pressed:
+		touchInput = false
+	if event is InputEventScreenTouch and event.pressed:
+		touchInput = true
+
 func loadCfg():
 	var cfg := ConfigFile.new();
 	cfg.load("config.ini");

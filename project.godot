@@ -171,10 +171,6 @@ ui_touchinp={
 "events": [  ]
 }
 
-[input_devices]
-
-pointing/emulate_touch_from_mouse=true
-
 [physics]
 
 common/physics_fps=120
