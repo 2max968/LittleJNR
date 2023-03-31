@@ -16,6 +16,13 @@ func _process(delta):
 			get_tree().paused = false;
 			showMenu = false;
 			visible = false;
+	
+	if Config.touchInput:
+		$Panel2/Menu.visible = false
+		$Panel2/TouchButtons.visible = true
+	else:
+		$Panel2/Menu.visible = true
+		$Panel2/TouchButtons.visible = false
 
 
 func _on_btnContinue_pressed():
@@ -41,3 +48,15 @@ func _on_Menu_item_selected(index):
 		_on_btnRestart_pressed()
 	elif(index == 2):
 		_on_btnExit_pressed()
+
+
+func _on_BtnContinue_pressed():
+	_on_btnContinue_pressed()
+
+
+func _on_BtnReset_pressed():
+	_on_btnRestart_pressed()
+
+
+func _on_BtnExit_pressed():
+	_on_btnExit_pressed()

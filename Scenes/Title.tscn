@@ -11,7 +11,7 @@ size = 36
 font_data = ExtResource( 1 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 800, 450 )
+extents = Vector2( 400, 225 )
 
 [node name="Node2D" type="Control"]
 anchor_right = 1.0

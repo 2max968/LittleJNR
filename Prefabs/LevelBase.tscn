@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/TilemapOnOffManager.gd" type="Script" id=2]
@@ -24,6 +24,9 @@
 [ext_resource path="res://Sprites/UI/TouchJumpPressed.png" type="Texture" id=22]
 [ext_resource path="res://Sprites/UI/TouchRightPressed.png" type="Texture" id=23]
 [ext_resource path="res://Sprites/UI/TouchPause.png" type="Texture" id=24]
+[ext_resource path="res://Sprites/UI/BtnContinue.png" type="Texture" id=25]
+[ext_resource path="res://Sprites/UI/BtnRestart.png" type="Texture" id=26]
+[ext_resource path="res://Sprites/UI/BtnExit.png" type="Texture" id=27]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 0.658824 )
@@ -33,6 +36,23 @@ size = 24
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 12 )
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=12]
+
+[sub_resource type="StyleBoxEmpty" id=13]
+
+[sub_resource type="StyleBoxEmpty" id=14]
+
+[sub_resource type="Theme" id=15]
+Button/styles/disabled = SubResource( 10 )
+Button/styles/focus = SubResource( 11 )
+Button/styles/hover = SubResource( 12 )
+Button/styles/normal = SubResource( 13 )
+Button/styles/pressed = SubResource( 14 )
 
 [sub_resource type="InputEventAction" id=3]
 action = "ui_cancel"
@@ -70,7 +90,6 @@ script = ExtResource( 4 )
 
 [node name="PauseMenu" type="Control" parent="CanvasLayer"]
 pause_mode = 2
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 3 )
@@ -91,6 +110,40 @@ Restart
 Exit level"
 menuFont = SubResource( 9 )
 spacing = 32
+
+[node name="TouchButtons" type="Control" parent="CanvasLayer/PauseMenu/Panel2"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="BtnContinue" type="Button" parent="CanvasLayer/PauseMenu/Panel2/TouchButtons"]
+margin_left = 104.0
+margin_top = 136.0
+margin_right = 296.0
+margin_bottom = 328.0
+theme = SubResource( 15 )
+icon = ExtResource( 25 )
+icon_align = 1
+expand_icon = true
+
+[node name="BtnReset" type="Button" parent="CanvasLayer/PauseMenu/Panel2/TouchButtons"]
+margin_left = 336.0
+margin_top = 136.0
+margin_right = 528.0
+margin_bottom = 328.0
+theme = SubResource( 15 )
+icon = ExtResource( 26 )
+icon_align = 1
+expand_icon = true
+
+[node name="BtnExit" type="Button" parent="CanvasLayer/PauseMenu/Panel2/TouchButtons"]
+margin_left = 560.0
+margin_top = 136.0
+margin_right = 752.0
+margin_bottom = 328.0
+theme = SubResource( 15 )
+icon = ExtResource( 27 )
+icon_align = 1
+expand_icon = true
 
 [node name="Panel" type="Panel" parent="CanvasLayer/PauseMenu"]
 visible = false
@@ -243,6 +296,9 @@ normal = ExtResource( 24 )
 action = "game_pause"
 
 [connection signal="item_selected" from="CanvasLayer/PauseMenu/Panel2/Menu" to="CanvasLayer/PauseMenu" method="_on_Menu_item_selected"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Panel2/TouchButtons/BtnContinue" to="CanvasLayer/PauseMenu" method="_on_BtnContinue_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Panel2/TouchButtons/BtnReset" to="CanvasLayer/PauseMenu" method="_on_BtnReset_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Panel2/TouchButtons/BtnExit" to="CanvasLayer/PauseMenu" method="_on_BtnExit_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/Panel/btnContinue" to="CanvasLayer/PauseMenu" method="_on_btnContinue_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/Panel/btnRestart" to="CanvasLayer/PauseMenu" method="_on_btnRestart_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/Panel/btnExit" to="CanvasLayer/PauseMenu" method="_on_btnExit_pressed"]
