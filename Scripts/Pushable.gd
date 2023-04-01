@@ -7,6 +7,9 @@ var yvelocity := 0.0
 const XSPEED := 128
 const GRAVITY := 750.0 * 3
 
+func _init():
+	add_to_group("buttonPresser")
+
 func _ready():
 	targetX = position.x
 

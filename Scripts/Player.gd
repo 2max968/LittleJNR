@@ -50,8 +50,9 @@ var spriteRedOutline = preload("res://Sprites/Player/RedOutline.png");
 var spriteGreenOutline = preload("res://Sprites/Player/GreenOutline.png");
 
 func _init():
-	add_to_group("colorhandler");
-	add_to_group("player");
+	add_to_group("colorhandler")
+	add_to_group("player")
+	add_to_group("buttonPresser")
 
 func _ready():
 	vlimitNode = get_tree().get_root().find_node("VLimit", true, false);
