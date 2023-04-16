@@ -9,7 +9,7 @@ func _init():
 	loadCfg();
 	OS.window_fullscreen = fullscreen;
 	
-func _process(delta):
+func _process(_delta):
 	if( Input.is_action_just_pressed("game_togglefullscreen")):
 		fullscreen = !fullscreen;
 		OS.window_fullscreen = fullscreen;
