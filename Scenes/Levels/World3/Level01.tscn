@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Prefabs/LevelBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tilesets/Tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Sprites/Noise.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Icon/32.png" type="Texture" id=5]
 [ext_resource path="res://Prefabs/Decoration/Waterfall.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scripts/Effects/ReflectiveWater.gd" type="Script" id=7]
@@ -24,11 +25,15 @@ uniform vec2 scale;
 uniform float y_zoom;
 uniform vec4 color : hint_color = vec4(1,1,1,0);
 
+uniform sampler2D noiseTexture;
+
 void fragment()
 {
+	// Reflexion:
 	float uv_height = SCREEN_PIXEL_SIZE.y / TEXTURE_PIXEL_SIZE.y;
 	vec2 rs_uv = vec2(SCREEN_UV.x, SCREEN_UV.y + uv_height * UV.y * scale.y * y_zoom * 2.0);
-	
+	float displace_y = round(UV.y / scale.y * 32.0) * scale.y / 32.0;
+	rs_uv.x += sin((displace_y + TIME) * 3.1415 * 2.0) / scale.x / 10.0;
 	vec4 ref_color = texture(SCREEN_TEXTURE, rs_uv);
 	COLOR = vec4(ref_color.rgb * (1.0-color.a) + color.rgb * color.a, ref_color.a);
 }"
@@ -36,8 +41,9 @@ void fragment()
 [sub_resource type="ShaderMaterial" id=19]
 shader = SubResource( 18 )
 shader_param/scale = Vector2( 33, 2.03125 )
-shader_param/y_zoom = null
-shader_param/color = Color( 1, 1, 1, 0 )
+shader_param/y_zoom = 2.37573
+shader_param/color = Color( 0.00392157, 0.235294, 0.352941, 0.364706 )
+shader_param/noiseTexture = ExtResource( 4 )
 
 [node name="Node2D" type="Node2D"]
 
