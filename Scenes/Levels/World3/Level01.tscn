@@ -1,16 +1,18 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Prefabs/LevelBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tilesets/Tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sprites/Noise.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/Icon/32.png" type="Texture" id=5]
-[ext_resource path="res://Prefabs/Decoration/Waterfall.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Sprites/WaterfallWide.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/Effects/ReflectiveWater.gd" type="Script" id=7]
 [ext_resource path="res://Sprites/Particle.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Finish.png" type="Texture" id=9]
 [ext_resource path="res://Scripts/Goal.gd" type="Script" id=10]
+[ext_resource path="res://Sprites/WaterfallWideTop.png" type="Texture" id=11]
 [ext_resource path="res://Tilesets/BlueOn.tres" type="TileSet" id=12]
+[ext_resource path="res://Scripts/AnimationSync.gd" type="Script" id=13]
 
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 32, 16 )
@@ -18,30 +20,119 @@ extents = Vector2( 32, 16 )
 [sub_resource type="Gradient" id=15]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 11 )
+region = Rect2( 48, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 11 )
+region = Rect2( 96, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 11 )
+region = Rect2( 144, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 11 )
+region = Rect2( 192, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 11 )
+region = Rect2( 240, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 11 )
+region = Rect2( 288, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 11 )
+region = Rect2( 336, 0, 48, 16 )
+
+[sub_resource type="SpriteFrames" id=28]
+animations = [ {
+"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 6 )
+region = Rect2( 48, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 6 )
+region = Rect2( 96, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 6 )
+region = Rect2( 144, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 6 )
+region = Rect2( 192, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 6 )
+region = Rect2( 240, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 6 )
+region = Rect2( 288, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 6 )
+region = Rect2( 336, 0, 48, 16 )
+
+[sub_resource type="SpriteFrames" id=37]
+animations = [ {
+"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
 [sub_resource type="Shader" id=18]
 code = "shader_type canvas_item;
 
 uniform vec2 scale;
 uniform float y_zoom;
+uniform float reflection_scale;
 uniform vec4 color : hint_color = vec4(1,1,1,0);
 
 uniform sampler2D noiseTexture;
 
 void fragment()
 {
+	// Texture displacement
+	//vec2 textDisp = (texture(noiseTexture, UV * scale * 2.0 + TIME * y_zoom * vec2(0.15, 0.2)).rg
+	//				+ texture(noiseTexture, UV * scale * 2.0 + TIME * y_zoom * vec2(0.2, -0.15)).rg) / scale / 64.0 * y_zoom;
+	
 	// Reflexion:
 	float uv_height = SCREEN_PIXEL_SIZE.y / TEXTURE_PIXEL_SIZE.y;
-	vec2 rs_uv = vec2(SCREEN_UV.x, SCREEN_UV.y + uv_height * UV.y * scale.y * y_zoom * 2.0);
-	float displace_y = round(UV.y / scale.y * 32.0) * scale.y / 32.0;
-	rs_uv.x += sin((displace_y + TIME) * 3.1415 * 2.0) / scale.x / 10.0;
+	vec2 rs_uv = vec2(SCREEN_UV.x, SCREEN_UV.y + uv_height * UV.y * scale.y * y_zoom / reflection_scale * 2.0);
+	float displace_x = round(UV.y / scale.y * 32.0) * scale.y / 32.0;
+	float displace_y = displace_x;
+	rs_uv.x += sin((displace_x + TIME) * 3.1415 * 2.0) / scale.x / 10.0;
+	rs_uv.y += cos((displace_y + TIME) * 3.1415 * 2.0) / scale.x / 10.0;
+	//rs_uv += textDisp;
 	vec4 ref_color = texture(SCREEN_TEXTURE, rs_uv);
 	COLOR = vec4(ref_color.rgb * (1.0-color.a) + color.rgb * color.a, ref_color.a);
 }"
 
 [sub_resource type="ShaderMaterial" id=19]
 shader = SubResource( 18 )
-shader_param/scale = Vector2( 33, 2.03125 )
-shader_param/y_zoom = 2.37573
+shader_param/scale = Vector2( 33, 2.01563 )
+shader_param/y_zoom = 0.943874
+shader_param/reflection_scale = 0.75
 shader_param/color = Color( 0.00392157, 0.235294, 0.352941, 0.364706 )
 shader_param/noiseTexture = ExtResource( 4 )
 
@@ -91,16 +182,48 @@ emission_rect_extents = Vector2( 32, 1 )
 gravity = Vector2( 0, -50 )
 color_ramp = SubResource( 15 )
 
-[node name="Waterfall" parent="Level" instance=ExtResource( 6 )]
-position = Vector2( 800, 416 )
+[node name="Waterfall" type="Node2D" parent="Level"]
+modulate = Color( 1, 1, 1, 0.694118 )
+position = Vector2( 800, 384 )
+script = ExtResource( 13 )
+
+[node name="Top" type="AnimatedSprite" parent="Level/Waterfall"]
+scale = Vector2( 4, 4 )
+frames = SubResource( 28 )
+frame = 4
+playing = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Level/Waterfall"]
+position = Vector2( 0, 64 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 37 )
+frame = 6
+playing = true
+
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="Level/Waterfall"]
+position = Vector2( 0, 128 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 37 )
+frame = 6
+playing = true
 
 [node name="Water" type="Sprite" parent="Level"]
+pause_mode = 2
 material = SubResource( 19 )
-position = Vector2( 528, 544 )
-scale = Vector2( 33, 2.03125 )
+position = Vector2( 528, 543.75 )
+scale = Vector2( 33, 2.01563 )
 texture = ExtResource( 5 )
 script = ExtResource( 7 )
 water_color = Color( 0.00392157, 0.235294, 0.352941, 0.364706 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Level/Water"]
+visible = false
+amount = 50
+local_coords = false
+texture = ExtResource( 8 )
+emission_shape = 2
+emission_rect_extents = Vector2( 16, 16 )
+gravity = Vector2( 0, 0 )
 
 [node name="LevelBase" parent="." instance=ExtResource( 1 )]
 position = Vector2( 120, 80 )
