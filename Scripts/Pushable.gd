@@ -3,8 +3,10 @@ class_name Pushable, "res://Sprites/Crate.png"
 
 var targetX : float
 var yvelocity := 0.0
+var playerInRange := false
+var pushLeft : bool
 
-const XSPEED := 128
+const XSPEED := 128 * 2
 const GRAVITY := 750.0 * 3
 
 func _init():
@@ -25,11 +27,26 @@ func _physics_process(delta):
 		if vel.x > XSPEED: vel.x = XSPEED
 		if vel.x < -XSPEED: vel.x = -XSPEED
 	move_and_slide(vel, Vector2(0, -1))
+	
+func _process(delta):
+	if playerInRange and Input.is_action_just_pressed("move_sprint"):
+		var snapX := round(position.x / 32.0 - 0.5) * 32.0 + 16
+		if pushLeft:
+			targetX = snapX - 32
+		else:
+			targetX = snapX + 32
 
 func _on_PushAreas_body_entered(body):
-	if body is Player and Input.is_action_pressed("move_sprint"):
-		var snapX := round(position.x / 32.0 - 0.5) * 32.0 + 16
-		if Input.is_action_pressed("move_right"):
-			targetX = snapX + 32
-		elif Input.is_action_pressed("move_left"):
-			targetX = snapX - 32
+	if body is Player:
+		playerInRange = true
+		Config.showTouchSprint += 1
+		if body.position.x < position.x:
+			pushLeft = false
+		else:
+			pushLeft = true
+
+
+func _on_PushAreas_body_exited(body):
+	if body is Player:
+		playerInRange = false
+		Config.showTouchSprint -= 1

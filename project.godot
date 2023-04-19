@@ -70,6 +70,7 @@ Savegame="*res://Scripts/Savegame.gd"
 
 window/size/width=1200
 window/size/height=625
+window/vsync/vsync_via_compositor=true
 
 [input]
 

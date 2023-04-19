@@ -34,3 +34,4 @@ position = Vector2( 0, -16 )
 texture = ExtResource( 2 )
 
 [connection signal="body_entered" from="PushAreas" to="." method="_on_PushAreas_body_entered"]
+[connection signal="body_exited" from="PushAreas" to="." method="_on_PushAreas_body_exited"]

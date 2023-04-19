@@ -1,8 +1,12 @@
 extends Node
 
+# Configuration
 var touchInput := false;
 var fullscreen := false;
 var currentLevel := "";
+
+# Globals
+var showTouchSprint := 0
 
 func _init():
 	self.set_pause_mode(Node.PAUSE_MODE_PROCESS)
