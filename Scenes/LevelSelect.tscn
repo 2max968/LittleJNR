@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Menu/SelectionMenu.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/UILayer.gd" type="Script" id=2]
-[ext_resource path="res://Scripts/Camera.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/Menu/LevelList2.gd" type="Script" id=4]
 [ext_resource path="res://Other/dogicapixel.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Scripts/LevelList3.gd" type="Script" id=6]
@@ -82,9 +81,6 @@ action = "ui_right"
 position = Vector2( 247, 28 )
 shape = SubResource( 4 )
 action = "ui_accept"
-
-[node name="Node2D" type="Node2D" parent="."]
-script = ExtResource( 3 )
 
 [node name="LevelList" type="Node2D" parent="."]
 script = ExtResource( 6 )

@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Other/dogicapixelbold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/Menu/Title.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/UILayer.gd" type="Script" id=3]
-[ext_resource path="res://Scripts/Camera.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/Menu/Blink.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFont" id=1]
@@ -40,10 +39,3 @@ period = 1.0
 [node name="TouchScreenButton" type="TouchScreenButton" parent="CanvasLayer"]
 shape = SubResource( 2 )
 action = "ui_touchinp"
-
-[node name="Node2D" type="Node2D" parent="."]
-script = ExtResource( 4 )
-blackColumns = false
-
-[node name="Camera" type="Node2D" parent="Node2D"]
-script = ExtResource( 4 )

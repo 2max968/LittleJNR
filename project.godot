@@ -68,9 +68,11 @@ Savegame="*res://Scripts/Savegame.gd"
 
 [display]
 
-window/size/width=1200
-window/size/height=625
+window/size/width=800
+window/size/height=450
 window/vsync/vsync_via_compositor=true
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [input]
 

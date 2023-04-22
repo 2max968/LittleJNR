@@ -57,8 +57,9 @@ func _init():
 func _ready():
 	vlimitNode = get_tree().get_root().find_node("VLimit", true, false);
 	hlimitNode = get_tree().get_root().find_node("HLimit", true, false);
-	var camera = get_tree().get_root().find_node("Camera", true, false);
-	camera.followObject(self);
+	var camera := get_tree().get_root().find_node("Camera", true, false);
+	if camera != null:
+		camera.followObject(self);
 	get_tree().call_group("colorhandler", "SetColor", "blue");
 
 func _process(delta):

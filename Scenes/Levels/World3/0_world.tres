@@ -1,3 +1,6 @@
 [World]
 background = "res://Sprites/Background/ForestMountains.png"
 name = "Forest"
+
+[Level01]
+background = "#2D350E"

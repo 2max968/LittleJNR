@@ -1,4 +1,4 @@
-extends Node2D
+extends Camera2D
 
 var Position : Vector2;
 var ViewportSize : Vector2;
@@ -38,7 +38,11 @@ func _ready():
 		layer2.layer = -100;
 		var levelPath := get_tree().current_scene.filename
 		#bgrSprite.texture = preload("res://Sprites/BgrMountains/Full.png");
-		bgrSprite.texture = load(LevelProperties.GetLevelBackground1(levelPath))
+		var bgrPath := LevelProperties.GetLevelBackground1(levelPath)
+		if bgrPath.begins_with('#'):
+			VisualServer.set_default_clear_color(Color(bgrPath))
+		else:
+			bgrSprite.texture = load(LevelProperties.GetLevelBackground1(levelPath))
 		bgrSprite.expand = true;
 		add_child(layer);
 		add_child(layer2);
