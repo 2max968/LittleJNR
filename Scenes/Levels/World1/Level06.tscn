@@ -4,7 +4,7 @@
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/LevelBase.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Prefabs/RainbowSlime.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Sprites/Light256.png" type="Texture" id=5]
+[ext_resource path="res://Prefabs/Decoration/BgrMountains.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Tilesets/GreenOn.tres" type="TileSet" id=6]
 [ext_resource path="res://Tilesets/BlueOn.tres" type="TileSet" id=7]
 [ext_resource path="res://Tilesets/RedOn.tres" type="TileSet" id=11]
@@ -21,16 +21,6 @@ colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 [node name="Node2D" type="Node2D"]
 
 [node name="Level" type="Node2D" parent="."]
-modulate = Color( 0.345098, 0.345098, 0.345098, 1 )
-
-[node name="Light2D" type="Light2D" parent="Level"]
-position = Vector2( 392, -336 )
-texture = ExtResource( 5 )
-texture_scale = 10.3
-energy = 2.02
-shadow_enabled = true
-shadow_filter = 5
-shadow_filter_smooth = 2.2
 
 [node name="HLimit" type="Node2D" parent="Level"]
 position = Vector2( 1856, 0 )
@@ -99,5 +89,9 @@ color_ramp = SubResource( 6 )
 
 [node name="LevelBase" parent="." instance=ExtResource( 3 )]
 position = Vector2( 120, 80 )
+
+[node name="BgrMountains" parent="." instance=ExtResource( 5 )]
+
+[node name="BgrMountains2" parent="." instance=ExtResource( 5 )]
 
 [connection signal="body_entered" from="Level/Goal" to="Level/Goal" method="_on_Goal_body_entered"]

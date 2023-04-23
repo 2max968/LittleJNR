@@ -35,6 +35,8 @@ func _process(delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		var levelName = "res://Scenes/Levels/" + worlds[selectedWorld] + "/Level01.tscn"
 		get_tree().change_scene(levelName)
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().change_scene("res://Scenes/Menu.tscn")
 	
 func selectWorld(index : int):
 	selectedWorld = index

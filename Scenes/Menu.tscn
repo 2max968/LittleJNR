@@ -1,50 +1,39 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scripts/Menu/LevelList.gd" type="Script" id=1]
-[ext_resource path="res://Scripts/Camera.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Menu/SelectionMenu.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Menu/MainMenu.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/UILayer.gd" type="Script" id=3]
-[ext_resource path="res://Other/UITheme.tres" type="Theme" id=4]
+[ext_resource path="res://Other/dogicapixel.ttf" type="DynamicFontData" id=4]
 
-[node name="Control" type="Control"]
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 4 )
+
+[node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = 1.0
+margin_bottom = 1.0
+script = ExtResource( 2 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
 script = ExtResource( 3 )
 
-[node name="Panel" type="Panel" parent="CanvasLayer"]
-margin_right = 1024.0
-margin_bottom = 600.0
-theme = ExtResource( 4 )
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
 
-[node name="LevelList" type="Control" parent="CanvasLayer/Panel"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 448.0
-margin_bottom = 576.0
-theme = ExtResource( 4 )
+[node name="Control" type="Control" parent="CanvasLayer"]
+margin_left = 301.0
+margin_top = 188.0
+margin_right = 335.0
+margin_bottom = 222.0
 script = ExtResource( 1 )
+items = "Start Game
+Exit Game"
+menuFont = SubResource( 1 )
+spacing = 48
 
-[node name="lvWorlds" type="ItemList" parent="CanvasLayer/Panel/LevelList"]
-margin_right = 220.0
-margin_bottom = 568.0
-theme = ExtResource( 4 )
-
-[node name="lvMaps" type="ItemList" parent="CanvasLayer/Panel/LevelList"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = 8.0
-margin_right = 220.0
-margin_bottom = 568.0
-theme = ExtResource( 4 )
-
-[node name="Node2D" type="Node2D" parent="."]
-script = ExtResource( 2 )
-blackColumns = false
-
-[node name="Camera" type="Node2D" parent="Node2D"]
-script = ExtResource( 2 )
-
-[connection signal="item_selected" from="CanvasLayer/Panel/LevelList/lvWorlds" to="CanvasLayer/Panel/LevelList" method="_on_lvWorlds_item_selected"]
-[connection signal="item_activated" from="CanvasLayer/Panel/LevelList/lvMaps" to="CanvasLayer/Panel/LevelList" method="_on_lvMaps_item_activated"]
+[connection signal="item_selected" from="CanvasLayer/Control" to="." method="_on_Control_item_selected"]

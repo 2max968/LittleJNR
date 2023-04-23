@@ -56,16 +56,16 @@ func _physics_process(delta):
 
 func _on_Body_body_entered(body):
 	if(body is Player):
-		if(body.oldPosition.y < position.y - 8):
+		if(body.oldPosition.y < global_position.y - 8):
 			body.JumpOnEnemy(color);
 			var instance = particles.instance();
+			get_parent().add_child(instance);
 			instance.global_position = global_position - Vector2(0,16);
 			instance.get_node("part").emitting = true;
-			get_parent().add_child(instance);
 			queue_free();
 			var deathSound = deathSoundPrefab.instance();
-			deathSound.global_position = global_position;
 			$"..".add_child(deathSound);
+			deathSound.global_position = global_position;
 			deathSound.get_node("audio").play();
 		else:
 			body.Damage(1);

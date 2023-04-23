@@ -228,7 +228,7 @@ func _physics_process(delta):
 	var _accel = rotatevector(accel, _rot);
 	var _vel = rotatevector(velocity, _rot);
 	var _up = Vector2(sin(_rot), -cos(_rot));
-	oldPosition = position
+	oldPosition = global_position
 	var actualMovement = move_and_slide(.5 * _accel * delta + _vel, _up);
 	velocity += accel * delta;
 	if(is_on_floor()):
@@ -240,14 +240,14 @@ func _physics_process(delta):
 		$Sounds/audioStep.play();
 	
 	# Handle outside world
-	if(real_up.y < 0 && vlimitNode != null && position.y > vlimitNode.position.y + 64):
+	if(real_up.y < 0 && vlimitNode != null && global_position.y > vlimitNode.global_position.y + 64):
 		Kill();
-	if(real_up.y > 0 && position.y < -32):
+	if(real_up.y > 0 && global_position.y < -32):
 		Kill();
-	if(position.x < 0):
-		position.x = 0;
-	if(hlimitNode != null &&  position.x > hlimitNode.position.x):
-		position.x = hlimitNode.position.x;
+	if(global_position.x < 0):
+		global_position.x = 0;
+	if(hlimitNode != null &&  global_position.x > hlimitNode.global_position.x):
+		global_position.x = hlimitNode.global_position.x;
 
 func calcJumpForce(jumpHeight : float, gravity : float = JUMPGRAVITY):
 	return sqrt(2 * gravity * jumpHeight);
@@ -257,15 +257,15 @@ func Kill():
 
 func jumpParticles():
 	var instance = jumpParticlesPrefab.instance();
+	$"..".add_child(instance);
 	instance.global_position = $RotationPivot/Sprites.global_position;
 	instance.emitting = true;
-	$"..".add_child(instance);
 
 func walkParticles():
 	var instance = walkParticlesPrefab.instance();
+	$"..".add_child(instance);
 	instance.global_position = $RotationPivot/Sprites.global_position;
 	instance.emitting = true;
-	$"..".add_child(instance);
 
 func Damage(amount : int):
 	if(invincible <= 0):
