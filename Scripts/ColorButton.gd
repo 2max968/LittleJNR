@@ -12,7 +12,7 @@ func _ready():
 	connect("body_entered", self, "OnBodyEnter")
 	connect("body_exited", self, "OnBodyLeave")
 	
-func _process(delta):
+func _process(_delta):
 	$Sprite.frame = 1 if objectCount > 0 else 0
 	$Sprite.animation = ButtonColor
 

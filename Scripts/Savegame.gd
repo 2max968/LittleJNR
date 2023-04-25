@@ -7,7 +7,7 @@ func _init():
 
 func loadGame():
 	var cfg := ConfigFile.new()
-	cfg.load("Savegame.ini")
+	cfg.load("user://Savegame.ini")
 	var timeKeys := cfg.get_section_keys("Times")
 	for level in timeKeys:
 		var time : float = cfg.get_value("Times", level, NAN)
@@ -19,7 +19,7 @@ func saveGame():
 	for key in levelTimes.keys():
 		var time : float = levelTimes[key]
 		cfg.set_value("Times", key, time)
-	cfg.save("Savegame.ini")
+	cfg.save("user://Savegame.ini")
 
 func getTime(world : String, level : String) -> float:
 	var key := world + "/" + level

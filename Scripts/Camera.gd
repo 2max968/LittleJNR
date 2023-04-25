@@ -29,7 +29,7 @@ func _ready():
 	
 	_process(0)
 
-func _process(delta : float):
+func _process(_delta : float):
 	if ObjectToFollow != null:
 		global_position = ObjectToFollow.global_position
 	

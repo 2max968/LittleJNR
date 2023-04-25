@@ -71,6 +71,7 @@ shadow_filter_smooth = 12.9
 
 [node name="HitIndicator" type="Sprite" parent="RotationPivot/Sprites"]
 visible = false
+self_modulate = Color( 1, 0.596078, 0.596078, 1 )
 light_mask = 2
 material = SubResource( 29 )
 position = Vector2( 0, -16 )

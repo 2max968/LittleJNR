@@ -5,7 +5,7 @@ func _ready():
 	size.x = size.y / 9 * 16;
 	OS.window_size = size;
 
-func _process(delta):
+func _process(_delta):
 	if(Input.is_action_just_pressed("ui_touchinp") or Input.is_action_just_pressed("ui_accept")):
 		Config.touchInput = Input.is_action_just_pressed("ui_touchinp")
 		var level := Config.currentLevel

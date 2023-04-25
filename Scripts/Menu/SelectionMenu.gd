@@ -48,7 +48,7 @@ func _ready():
 		btnDown.action = "ui_down"
 		btnEnter.action = "ui_accept"
 
-func _process(delta):
+func _process(_delta):
 	if(not is_visible_in_tree()):
 		return;
 	if(Input.is_action_just_pressed("ui_down") or Input.is_action_just_pressed("move_down")):
@@ -63,8 +63,8 @@ func _process(delta):
 	if(Input.is_action_just_pressed("ui_accept")):
 		emit_signal("item_selected", selected);
 
-func loadItems(items : String):
+func loadItems(litems : String):
 	for child in get_children():
 		child.queue_free()
-	self.items = items
+	self.items = litems
 	_ready()

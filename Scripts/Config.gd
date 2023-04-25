@@ -27,7 +27,7 @@ func _input(event):
 
 func loadCfg():
 	var cfg := ConfigFile.new();
-	cfg.load("config.ini");
+	cfg.load("user://config.ini");
 	touchInput = cfg.get_value("Input", "touch", touchInput);
 	fullscreen = cfg.get_value("View", "fullscreen", fullscreen);
 	currentLevel = cfg.get_value("State", "currentLevel", currentLevel);
@@ -37,4 +37,4 @@ func saveCfg():
 	cfg.set_value("Input", "touch", touchInput);
 	cfg.set_value("View", "fullscreen", fullscreen);
 	cfg.set_value("State", "currentLevel", currentLevel);
-	cfg.save("config.ini");
+	cfg.save("user://config.ini");

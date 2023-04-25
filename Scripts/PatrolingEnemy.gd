@@ -51,7 +51,7 @@ func _physics_process(delta):
 		if(resultRight.empty()):
 			direction = DIRECTION.LEFT;
 	
-	var actualMovement = move_and_slide(.5 * accel * delta + velocity, Vector2(0,-1));
+	move_and_slide(.5 * accel * delta + velocity, Vector2(0,-1));
 	velocity += accel * delta;
 
 func _on_Body_body_entered(body):

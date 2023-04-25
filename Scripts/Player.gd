@@ -19,7 +19,7 @@ const TRAMPOLINEBOOST = JUMPHEIGHT * 1.5;
 const INVINCIBLETIME = 1.0;
 
 var velocity = Vector2(0,0);
-var gravity = FALLGRAVITY;
+var current_gravity = FALLGRAVITY;
 var jumping = -1;
 var grounded = -1;
 var steptime = -1;
@@ -38,6 +38,7 @@ var up = Vector2(0,-1);
 export var defaultRotation : int = 0;
 var lastRotation = 0;
 var oldPosition : Vector2
+var oddFrame := false
 
 var jumpParticlesPrefab = preload("res://Prefabs/JumpParticles.tscn");
 var walkParticlesPrefab = preload("res://Prefabs/WalkParticles.tscn");
@@ -63,6 +64,7 @@ func _ready():
 	get_tree().call_group("colorhandler", "SetColor", "blue");
 
 func _process(delta):
+	oddFrame = not oddFrame
 	$RotationPivot.rotation_degrees = getGravitation();
 	# Transform Movement to new rotation
 	if(lastRotation != $RotationPivot.rotation):
@@ -81,7 +83,7 @@ func _process(delta):
 	if(lengthStrech < 0):
 		lengthStrech = min(0, lengthStrech + delta * 8);
 	
-	$RotationPivot/Sprites/HitIndicator.visible = invincible > 0;
+	$RotationPivot/Sprites/HitIndicator.visible = invincible > 0 and oddFrame;
 	
 #	if(color == "rainbow"):
 #		if(Input.is_action_just_pressed("move_switchColor1")):
@@ -129,7 +131,7 @@ func _physics_process(delta):
 	if(is_on_floor()):
 		grounded = COYOTETIME;
 	
-	var accel = up * -gravity;
+	var accel = up * -current_gravity;
 	
 	# Set friction
 	var friction = AIRFRICTION;
@@ -174,7 +176,7 @@ func _physics_process(delta):
 	if(grounded >= 0 && jumping >= 0):
 		grounded = -1;
 		jumping = -1;
-		gravity = JUMPGRAVITY;
+		current_gravity = JUMPGRAVITY;
 		accel.y = 0;
 		velocity.y = -calcJumpForce(JUMPHEIGHT);
 		$Sounds/audioJump.play();
@@ -197,23 +199,23 @@ func _physics_process(delta):
 			var jumpforce = calcJumpForce(WALLKICKHEIGHT);
 			accel = Vector2(0,0);
 			velocity = Vector2(jumpforce, -jumpforce);
-			gravity = JUMPGRAVITY;
+			current_gravity = JUMPGRAVITY;
 			lengthStrech = 1;
 			$Sounds/audioJump.play();
 		if(iright && !ileft):
 			var jumpforce = calcJumpForce(WALLKICKHEIGHT);
 			accel = Vector2(0,0);
 			velocity = Vector2(-jumpforce, -jumpforce);
-			gravity = JUMPGRAVITY;
+			current_gravity = JUMPGRAVITY;
 			lengthStrech = 1;
 			$Sounds/audioJump.play();
 		
 	if(!(Input.is_action_pressed("move_jump") || Input.is_action_pressed(jump_alt)) || velocity.y >= 0):
-		gravity = FALLGRAVITY;
+		current_gravity = FALLGRAVITY;
 	
 	if(jumping >= 0 && trampolinetime >= 0):
 		velocity.y = -calcJumpForce(TRAMPOLINEBOOST);
-		gravity = JUMPGRAVITY;
+		current_gravity = JUMPGRAVITY;
 	
 	if(velocity.x < targetX):
 		velocity.x = min(velocity.x + friction * delta, targetX);
@@ -277,10 +279,10 @@ func Damage(amount : int):
 	if(health <= 0):
 		Kill();
 
-func JumpOnEnemy(color : String):
+func JumpOnEnemy(new_color : String):
 	Trampoline();
-	if(color != ""):
-		get_tree().call_group("colorhandler", "SetColor", color);
+	if(new_color != ""):
+		get_tree().call_group("colorhandler", "SetColor", new_color);
 
 func SetColor(c : String):
 	worldColor = c;

@@ -14,7 +14,7 @@ var stateTime := 0.0
 func _ready():
 	pass
 
-func _process(delta):
+func _process(_delta):
 	if(state == States.IdleLeft or state == States.IdleRight):
 		$SpriteIdle.visible = true
 		$SpriteMoveL.visible = false
@@ -52,8 +52,8 @@ func _physics_process(delta):
 			if(collision != null and collision.normal.x > 0.5):
 				switchState(States.IdleLeft)
 
-func switchState(state):
-	self.state = state
+func switchState(new_state):
+	self.state = new_state
 	stateTime = 0
 
 func checkStopCondition(right : bool, offset : Vector2) -> bool:

@@ -8,7 +8,7 @@ func _ready():
 	pass
 
 
-func _process(delta):
+func _process(_delta):
 	
 	if Engine.editor_hint:
 		material.set_shader_param("y_zoom", get_viewport().global_canvas_transform.y.y)

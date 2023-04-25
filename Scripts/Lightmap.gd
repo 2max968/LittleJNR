@@ -25,3 +25,4 @@ func renderLightmap():
 func pos2world(pos : Vector2):
 	pos /= scale;
 	pos += rect_position;
+	return pos

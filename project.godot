@@ -58,6 +58,10 @@ _global_script_class_icons={
 
 config/name="Little Jnr"
 run/main_scene="res://Scenes/Title.tscn"
+boot_splash/image="res://Sprites/Icon/Web180.png"
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://Sprites/Icon.png"
 config/windows_native_icon="res://Sprites/Icon/Icon.ico"
 
@@ -65,6 +69,12 @@ config/windows_native_icon="res://Sprites/Icon/Icon.ico"
 
 Config="*res://Scripts/Config.gd"
 Savegame="*res://Scripts/Savegame.gd"
+
+[debug]
+
+gdscript/warnings/narrowing_conversion=false
+gdscript/warnings/return_value_discarded=false
+gdscript/warnings/integer_division=false
 
 [display]
 

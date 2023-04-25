@@ -5,7 +5,7 @@ var showMenu = false;
 func _ready():
 	visible = false;
 
-func _process(delta):
+func _process(_delta):
 	if(Input.is_action_just_pressed("game_pause")):
 		if(!showMenu):
 			get_tree().paused = true;

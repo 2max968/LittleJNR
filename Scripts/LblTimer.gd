@@ -19,9 +19,9 @@ func _physics_process(delta):
 #		sHundrets = '0' + sHundrets;
 #	text = sSenconds + ':' + sHundrets;
 	
-static func getFormattedTime(time : float) -> String:
-	var iSeconds : int = int(time) / 100;
-	var iHundrets : int = int(time) % 100;
+static func getFormattedTime(ftime : float) -> String:
+	var iSeconds : int = int(ftime) / 100;
+	var iHundrets : int = int(ftime) % 100;
 	var sSenconds : String = str(iSeconds)
 	var sHundrets : String = str(iHundrets)
 	if(sSenconds.length() < 2):

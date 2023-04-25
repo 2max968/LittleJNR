@@ -28,7 +28,7 @@ func _physics_process(delta):
 		if vel.x < -XSPEED: vel.x = -XSPEED
 	move_and_slide(vel, Vector2(0, -1))
 	
-func _process(delta):
+func _process(_delta):
 	if playerInRange and Input.is_action_just_pressed("move_sprint"):
 		var snapX := round(position.x / 32.0 - 0.5) * 32.0 + 16
 		if pushLeft:

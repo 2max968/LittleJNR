@@ -27,7 +27,7 @@ func _input(event):
 			if pan.delta.x < 0:
 				selectPrevWorld()
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_right"):
 		selectNextWorld()
 	if Input.is_action_just_pressed("ui_left"):
