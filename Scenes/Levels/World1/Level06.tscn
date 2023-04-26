@@ -4,7 +4,7 @@
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/LevelBase.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Prefabs/RainbowSlime.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Prefabs/Decoration/BgrMountains.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Prefabs/Decoration/BgrPlainsMountains.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Tilesets/GreenOn.tres" type="TileSet" id=6]
 [ext_resource path="res://Tilesets/BlueOn.tres" type="TileSet" id=7]
 [ext_resource path="res://Tilesets/RedOn.tres" type="TileSet" id=11]
@@ -90,8 +90,6 @@ color_ramp = SubResource( 6 )
 [node name="LevelBase" parent="." instance=ExtResource( 3 )]
 position = Vector2( 120, 80 )
 
-[node name="BgrMountains" parent="." instance=ExtResource( 5 )]
-
-[node name="BgrMountains2" parent="." instance=ExtResource( 5 )]
+[node name="BgrPlainsMountains" parent="." instance=ExtResource( 5 )]
 
 [connection signal="body_entered" from="Level/Goal" to="Level/Goal" method="_on_Goal_body_entered"]

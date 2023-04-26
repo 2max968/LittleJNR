@@ -40,18 +40,22 @@ position = Vector2( 1984, 192 )
 
 [node name="DropSpawnerRed4" parent="Level" instance=ExtResource( 7 )]
 position = Vector2( 2048, 192 )
+delay = 0.325
 
 [node name="DropSpawnerRed5" parent="Level" instance=ExtResource( 7 )]
 position = Vector2( 2240, 192 )
 
 [node name="DropSpawnerRed6" parent="Level" instance=ExtResource( 7 )]
 position = Vector2( 2304, 192 )
+delay = 0.2
 
 [node name="DropSpawnerRed7" parent="Level" instance=ExtResource( 7 )]
 position = Vector2( 2368, 192 )
+delay = 0.4
 
 [node name="DropSpawnerRed8" parent="Level" instance=ExtResource( 7 )]
 position = Vector2( 2432, 192 )
+delay = 0.6
 
 [node name="Lightrays2" type="Sprite" parent="Level"]
 modulate = Color( 0.733333, 0.733333, 0.733333, 1 )

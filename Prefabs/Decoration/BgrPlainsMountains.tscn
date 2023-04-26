@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/Background/BgrStickBottom.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Background/PlainsFarMountains/Clouds.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Background/PlainsFarMountains/Sky.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Background/PlainsFarMountains/Mountains.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Background/PlainsFarMountains/MountainsV2.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/Background/BgrScrollingLayer.gd" type="Script" id=5]
 
 [node name="BgrPlainsMountains" type="ParallaxBackground"]

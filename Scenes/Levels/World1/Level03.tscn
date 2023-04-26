@@ -10,7 +10,7 @@
 [ext_resource path="res://Scripts/Goal.gd" type="Script" id=8]
 [ext_resource path="res://Prefabs/BlueSlime.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Prefabs/GreenSlime.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Prefabs/Decoration/BgrMountains.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Prefabs/Decoration/BgrPlainsMountains.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Prefabs/LevelBase.tscn" type="PackedScene" id=15]
 
@@ -98,6 +98,6 @@ script = ExtResource( 4 )
 [node name="LevelBase" parent="." instance=ExtResource( 15 )]
 position = Vector2( 120, 80 )
 
-[node name="BgrMountains" parent="." instance=ExtResource( 11 )]
+[node name="BgrPlainsMountains" parent="." instance=ExtResource( 11 )]
 
 [connection signal="body_entered" from="Level/Goal" to="Level/Goal" method="_on_Goal_body_entered"]

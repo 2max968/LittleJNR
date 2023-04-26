@@ -1,8 +1,12 @@
 extends Node2D
 
 export var drop_color := "red"
+export var delay = 0.0
 var timeout := 0.0
 var dropPrefab := preload("res://Prefabs/DropColor.tscn")
+
+func _ready():
+	timeout = delay
 
 func _physics_process(delta):
 	timeout -= delta
