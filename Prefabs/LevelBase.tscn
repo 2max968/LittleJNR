@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/TilemapOnOffManager.gd" type="Script" id=2]
@@ -27,6 +27,8 @@
 [ext_resource path="res://Sprites/UI/BtnContinue.png" type="Texture" id=25]
 [ext_resource path="res://Sprites/UI/BtnRestart.png" type="Texture" id=26]
 [ext_resource path="res://Sprites/UI/BtnExit.png" type="Texture" id=27]
+[ext_resource path="res://Shaders/ColorOverlay.tres" type="Shader" id=28]
+[ext_resource path="res://Scripts/Effects/ColorOverlay.gd" type="Script" id=29]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 0.658824 )
@@ -75,6 +77,9 @@ size = 24
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 12 )
+
+[sub_resource type="ShaderMaterial" id=16]
+shader = ExtResource( 28 )
 
 [node name="LevelBase" type="Node2D"]
 
@@ -306,6 +311,31 @@ modulate = Color( 1, 1, 1, 0.352941 )
 position = Vector2( 405, 8 )
 normal = ExtResource( 24 )
 action = "game_pause"
+
+[node name="ColorOverlay" type="CanvasLayer" parent="."]
+layer = 100
+script = ExtResource( 29 )
+
+[node name="ColorOverlayBlue" type="ColorRect" parent="ColorOverlay"]
+visible = false
+material = SubResource( 16 )
+margin_right = 800.0
+margin_bottom = 450.0
+color = Color( 0, 0.788235, 1, 1 )
+
+[node name="ColorOverlayRed" type="ColorRect" parent="ColorOverlay"]
+visible = false
+material = SubResource( 16 )
+margin_right = 800.0
+margin_bottom = 450.0
+color = Color( 1, 0.141176, 0, 1 )
+
+[node name="ColorOverlayGreen" type="ColorRect" parent="ColorOverlay"]
+visible = false
+material = SubResource( 16 )
+margin_right = 800.0
+margin_bottom = 450.0
+color = Color( 0.545098, 1, 0, 1 )
 
 [connection signal="item_selected" from="CanvasLayer/PauseMenu/Panel2/Menu" to="CanvasLayer/PauseMenu" method="_on_Menu_item_selected"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/Panel2/TouchButtons/BtnContinue" to="CanvasLayer/PauseMenu" method="_on_BtnContinue_pressed"]

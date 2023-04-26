@@ -22,8 +22,11 @@ func _process(_delta):
 func _input(event):
 	if (event is InputEventKey or event is InputEventJoypadButton) and event.pressed:
 		touchInput = false
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	if event is InputEventScreenTouch and event.pressed:
 		touchInput = true
+	if event is InputEventMouseMotion or event is InputEventMouseButton:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func loadCfg():
 	var cfg := ConfigFile.new();
