@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Tilesets/Tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/LevelBase.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Prefabs/BlueSlime.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Sprites/Cannon.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/CannonRed.gd" type="Script" id=6]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 32, 64, 32 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 16.0
+height = 24.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="HLimit" type="Node2D" parent="Level"]
+position = Vector2( 1920, 0 )
+
+[node name="VLimit" type="Node2D" parent="Level"]
+position = Vector2( 0, 576 )
+
+[node name="Player" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 80, 480 )
+
+[node name="BlueSlime" parent="Level" instance=ExtResource( 4 )]
+position = Vector2( 1664, 480 )
+
+[node name="TileMap" type="TileMap" parent="Level"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 786470, 0, 0, 786471, 0, 1, 786472, 0, 1, 786473, 0, 1, 786474, 0, 1, 786475, 0, 1, 786476, 0, 1, 786477, 0, 1, 786478, 0, 1, 786479, 0, 2, 851996, 2, 65537, 851997, 2, 65538, 852006, 0, 65536, 852007, 0, 65537, 852008, 0, 65537, 852009, 0, 65537, 852010, 0, 65537, 852011, 0, 65537, 852012, 0, 65537, 852013, 0, 65537, 852014, 0, 65537, 852015, 0, 65538, 917532, 2, 196609, 917533, 2, 196610, 917542, 0, 131072, 917543, 0, 131073, 917544, 0, 131073, 917545, 0, 65537, 917546, 0, 65537, 917547, 0, 65537, 917548, 0, 65537, 917549, 0, 65537, 917550, 0, 65537, 917551, 0, 65538, 983040, 0, 1, 983041, 0, 1, 983042, 0, 1, 983043, 0, 1, 983044, 0, 1, 983045, 0, 1, 983046, 0, 1, 983047, 0, 1, 983048, 0, 2, 983051, 0, 0, 983052, 0, 1, 983053, 0, 1, 983054, 0, 1, 983055, 0, 1, 983056, 0, 1, 983057, 0, 2, 983063, 0, 0, 983064, 0, 1, 983065, 0, 1, 983066, 0, 1, 983067, 0, 1, 983068, 0, 1, 983069, 0, 1, 983070, 0, 2, 983081, 0, 65536, 983082, 0, 65537, 983083, 0, 65537, 983084, 0, 65537, 983085, 0, 65537, 983086, 0, 65537, 983087, 0, 65540, 983088, 0, 1, 983089, 0, 1, 983090, 0, 1, 983091, 0, 1, 983092, 0, 1, 983093, 0, 2, 1048576, 0, 65537, 1048577, 0, 65537, 1048578, 0, 65537, 1048579, 0, 65537, 1048580, 0, 65537, 1048581, 0, 65537, 1048582, 0, 65537, 1048583, 0, 65537, 1048584, 0, 65538, 1048587, 0, 65536, 1048588, 0, 65537, 1048589, 0, 65537, 1048590, 0, 65537, 1048591, 0, 65537, 1048592, 0, 65537, 1048593, 0, 65538, 1048599, 0, 65536, 1048600, 0, 65537, 1048601, 0, 65537, 1048602, 0, 65537, 1048603, 0, 65537, 1048604, 0, 65537, 1048605, 0, 65537, 1048606, 0, 65538, 1048617, 0, 65536, 1048618, 0, 65537, 1048619, 0, 65537, 1048620, 0, 65537, 1048621, 0, 65537, 1048622, 0, 65537, 1048623, 0, 65537, 1048624, 0, 65537, 1048625, 0, 65537, 1048626, 0, 65537, 1048627, 0, 131073, 1048628, 0, 131073, 1048629, 0, 131074, 1114112, 0, 65537, 1114113, 0, 65537, 1114114, 0, 65537, 1114115, 0, 65537, 1114116, 0, 65537, 1114117, 0, 65537, 1114118, 0, 65537, 1114119, 0, 65537, 1114120, 0, 65538, 1114121, 2, 0, 1114122, 2, 0, 1114123, 0, 65536, 1114124, 0, 65537, 1114125, 0, 65537, 1114126, 0, 65537, 1114127, 0, 65537, 1114128, 0, 65537, 1114129, 0, 65538, 1114130, 2, 0, 1114131, 2, 0, 1114132, 2, 0, 1114133, 2, 0, 1114134, 2, 0, 1114135, 0, 65536, 1114136, 0, 65537, 1114137, 0, 65537, 1114138, 0, 65537, 1114139, 0, 65537, 1114140, 0, 65537, 1114141, 0, 65537, 1114142, 0, 65538, 1114143, 2, 0, 1114144, 2, 0, 1114145, 2, 0, 1114146, 2, 0, 1114147, 2, 0, 1114148, 2, 0, 1114149, 2, 0, 1114150, 2, 0, 1114151, 2, 0, 1114152, 2, 0, 1114153, 0, 65536, 1114154, 0, 65537, 1114155, 0, 65537, 1114156, 0, 65537, 1114157, 0, 65537, 1114158, 0, 65537, 1114159, 0, 65537, 1114160, 0, 65537, 1114161, 0, 65537, 1114162, 0, 65538 )
+
+[node name="CannonRed" type="Area2D" parent="Level"]
+position = Vector2( 192, 384 )
+script = ExtResource( 6 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Level/CannonRed"]
+position = Vector2( 16, 0 )
+frames = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/CannonRed"]
+position = Vector2( 10, 0 )
+rotation = 1.5708
+shape = SubResource( 4 )
+
+[node name="LevelBase" parent="." instance=ExtResource( 3 )]
+position = Vector2( 120, 80 )
+
+[connection signal="body_entered" from="Level/CannonRed" to="Level/CannonRed" method="_on_CannonRed_body_entered"]

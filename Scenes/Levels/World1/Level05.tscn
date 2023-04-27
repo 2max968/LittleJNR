@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Tilesets/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/LevelBase.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Prefabs/Decoration/BgrPlainsMountains.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/Star.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Tilesets/GreenOn.tres" type="TileSet" id=6]
 [ext_resource path="res://Tilesets/BlueOn.tres" type="TileSet" id=7]
 [ext_resource path="res://Prefabs/RedSlime.tscn" type="PackedScene" id=10]
@@ -103,6 +104,9 @@ position = Vector2( 799, 273 )
 rotation = 3.14159
 shape = SubResource( 7 )
 one_way_collision = true
+
+[node name="Star" parent="Level" instance=ExtResource( 5 )]
+position = Vector2( 192, 320 )
 
 [node name="Goal" type="Area2D" parent="Level"]
 position = Vector2( 0, 224 )

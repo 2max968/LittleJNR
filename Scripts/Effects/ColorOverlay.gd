@@ -17,6 +17,9 @@ func _process(delta):
 		t -= delta * 5
 
 func SetColor(color : String):
+	$ColorOverlayBlue.visible = false
+	$ColorOverlayGreen.visible = false
+	$ColorOverlayRed.visible = false
 	if(color == "green"):
 		animateColor($ColorOverlayGreen)
 	if(color == "blue"):

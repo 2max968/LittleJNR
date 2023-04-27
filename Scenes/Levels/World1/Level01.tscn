@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Tilesets/GreenOn.tres" type="TileSet" id=1]
 [ext_resource path="res://Tilesets/Tileset.tres" type="TileSet" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Prefabs/BlueSlime.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Prefabs/GreenSlime.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scripts/LevelProperties.gd" type="Script" id=11]
+[ext_resource path="res://Prefabs/Star.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Prefabs/RedSlime.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Prefabs/LevelBase.tscn" type="PackedScene" id=15]
@@ -102,5 +103,8 @@ color_ramp = SubResource( 6 )
 position = Vector2( 120, 80 )
 
 [node name="BgrPlainsMountains" parent="." instance=ExtResource( 4 )]
+
+[node name="Star" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1776, 56 )
 
 [connection signal="body_entered" from="Level/Goal" to="Level/Goal" method="_on_Goal_body_entered"]

@@ -38,6 +38,8 @@ void fragment()
 	vec3 colored = rgb2hsv(pixel.xyz);
 	colored.x = target_hue;
 	colored.y = target_saturation;
+	colored.z *= 0.7;
+	colored.z += 0.3;
 	colored = hsv2rgb(colored);
 	COLOR = vec4(colored, 1) * COLOR.w + pixel * (1.0 - COLOR.w);
 }"

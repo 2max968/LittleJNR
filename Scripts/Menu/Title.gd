@@ -12,4 +12,6 @@ func _process(_delta):
 		var file := File.new()
 		if(level == "" or not file.file_exists(level) or not "Scenes/Levels/" in level):
 			level = "res://Scenes/Levels/World1/Level01.tscn"
-		get_tree().change_scene(level)
+		var error := get_tree().change_scene(level)
+		if error != OK:
+			get_tree().change_scene("res://Scenes/LevelSelect.tscn")
