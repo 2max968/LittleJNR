@@ -8,6 +8,9 @@ var fall := false
 var time_falling := 2.0
 var startPos : Vector2
 
+func _ready():
+	startPos = position
+
 func _physics_process(delta):
 	if fall:
 		position += direction.normalized() * 256 * delta
@@ -20,4 +23,3 @@ func _physics_process(delta):
 func _on_ActivateTrigger_body_entered(body):
 	if body is Player:
 		fall = true
-		startPos = position
