@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Tilesets/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
@@ -7,12 +7,16 @@
 [ext_resource path="res://Sprites/Crate.png" type="Texture" id=5]
 [ext_resource path="res://Scripts/MovingRightLeft.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/MoveUpDown.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/PlatformFalldown.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 48, 16 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 32, 8 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 32, 1 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -124,18 +128,40 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="Level"]
-position = Vector2( 288, 480 )
+[node name="PlatformFalldown" type="KinematicBody2D" parent="Level"]
+position = Vector2( 288, 424 )
+script = ExtResource( 8 )
+direction = Vector2( -1, 0 )
 
-[node name="ColorRect" type="ColorRect" parent="Level/KinematicBody2D"]
+[node name="ColorRect" type="ColorRect" parent="Level/PlatformFalldown"]
 margin_right = 64.0
 margin_bottom = 16.0
 color = Color( 0, 0.552941, 1, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/KinematicBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/PlatformFalldown"]
 position = Vector2( 32, 8 )
 shape = SubResource( 2 )
 one_way_collision = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ActivateTrigger" type="Area2D" parent="Level/PlatformFalldown"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/PlatformFalldown/ActivateTrigger"]
+position = Vector2( 32, 0 )
+shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="LevelBase" parent="." instance=ExtResource( 3 )]
 position = Vector2( 120, 80 )
+
+[connection signal="body_entered" from="Level/PlatformFalldown/ActivateTrigger" to="Level/PlatformFalldown" method="_on_ActivateTrigger_body_entered"]

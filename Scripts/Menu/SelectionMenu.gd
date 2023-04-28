@@ -10,6 +10,10 @@ var selected : int = 0;
 var selIndicator : TextureRect;
 var menuLength : int;
 
+var btnUp : TouchScreenButton
+var btnDown : TouchScreenButton
+var btnEnter : TouchScreenButton
+
 func _ready():
 	var itmList := items.split('\n');
 	menuLength = len(itmList)
@@ -29,10 +33,10 @@ func _ready():
 	#selIndicator.color = Color(0, 0.601563, 0.051697)
 	add_child(selIndicator)
 	
-	if(Config.touchInput):
-		var btnUp := TouchScreenButton.new()
-		var btnDown := TouchScreenButton.new()
-		var btnEnter = TouchScreenButton.new()
+	if(Config.touchInput or true):
+		btnUp = TouchScreenButton.new()
+		btnDown = TouchScreenButton.new()
+		btnEnter = TouchScreenButton.new()
 		var icoUp : Texture = load("res://Sprites/UI/TouchUp.png")
 		var icoEnter : Texture = load("res://Sprites/UI/TouchEnter.png")
 		btnUp.normal = icoUp;
@@ -62,6 +66,10 @@ func _process(_delta):
 	selIndicator.margin_bottom = selected * spacing + spacing;
 	if(Input.is_action_just_pressed("ui_accept")):
 		emit_signal("item_selected", selected);
+		
+	btnUp.visible = Config.touchInput
+	btnDown.visible = Config.touchInput
+	btnEnter.visible = Config.touchInput
 
 func loadItems(litems : String):
 	for child in get_children():

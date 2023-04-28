@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Other/dogicapixelbold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/Menu/Title.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/UILayer.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Menu/lblPlatformInfo.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/Menu/Blink.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFont" id=1]
@@ -39,3 +40,12 @@ period = 1.0
 [node name="TouchScreenButton" type="TouchScreenButton" parent="CanvasLayer"]
 shape = SubResource( 2 )
 action = "ui_touchinp"
+
+[node name="lblPlatformInfo" type="Label" parent="CanvasLayer"]
+margin_left = 99.0
+margin_top = 432.0
+margin_right = 797.0
+margin_bottom = 446.0
+text = "texttexttexttext"
+align = 2
+script = ExtResource( 4 )
