@@ -55,7 +55,9 @@ tile_data = PoolIntArray( 589838, 4, 65537, 655374, 4, 65537, 720910, 4, 65537, 
 
 [node name="CannonRed" type="Area2D" parent="Level"]
 position = Vector2( 192, 384 )
+rotation = -2.49582
 script = ExtResource( 6 )
+Strength = 1000.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Level/CannonRed"]
 position = Vector2( 16, 0 )
@@ -69,14 +71,24 @@ position = Vector2( 10, 0 )
 rotation = 1.5708
 shape = SubResource( 4 )
 
-[node name="Cannonball" type="KinematicBody2D" parent="Level/CannonRed"]
+[node name="Node" type="Node" parent="Level/CannonRed"]
+
+[node name="Cannonball" type="KinematicBody2D" parent="Level/CannonRed/Node"]
+visible = false
+position = Vector2( 192, 384 )
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/CannonRed/Cannonball"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/CannonRed/Node/Cannonball"]
 shape = SubResource( 5 )
 
-[node name="Sprite" type="Sprite" parent="Level/CannonRed/Cannonball"]
+[node name="Sprite" type="Sprite" parent="Level/CannonRed/Node/Cannonball"]
 texture = ExtResource( 7 )
+
+[node name="Preview" type="Line2D" parent="Level/CannonRed/Node"]
+position = Vector2( 192, 384 )
+scale = Vector2( 1, 1 )
+points = PoolVector2Array( 0, 0, -79.8635, -50.1815, -159.727, -80.363, -239.591, -90.5445, -319.454, -80.726, -399.318, -50.9075, -479.181, -1.08905, -559.045, 68.7294, -638.908, 158.548, -718.772, 268.366, -798.635, 398.185, -878.499, 548.003, -958.363, 717.822, -1038.23, 907.64, -1118.09, 1117.46, -1197.95, 1347.28, -1277.82, 1597.1, -1357.68, 1866.91, -1437.54, 2156.73, -1517.41, 2466.55, -1597.27, 2796.37, -1677.13, 3146.19, -1757, 3516.01, -1836.86, 3905.83, -1916.73, 4315.64, -1996.59, 4745.46, -2076.45, 5195.28, -2156.32, 5665.1, -2236.18, 6154.92, -2316.04, 6664.74, -2395.91, 7194.55, -2475.77, 7744.37, -2555.63, 8314.19, -2635.5, 8904.01, -2715.36, 9513.83, -2795.22, 10143.6, -2875.09, 10793.5, -2954.95, 11463.3, -3034.81, 12153.1, -3114.68, 12862.9, -3194.54, 13592.7, -3274.41, 14342.6, -3354.27, 15112.4, -3434.13, 15902.2, -3514, 16712, -3593.86, 17541.8, -3673.72, 18391.7, -3753.59, 19261.5, -3833.45, 20151.3, -3913.31, 21061.1 )
+width = 5.0
 
 [node name="LevelBase" parent="." instance=ExtResource( 3 )]
 position = Vector2( 120, 80 )

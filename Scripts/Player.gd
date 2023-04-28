@@ -39,6 +39,7 @@ export var defaultRotation : int = 0;
 var lastRotation = 0;
 var oldPosition : Vector2
 var oddFrame := false
+var jumpedThisFrame := false
 
 var jumpParticlesPrefab = preload("res://Prefabs/JumpParticles.tscn");
 var walkParticlesPrefab = preload("res://Prefabs/WalkParticles.tscn");
@@ -100,6 +101,8 @@ func _process(delta):
 #			get_tree().call_group("colorhandler", "SetColor", colors[cind]);
 
 func _physics_process(delta):
+	jumpedThisFrame = false
+	
 	# Set inputs depending of current rotation
 	var inpAng = getDir($RotationPivot.rotation_degrees);
 	var real_up = Vector2(sin($RotationPivot.rotation), -cos($RotationPivot.rotation));
@@ -182,6 +185,7 @@ func _physics_process(delta):
 		$Sounds/audioJump.play();
 		lengthStrech = 1;
 		jumpParticles();
+		jumpedThisFrame = true
 		if(color == "rainbow"):
 			var cind = colors.find(worldColor);
 			cind += 1;
@@ -216,6 +220,7 @@ func _physics_process(delta):
 	if(jumping >= 0 && trampolinetime >= 0):
 		velocity.y = -calcJumpForce(TRAMPOLINEBOOST);
 		current_gravity = JUMPGRAVITY;
+		jumpedThisFrame = true
 	
 	if(velocity.x < targetX):
 		velocity.x = min(velocity.x + friction * delta, targetX);
@@ -231,7 +236,8 @@ func _physics_process(delta):
 	var _vel = rotatevector(velocity, _rot);
 	var _up = Vector2(sin(_rot), -cos(_rot));
 	oldPosition = global_position
-	var actualMovement = move_and_slide(.5 * _accel * delta + _vel, _up);
+	var snap := Vector2.DOWN * 16 if is_on_floor() and not jumpedThisFrame else Vector2.ZERO
+	var actualMovement = move_and_slide_with_snap(.5 * _accel * delta + _vel, snap, _up);
 	velocity += accel * delta;
 	if(is_on_floor()):
 		steptime -= abs(actualMovement.x) * delta;
