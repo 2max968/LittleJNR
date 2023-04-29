@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Tilesets/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
@@ -8,18 +8,22 @@
 [ext_resource path="res://Scripts/MovingRightLeft.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/MoveUpDown.gd" type="Script" id=7]
 [ext_resource path="res://Scripts/PlatformFalldown.gd" type="Script" id=8]
+[ext_resource path="res://Sprites/Platforms/Falling.png" type="Texture" id=9]
+[ext_resource path="res://Prefabs/ConveyorBelt.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Prefabs/ColorButton.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Prefabs/GreenSlime.tscn" type="PackedScene" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 48, 16 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 32, 8 )
+extents = Vector2( 64, 8 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 32, 1 )
+extents = Vector2( 64, 1 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 128, 20 )
+extents = Vector2( 16, 16 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -132,19 +136,11 @@ __meta__ = {
 }
 
 [node name="PlatformFalldown" type="KinematicBody2D" parent="Level"]
-position = Vector2( 288, 424 )
+position = Vector2( 256, 384 )
 script = ExtResource( 8 )
 
-[node name="ColorRect" type="ColorRect" parent="Level/PlatformFalldown"]
-margin_right = 64.0
-margin_bottom = 16.0
-color = Color( 0, 0.552941, 1, 1 )
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/PlatformFalldown"]
-position = Vector2( 32, 8 )
+position = Vector2( 64, 8 )
 shape = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
@@ -156,25 +152,50 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/PlatformFalldown/ActivateTrigger"]
-position = Vector2( 32, 0 )
+position = Vector2( 64, 0 )
 shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Level"]
-position = Vector2( 512, 408 )
+[node name="Sprite" type="Sprite" parent="Level/PlatformFalldown"]
+position = Vector2( 64, 8 )
+texture = ExtResource( 9 )
+
+[node name="ConveyorBelt" parent="Level" instance=ExtResource( 10 )]
+position = Vector2( 1344, 352 )
+
+[node name="ConveyorBelt2" parent="Level" instance=ExtResource( 10 )]
+position = Vector2( 1376, 352 )
+
+[node name="ConveyorBelt3" parent="Level" instance=ExtResource( 10 )]
+position = Vector2( 1408, 352 )
+
+[node name="ConveyorBelt4" parent="Level" instance=ExtResource( 10 )]
+position = Vector2( 1440, 352 )
+
+[node name="ConveyorBelt5" parent="Level" instance=ExtResource( 10 )]
+position = Vector2( 1472, 352 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Level"]
+position = Vector2( 576, 408 )
 constant_linear_velocity = Vector2( 32, 0 )
 
-[node name="ColorRect" type="ColorRect" parent="Level/StaticBody2D"]
-margin_right = 256.0
-margin_bottom = 42.0
+[node name="ColorRect" type="ColorRect" parent="Level/StaticBody2D2"]
+margin_right = 64.0
+margin_bottom = 24.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/StaticBody2D"]
-position = Vector2( 128, 20 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/StaticBody2D2"]
+position = Vector2( 32, 12 )
 shape = SubResource( 4 )
 
 [node name="LevelBase" parent="." instance=ExtResource( 3 )]
 position = Vector2( 120, 80 )
+
+[node name="ColorButton" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1264, 384 )
+
+[node name="GreenSlime" parent="." instance=ExtResource( 13 )]
+position = Vector2( 1600, 480 )
 
 [connection signal="body_entered" from="Level/PlatformFalldown/ActivateTrigger" to="Level/PlatformFalldown" method="_on_ActivateTrigger_body_entered"]
