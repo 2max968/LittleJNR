@@ -57,6 +57,10 @@ delay = 0.4
 position = Vector2( 2432, 192 )
 delay = 0.6
 
+[node name="DropSpawnerRed9" parent="Level" instance=ExtResource( 7 )]
+position = Vector2( 2464, 192 )
+delay = 0.7
+
 [node name="Lightrays2" type="Sprite" parent="Level"]
 modulate = Color( 0.733333, 0.733333, 0.733333, 1 )
 material = SubResource( 1 )

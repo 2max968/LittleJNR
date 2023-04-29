@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/PlatformFalldown.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Platforms/Falling.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 64, 8 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 64, 1 )
+
+[node name="PlatformFalldown" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 64, 8 )
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ActivateTrigger" type="Area2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActivateTrigger"]
+position = Vector2( 64, 0 )
+shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 64, 8 )
+texture = ExtResource( 2 )
+
+[connection signal="body_entered" from="ActivateTrigger" to="." method="_on_ActivateTrigger_body_entered"]

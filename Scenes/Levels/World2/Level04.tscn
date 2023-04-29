@@ -1,0 +1,135 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Prefabs/LevelBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Tilesets/Tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Sprites/Lightrays.png" type="Texture" id=4]
+[ext_resource path="res://Prefabs/Star.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Tilesets/RedOn.tres" type="TileSet" id=6]
+[ext_resource path="res://Prefabs/PlatformFalldown.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Sprites/Particle.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Finish.png" type="Texture" id=9]
+[ext_resource path="res://Scripts/Goal.gd" type="Script" id=10]
+[ext_resource path="res://Tilesets/BlueOn.tres" type="TileSet" id=12]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 32, 16 )
+
+[sub_resource type="Gradient" id=15]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="BgrBlack" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="BgrBlack" type="ColorRect" parent="BgrBlack"]
+margin_right = 800.0
+margin_bottom = 450.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Level" type="Node2D" parent="."]
+modulate = Color( 0.717647, 0.717647, 0.717647, 1 )
+
+[node name="HLimit" type="Node2D" parent="Level"]
+position = Vector2( 2752, 0 )
+
+[node name="VLimit" type="Node2D" parent="Level"]
+position = Vector2( 0, 576 )
+
+[node name="Lightrays2" type="Sprite" parent="Level"]
+modulate = Color( 0.733333, 0.733333, 0.733333, 1 )
+material = SubResource( 1 )
+position = Vector2( 339, 279 )
+texture = ExtResource( 4 )
+
+[node name="Light2D" type="Light2D" parent="Level/Lightrays2"]
+texture = ExtResource( 4 )
+energy = 1.85
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Player" parent="Level" instance=ExtResource( 3 )]
+position = Vector2( 88, 445 )
+
+[node name="Blue" type="TileMap" parent="Level"]
+tile_set = ExtResource( 12 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="Red" type="TileMap" parent="Level"]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="TileMap" type="TileMap" parent="Level"]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 46, 4, 196611, 47, 4, 196611, 65582, 4, 196611, 65583, 4, 196611, 131118, 4, 196611, 131119, 4, 196611, 196654, 4, 196611, 196655, 4, 196611, 196665, 10, 0, 196666, 5, 131075, 196667, 5, 131075, 196668, 5, 131075, 196669, 5, 131075, 196670, 4, 65537, 262190, 4, 196611, 262191, 4, 196611, 262201, 9, 3, 262206, 4, 65537, 327726, 4, 196611, 327727, 4, 196611, 327737, 9, 3, 327742, 4, 65537, 327747, 5, 131075, 327748, 10, 0, 327749, 5, 131075, 327750, 5, 131075, 327751, 5, 131075, 327752, 5, 131075, 327753, 5, 131075, 327754, 5, 131075, 327755, 10, 0, 327756, 5, 131075, 327757, 4, 0, 327758, 4, 1, 327759, 4, 1, 327760, 4, 1, 327761, 4, 1, 327762, 4, 1, 327763, 4, 1, 327764, 4, 1, 327765, 4, 1, 393262, 4, 196611, 393263, 4, 196611, 393273, 9, 3, 393278, 4, 65537, 393284, 9, 3, 393291, 9, 3, 393293, 4, 131072, 393294, 4, 131073, 393295, 4, 131073, 393296, 4, 131073, 393297, 4, 131073, 393298, 4, 131073, 393299, 4, 131073, 393300, 4, 131073, 393301, 4, 131073, 458798, 4, 196611, 458799, 4, 196611, 458803, 10, 0, 458804, 5, 131075, 458805, 5, 131075, 458806, 5, 131075, 458807, 5, 131075, 458808, 5, 131075, 458809, 10, 0, 458810, 5, 131075, 458811, 5, 131075, 458812, 5, 131075, 458813, 5, 131075, 458814, 4, 65537, 458820, 9, 3, 458827, 9, 3, 524288, 4, 2, 524329, 4, 196611, 524334, 4, 196611, 524335, 4, 196611, 524339, 9, 3, 524345, 9, 3, 524350, 4, 65537, 524356, 9, 3, 524363, 9, 3, 589824, 4, 65538, 589865, 4, 196611, 589870, 4, 196611, 589871, 4, 196611, 589875, 9, 3, 589881, 9, 3, 589886, 4, 65537, 589892, 9, 3, 589899, 9, 3, 655360, 4, 65538, 655401, 4, 196611, 655406, 4, 196611, 655407, 4, 196611, 655411, 9, 3, 655417, 9, 3, 655422, 4, 65537, 655428, 9, 3, 655435, 9, 3, 720896, 4, 65538, 720937, 4, 196611, 720942, 4, 196611, 720943, 4, 196611, 720944, 5, 131075, 720945, 5, 131075, 720946, 5, 131075, 720947, 10, 0, 720953, 9, 3, 720958, 4, 65537, 720964, 9, 3, 720971, 9, 3, 786432, 4, 65538, 786473, 4, 196611, 786483, 9, 3, 786489, 9, 3, 786494, 4, 65537, 786500, 9, 3, 786507, 9, 3, 851968, 4, 131074, 852009, 4, 196611, 852019, 9, 3, 852022, 4, 131075, 852023, 4, 131075, 852024, 4, 131075, 852025, 4, 131075, 852026, 4, 131075, 852027, 4, 131075, 852028, 4, 131075, 852029, 4, 131075, 852030, 4, 131075, 852036, 9, 3, 852043, 9, 3, 917504, 4, 0, 917505, 4, 1, 917506, 4, 1, 917507, 4, 1, 917508, 4, 1, 917509, 4, 1, 917510, 4, 1, 917511, 4, 1, 917512, 4, 1, 917513, 4, 1, 917514, 4, 1, 917515, 4, 1, 917516, 4, 1, 917517, 4, 1, 917518, 4, 1, 917519, 4, 1, 917520, 4, 1, 917545, 4, 196611, 917555, 9, 3, 917558, 4, 131075, 917559, 4, 131075, 917560, 4, 131075, 917561, 4, 131075, 917562, 4, 131075, 917563, 4, 131075, 917564, 4, 131075, 917565, 4, 131075, 917566, 4, 65537, 917572, 9, 3, 917579, 9, 3, 983040, 4, 65536, 983041, 4, 65537, 983042, 4, 65537, 983043, 4, 65537, 983044, 4, 65537, 983045, 4, 65537, 983046, 4, 65537, 983047, 4, 65537, 983048, 4, 65537, 983049, 4, 65537, 983050, 4, 65537, 983051, 4, 65537, 983052, 4, 65537, 983053, 4, 65537, 983054, 4, 65537, 983055, 4, 65537, 983056, 4, 65538, 983081, 4, 196611, 983091, 9, 3, 983093, 4, 131075, 983094, 4, 131075, 983095, 4, 131075, 983096, 4, 131075, 983097, 4, 131075, 983098, 4, 131075, 983099, 4, 131075, 983100, 4, 131075, 983101, 4, 131075, 983102, 4, 65537, 983108, 9, 3, 983115, 9, 3, 1048576, 4, 65536, 1048577, 4, 65537, 1048578, 4, 65537, 1048579, 4, 65537, 1048580, 4, 65537, 1048581, 4, 65537, 1048582, 4, 65537, 1048583, 4, 65537, 1048584, 4, 65537, 1048585, 4, 65537, 1048586, 4, 65537, 1048587, 4, 65537, 1048588, 4, 65537, 1048589, 4, 65537, 1048590, 4, 65537, 1048591, 4, 65537, 1048592, 4, 65538, 1048617, 4, 196611, 1048627, 9, 3, 1048629, 4, 131075, 1048630, 4, 131075, 1048631, 4, 131075, 1048632, 4, 131075, 1048633, 4, 131075, 1048634, 4, 131075, 1048635, 4, 131075, 1048636, 4, 131075, 1048637, 4, 131075, 1048638, 4, 65537, 1048644, 9, 3, 1048651, 9, 3, 1114112, 4, 65536, 1114113, 4, 65537, 1114114, 4, 65537, 1114115, 4, 65537, 1114116, 4, 65537, 1114117, 4, 65537, 1114118, 4, 65537, 1114119, 4, 65537, 1114120, 4, 65537, 1114121, 4, 65537, 1114122, 4, 65537, 1114123, 4, 65537, 1114124, 4, 65537, 1114125, 4, 65537, 1114126, 4, 65537, 1114127, 4, 65537, 1114128, 4, 65538, 1114153, 4, 196611, 1114163, 4, 196611, 1114164, 4, 196611, 1114165, 4, 196611, 1114166, 4, 196611, 1114167, 4, 196611, 1114168, 4, 65537, 1114169, 4, 65537, 1114170, 4, 65537, 1114171, 4, 65537, 1114172, 4, 65537, 1114173, 4, 65537, 1114174, 4, 65537, 1114180, 9, 3, 1114187, 9, 3 )
+
+[node name="Goal" type="Area2D" parent="Level"]
+position = Vector2( 2656, 128 )
+script = ExtResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Goal"]
+position = Vector2( 32, 16 )
+shape = SubResource( 14 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Level/Goal"]
+position = Vector2( 32, 16 )
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Level/Goal"]
+position = Vector2( 32, 32 )
+lifetime = 1.4
+texture = ExtResource( 8 )
+emission_shape = 2
+emission_rect_extents = Vector2( 32, 1 )
+gravity = Vector2( 0, -50 )
+color_ramp = SubResource( 15 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PlatformFalldown2" parent="Level" instance=ExtResource( 7 )]
+position = Vector2( 704, 384 )
+
+[node name="PlatformFalldown" parent="Level" instance=ExtResource( 7 )]
+position = Vector2( 544, 448 )
+
+[node name="PlatformFalldown5" parent="Level" instance=ExtResource( 7 )]
+position = Vector2( 1184, 320 )
+
+[node name="PlatformFalldown4" parent="Level" instance=ExtResource( 7 )]
+position = Vector2( 1008, 320 )
+
+[node name="PlatformFalldown3" parent="Level" instance=ExtResource( 7 )]
+position = Vector2( 832, 320 )
+
+[node name="PlatformFalldown6" parent="Level" instance=ExtResource( 7 )]
+position = Vector2( 1344, 256 )
+
+[node name="PlatformFalldown7" parent="Level" instance=ExtResource( 7 )]
+position = Vector2( 2016, 96 )
+
+[node name="Star" parent="Level" instance=ExtResource( 5 )]
+position = Vector2( 2168, 192 )
+
+[node name="LevelBase" parent="." instance=ExtResource( 1 )]
+position = Vector2( 120, 80 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="body_entered" from="Level/Goal" to="Level/Goal" method="_on_Goal_body_entered"]

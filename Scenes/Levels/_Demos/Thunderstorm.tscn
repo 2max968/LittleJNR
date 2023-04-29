@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Tilesets/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/BlueSlime.tscn" type="PackedScene" id=2]
@@ -10,22 +10,14 @@
 [ext_resource path="res://Prefabs/RedSlime.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Prefabs/RainbowSlime.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Sprites/Trampoline.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Background/PlainsFarMountains/Sky.png" type="Texture" id=11]
 [ext_resource path="res://Scripts/Spiky.gd" type="Script" id=12]
 [ext_resource path="res://Scripts/TilemapReplacer.gd" type="Script" id=13]
 [ext_resource path="res://Scripts/Trampoline.gd" type="Script" id=14]
-[ext_resource path="res://Sprites/Background/PlainsFarMountains/Clouds.png" type="Texture" id=15]
-[ext_resource path="res://Scripts/Effects/Lightnings.gd" type="Script" id=16]
 [ext_resource path="res://Tilesets/GreenOn.tres" type="TileSet" id=17]
 [ext_resource path="res://Tilesets/RedOn.tres" type="TileSet" id=18]
 [ext_resource path="res://Tilesets/BlueOn.tres" type="TileSet" id=19]
-[ext_resource path="res://Scripts/Background/BgrScrollingLayer.gd" type="Script" id=20]
 [ext_resource path="res://Sprites/Platforms/BlueSpikyOff.png" type="Texture" id=21]
 [ext_resource path="res://Sprites/Platforms/BlueSpikyOn.png" type="Texture" id=22]
-[ext_resource path="res://Scripts/Background/BgrStickBottom.gd" type="Script" id=23]
-[ext_resource path="res://Sounds/thunder/thunder3.wav" type="AudioStream" id=24]
-[ext_resource path="res://Sounds/thunder/thunder1.wav" type="AudioStream" id=25]
-[ext_resource path="res://Sounds/thunder/thunder2.wav" type="AudioStream" id=26]
 
 [sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 80, 16 )
@@ -42,7 +34,6 @@ extents = Vector2( 16, 16 )
 [node name="Node2D" type="Node2D"]
 
 [node name="Level" type="Node2D" parent="."]
-modulate = Color( 0.192157, 0.192157, 0.192157, 1 )
 
 [node name="Blue" type="TileMap" parent="Level"]
 tile_set = ExtResource( 19 )
@@ -151,66 +142,6 @@ __meta__ = {
 }
 
 [node name="LevelBase" parent="." instance=ExtResource( 7 )]
-
-[node name="BgrPlainsMountains2" type="ParallaxBackground" parent="."]
-script = ExtResource( 23 )
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="BgrPlainsMountains2"]
-modulate = Color( 0.113725, 0.113725, 0.113725, 1 )
-motion_scale = Vector2( 0, 0 )
-motion_mirroring = Vector2( 800, 450 )
-
-[node name="Sprite" type="Sprite" parent="BgrPlainsMountains2/ParallaxLayer"]
-texture = ExtResource( 11 )
-
-[node name="ParallaxLayer4" type="ParallaxLayer" parent="BgrPlainsMountains2"]
-modulate = Color( 0.168627, 0.192157, 0.266667, 1 )
-motion_scale = Vector2( 0, 0 )
-motion_offset = Vector2( 0, -128 )
-motion_mirroring = Vector2( 800, 0 )
-script = ExtResource( 20 )
-Scroll = Vector2( 7, 0 )
-
-[node name="Sprite" type="Sprite" parent="BgrPlainsMountains2/ParallaxLayer4"]
-texture = ExtResource( 15 )
-
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="BgrPlainsMountains2"]
-modulate = Color( 0.32549, 0.32549, 0.32549, 1 )
-motion_scale = Vector2( 0.05, 0.05 )
-motion_mirroring = Vector2( 800, 0 )
-script = ExtResource( 20 )
-Scroll = Vector2( -5, 0 )
-
-[node name="Sprite" type="Sprite" parent="BgrPlainsMountains2/ParallaxLayer2"]
-texture = ExtResource( 15 )
-
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="BgrPlainsMountains2"]
-modulate = Color( 0.141176, 0.215686, 0.219608, 1 )
-motion_scale = Vector2( 0.1, 0.1 )
-motion_offset = Vector2( 0, 128 )
-motion_mirroring = Vector2( 800, 0 )
-script = ExtResource( 20 )
-Scroll = Vector2( 5, 0 )
-
-[node name="Sprite" type="Sprite" parent="BgrPlainsMountains2/ParallaxLayer3"]
-texture = ExtResource( 15 )
-
-[node name="Lightnings" type="Node" parent="BgrPlainsMountains2"]
-script = ExtResource( 16 )
-enlightedLayers = [ NodePath("../ParallaxLayer"), NodePath("../ParallaxLayer4"), NodePath("../ParallaxLayer2"), NodePath("../ParallaxLayer3") ]
-thunderSounds = [ NodePath("ThunderPlayer"), NodePath("ThunderPlayer2"), NodePath("ThunderPlayer3") ]
-
-[node name="ThunderPlayer" type="AudioStreamPlayer" parent="BgrPlainsMountains2/Lightnings"]
-stream = ExtResource( 25 )
-volume_db = -10.0
-
-[node name="ThunderPlayer2" type="AudioStreamPlayer" parent="BgrPlainsMountains2/Lightnings"]
-stream = ExtResource( 26 )
-volume_db = -10.0
-
-[node name="ThunderPlayer3" type="AudioStreamPlayer" parent="BgrPlainsMountains2/Lightnings"]
-stream = ExtResource( 24 )
-volume_db = -10.0
 
 [connection signal="body_entered" from="Level/BlueSpiky/KillArea" to="Level/BlueSpiky" method="_on_KillArea_body_entered"]
 [connection signal="body_entered" from="Level/Trampoline/Area2D" to="Level/Trampoline" method="_on_Area2D_body_entered"]
