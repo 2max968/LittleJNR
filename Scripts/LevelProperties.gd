@@ -48,3 +48,28 @@ static func GetLevelBackground2(worldName : String, levelName : String) -> Strin
 	bgr = cfg.get_value(levelName, "background", bgr)
 	return bgr
 	
+static func GetWorldNames() -> Array:
+	var worlds := []
+	var dir = Directory.new();
+	dir.open("res://Scenes/Levels");
+	dir.list_dir_begin();
+	var filename = dir.get_next();
+	while(filename != ""):
+		if(!filename.count(".")):
+			worlds.append(filename)
+		filename = dir.get_next();
+	dir.list_dir_end();
+	return worlds
+
+static func GetLevelNames(world : String) -> Array:
+	var levels := []
+	var dir = Directory.new();
+	dir.open("res://Scenes/Levels/" + world);
+	dir.list_dir_begin();
+	var filename = dir.get_next();
+	while(filename != ""):
+		if(filename.ends_with(".tscn")):
+			levels.append(filename)
+		filename = dir.get_next();
+	dir.list_dir_end();
+	return levels
