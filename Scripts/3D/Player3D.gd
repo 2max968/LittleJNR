@@ -18,11 +18,19 @@ const TRAMPOLINEBOOST = JUMPHEIGHT * 1.5;
 const INVINCIBLETIME = 1.0;
 
 var velocity2D : Vector2 = Vector2(0, 0)
+var velocityY : float = 0
+var grounded := 0.0
+var jump := 0.0
+var gravity : float = FALLGRAVITY
 
 func _ready():
 	pass
 
 func _physics_process(delta):
+	grounded -= delta
+	jump -= delta
+	var accelY : float = 0
+	
 	var inputDirection := Vector2(0, 0)
 	inputDirection.x = Input.get_joy_axis(0, JOY_ANALOG_LX)
 	inputDirection.y = Input.get_joy_axis(0, JOY_ANALOG_LY)
@@ -41,13 +49,34 @@ func _physics_process(delta):
 		else:
 			inputDirection.y = 0
 	
+	if is_on_floor():
+		grounded = COYOTETIME
+	if Input.is_action_just_pressed("move_jump"):
+		jump = JUMPBUFFER
+	
 	inputDirection = inputDirection.normalized()
 	inputDirection *= RUNSPEED if Input.is_action_pressed("move_sprint") else WALKSPEED
-	var fricLength = (GROUNDFRICTION if is_on_floor() else AIRFRICTION) * delta
+	var fricLength = (GROUNDFRICTION if grounded > 0 else AIRFRICTION) * delta
 	var diff := inputDirection - velocity2D
 	if diff.length() > fricLength:
 		diff = diff.normalized() * fricLength
 	velocity2D += diff
 	
-	var velocity := Vector3(velocity2D.x, 0, velocity2D.y) / 10.0
+	if grounded > 0:
+		velocityY = 0
+		accelY = 0
+		if jump > 0:
+			velocityY = calcJumpForce(JUMPHEIGHT)
+			gravity = JUMPGRAVITY
+	else:
+		velocityY -= gravity * delta
+		accelY = -gravity
+	
+	if Input.is_action_just_released("move_jump"):
+		gravity = FALLGRAVITY
+	
+	var velocity := Vector3(velocity2D.x, velocityY + gravity * delta, velocity2D.y) / 10.0
 	move_and_slide(velocity, Vector3(0, 1, 0))
+
+func calcJumpForce(jumpHeight : float, gravity : float = JUMPGRAVITY):
+	return sqrt(2 * gravity * jumpHeight);
