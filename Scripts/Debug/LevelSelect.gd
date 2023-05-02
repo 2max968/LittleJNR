@@ -5,7 +5,6 @@ func _ready():
 		$Panel/BtnWorld.add_item(world)
 	_on_BtnWorld_item_selected(-1)
 
-
 func _on_BtnWorld_item_selected(index):
 	$Panel/BtnLevel.items.clear()
 	for level in LevelProperties.GetLevelNames($Panel/BtnWorld.text):
