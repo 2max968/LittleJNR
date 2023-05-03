@@ -17,11 +17,14 @@ const TRAMPOLINEBOUNCE = 64.0;
 const TRAMPOLINEBOOST = JUMPHEIGHT * 1.5;
 const INVINCIBLETIME = 1.0;
 
+const SPEED_SCALE = 0.1
+
 var velocity2D : Vector2 = Vector2(0, 0)
 var velocityY : float = 0
 var grounded := 0.0
 var jump := 0.0
 var gravity : float = FALLGRAVITY
+var lastWallNormal : Vector3
 
 func _ready():
 	pass
@@ -70,13 +73,32 @@ func _physics_process(delta):
 			gravity = JUMPGRAVITY
 	else:
 		velocityY -= gravity * delta
-		accelY = -gravity
+		accelY = gravity
 	
-	if Input.is_action_just_released("move_jump"):
+	if not Input.is_action_pressed("move_jump"):
 		gravity = FALLGRAVITY
 	
-	var velocity := Vector3(velocity2D.x, velocityY + gravity * delta, velocity2D.y) / 10.0
-	move_and_slide(velocity, Vector3(0, 1, 0))
+	if(get_slide_count() > 0):
+		lastWallNormal = get_slide_collision(0).normal
+	
+	if Input.is_action_just_pressed("move_jump") and grounded <= 0 and is_on_wall():
+		if canWalljump(inputDirection.normalized(), lastWallNormal):
+			var jumpForce := calcJumpForce(WALLKICKHEIGHT)
+			accelY = 0
+			velocityY = jumpForce
+			velocity2D = Vector2(lastWallNormal.x, lastWallNormal.z).normalized() * jumpForce
+			gravity = JUMPGRAVITY
+	
+	var velocity := Vector3(velocity2D.x, velocityY + accelY * delta, velocity2D.y) * SPEED_SCALE
+	velocity = move_and_slide(velocity, Vector3(0, 1, 0))
+	velocity2D = Vector2(velocity.x, velocity.z) / SPEED_SCALE
+	
 
-func calcJumpForce(jumpHeight : float, gravity : float = JUMPGRAVITY):
+func calcJumpForce(jumpHeight : float, gravity : float = JUMPGRAVITY) -> float:
 	return sqrt(2 * gravity * jumpHeight);
+
+func canWalljump(inputDirection : Vector2, wallNormal : Vector3) -> bool:
+	if abs(wallNormal.y) > 0.1:
+		return false
+	var wallNormal2d := Vector2(wallNormal.x, wallNormal.z)
+	return acos(wallNormal2d.dot(-inputDirection)) < PI / 4.0
