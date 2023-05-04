@@ -1,4 +1,5 @@
 extends KinematicBody
+class_name Player3D, "res://Sprites/Player/Red.png"
 
 const JUMPGRAVITY = 750.0;
 const FALLGRAVITY = JUMPGRAVITY * 3;
@@ -25,6 +26,7 @@ var grounded := 0.0
 var jump := 0.0
 var gravity : float = FALLGRAVITY
 var lastWallNormal : Vector3
+var trampolinetime : float = 0
 
 func _ready():
 	pass
@@ -102,3 +104,15 @@ func canWalljump(inputDirection : Vector2, wallNormal : Vector3) -> bool:
 		return false
 	var wallNormal2d := Vector2(wallNormal.x, wallNormal.z)
 	return acos(wallNormal2d.dot(-inputDirection)) < PI / 4.0
+
+func Damage(amount : int):
+	pass
+
+func JumpOnEnemy(new_color : String):
+	Trampoline();
+	if(new_color != ""):
+		get_tree().call_group("colorhandler", "SetColor", new_color);
+
+func Trampoline():
+	trampolinetime = JUMPBUFFER;
+	velocityY = calcJumpForce(TRAMPOLINEBOUNCE, FALLGRAVITY);

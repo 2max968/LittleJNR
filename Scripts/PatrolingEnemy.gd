@@ -40,8 +40,8 @@ func _physics_process(delta):
 		velocity.x = -WALKSPEED;
 		
 	var space_state = get_world_2d().direct_space_state;
-	var posLeft = position + Vector2(-17,0);
-	var posRight = position + Vector2(17,0);
+	var posLeft = global_position + Vector2(-17,0);
+	var posRight = global_position + Vector2(17,0);
 	var resultLeft = space_state.intersect_ray(posLeft, posLeft + Vector2(0,1), [self], 1);
 	var resultRight = space_state.intersect_ray(posRight, posRight + Vector2(0,1), [self], 1);
 	

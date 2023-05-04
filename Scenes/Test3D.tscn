@@ -1,7 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Sprites/Player/Blue.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/3D/Player3D.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Enemies/RedSlime.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/PatrolingEnemy3D.gd" type="Script" id=4]
+[ext_resource path="res://Shaders/ColorOverlay.tres" type="Shader" id=5]
+[ext_resource path="res://Scripts/Effects/ColorOverlay.gd" type="Script" id=6]
 
 [sub_resource type="QuadMesh" id=1]
 
@@ -14,6 +18,9 @@ radius = 1.6
 [sub_resource type="CubeMesh" id=4]
 
 [sub_resource type="BoxShape" id=5]
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 5 )
 
 [node name="Spatial" type="Spatial"]
 
@@ -66,3 +73,53 @@ shape = SubResource( 5 )
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.965218, -0.0370507, 0.258809, -0.151314, 0.728107, 0.668554, -0.213211, -0.684461, 0.697175, 0, 15.3459, 0 )
 shadow_enabled = true
+
+[node name="Enemy" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76297, 0, -4.35265 )
+collision_layer = 2
+script = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Enemy"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
+shape = SubResource( 2 )
+
+[node name="Sprites" type="Spatial" parent="Enemy"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
+
+[node name="Sprite3D" type="Sprite3D" parent="Enemy/Sprites"]
+pixel_size = 0.1
+alpha_cut = 1
+texture = ExtResource( 3 )
+
+[node name="Body" type="Area" parent="Enemy"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Enemy/Body"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
+shape = SubResource( 2 )
+
+[node name="ColorOverlay" type="CanvasLayer" parent="."]
+layer = 100
+script = ExtResource( 6 )
+
+[node name="ColorOverlayBlue" type="ColorRect" parent="ColorOverlay"]
+visible = false
+material = SubResource( 6 )
+margin_right = 800.0
+margin_bottom = 450.0
+color = Color( 0, 0.788235, 1, 1 )
+
+[node name="ColorOverlayRed" type="ColorRect" parent="ColorOverlay"]
+visible = false
+material = SubResource( 6 )
+margin_right = 800.0
+margin_bottom = 450.0
+color = Color( 1, 0.141176, 0, 1 )
+
+[node name="ColorOverlayGreen" type="ColorRect" parent="ColorOverlay"]
+visible = false
+material = SubResource( 6 )
+margin_right = 800.0
+margin_bottom = 450.0
+color = Color( 0.545098, 1, 0, 1 )
+
+[connection signal="body_entered" from="Enemy/Body" to="Enemy" method="_on_Body_body_entered"]
