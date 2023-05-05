@@ -37,17 +37,17 @@ shape = SubResource( 3 )
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.887743, 0.460339, 0, -0.460339, 0.887743, 0, 18.0626, 29.4589 )
 
-[node name="Player" type="KinematicBody" parent="."]
+[node name="Player3D" type="KinematicBody" parent="."]
 script = ExtResource( 2 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Player"]
+[node name="CollisionShape" type="CollisionShape" parent="Player3D"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
 shape = SubResource( 2 )
 
-[node name="Sprites" type="Spatial" parent="Player"]
+[node name="Sprites" type="Spatial" parent="Player3D"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
 
-[node name="Sprite3D" type="Sprite3D" parent="Player/Sprites"]
+[node name="Sprite3D" type="Sprite3D" parent="Player3D/Sprites"]
 pixel_size = 0.1
 alpha_cut = 1
 texture = ExtResource( 1 )
@@ -74,26 +74,26 @@ shape = SubResource( 5 )
 transform = Transform( 0.965218, -0.0370507, 0.258809, -0.151314, 0.728107, 0.668554, -0.213211, -0.684461, 0.697175, 0, 15.3459, 0 )
 shadow_enabled = true
 
-[node name="Enemy" type="KinematicBody" parent="."]
+[node name="Enemy3D" type="KinematicBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76297, 0, -4.35265 )
 collision_layer = 2
 script = ExtResource( 4 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Enemy"]
+[node name="CollisionShape" type="CollisionShape" parent="Enemy3D"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
 shape = SubResource( 2 )
 
-[node name="Sprites" type="Spatial" parent="Enemy"]
+[node name="Sprites" type="Spatial" parent="Enemy3D"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
 
-[node name="Sprite3D" type="Sprite3D" parent="Enemy/Sprites"]
+[node name="Sprite3D" type="Sprite3D" parent="Enemy3D/Sprites"]
 pixel_size = 0.1
 alpha_cut = 1
 texture = ExtResource( 3 )
 
-[node name="Body" type="Area" parent="Enemy"]
+[node name="Body" type="Area" parent="Enemy3D"]
 
-[node name="CollisionShape" type="CollisionShape" parent="Enemy/Body"]
+[node name="CollisionShape" type="CollisionShape" parent="Enemy3D/Body"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
 shape = SubResource( 2 )
 
@@ -122,4 +122,4 @@ margin_right = 800.0
 margin_bottom = 450.0
 color = Color( 0.545098, 1, 0, 1 )
 
-[connection signal="body_entered" from="Enemy/Body" to="Enemy" method="_on_Body_body_entered"]
+[connection signal="body_entered" from="Enemy3D/Body" to="Enemy3D" method="_on_Body_body_entered"]

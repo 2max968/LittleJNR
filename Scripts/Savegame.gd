@@ -7,12 +7,15 @@ func _init():
 
 func loadGame():
 	var cfg := ConfigFile.new()
-	cfg.load("user://Savegame.ini")
-	var timeKeys := cfg.get_section_keys("Times")
-	for level in timeKeys:
-		var time : float = cfg.get_value("Times", level, NAN)
-		if not is_nan(time):
-			levelTimes[level] = time
+	var error := cfg.load("user://Savegame.ini")
+	if error != OK:
+		return
+	if cfg.has_section("Times"):
+		var timeKeys := cfg.get_section_keys("Times")
+		for level in timeKeys:
+			var time : float = cfg.get_value("Times", level, NAN)
+			if not is_nan(time):
+				levelTimes[level] = time
 
 func saveGame():
 	var cfg := ConfigFile.new()

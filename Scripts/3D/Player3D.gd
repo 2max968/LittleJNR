@@ -34,7 +34,9 @@ func _ready():
 func _physics_process(delta):
 	grounded -= delta
 	jump -= delta
+	trampolinetime -= delta
 	var accelY : float = 0
+	var jumpedThisFrame := false
 	
 	var inputDirection := Vector2(0, 0)
 	inputDirection.x = Input.get_joy_axis(0, JOY_ANALOG_LX)
@@ -73,12 +75,14 @@ func _physics_process(delta):
 		if jump > 0:
 			velocityY = calcJumpForce(JUMPHEIGHT)
 			gravity = JUMPGRAVITY
+			jumpedThisFrame = true
 	else:
 		velocityY -= gravity * delta
 		accelY = gravity
 	
 	if not Input.is_action_pressed("move_jump"):
 		gravity = FALLGRAVITY
+		jumpedThisFrame = true
 	
 	if(get_slide_count() > 0):
 		lastWallNormal = get_slide_collision(0).normal
@@ -90,6 +94,11 @@ func _physics_process(delta):
 			velocityY = jumpForce
 			velocity2D = Vector2(lastWallNormal.x, lastWallNormal.z).normalized() * jumpForce
 			gravity = JUMPGRAVITY
+	
+	if(jump >= 0 && trampolinetime >= 0):
+		velocityY = calcJumpForce(TRAMPOLINEBOOST);
+		gravity = JUMPGRAVITY;
+		jumpedThisFrame = true
 	
 	var velocity := Vector3(velocity2D.x, velocityY + accelY * delta, velocity2D.y) * SPEED_SCALE
 	velocity = move_and_slide(velocity, Vector3(0, 1, 0))
