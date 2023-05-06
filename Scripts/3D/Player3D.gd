@@ -27,9 +27,30 @@ var jump := 0.0
 var gravity : float = FALLGRAVITY
 var lastWallNormal : Vector3
 var trampolinetime : float = 0
+var movingRight := true;
+var lengthStrech := 0.0
 
 func _ready():
 	pass
+
+func _process(delta):
+	if movingRight:
+		if $Sprites.rotation_degrees.y < 0:
+			$Sprites.rotation_degrees.y += delta * 180 * 6
+			if $Sprites.rotation_degrees.y > 0:
+				$Sprites.rotation_degrees.y = 0
+	else:
+		if $Sprites.rotation_degrees.y > -180:
+			$Sprites.rotation_degrees.y -= delta * 180 * 6
+			if $Sprites.rotation_degrees.y < -180:
+				$Sprites.rotation_degrees.y = -180
+				
+	$Sprites.scale.y = sin(PI*lengthStrech)/4.0 + 1;
+	$Sprites.scale.x = 1 * (1 / $Sprites.scale.y);
+	if(lengthStrech > 0):
+		lengthStrech = max(0, lengthStrech - delta * 8);
+	if(lengthStrech < 0):
+		lengthStrech = min(0, lengthStrech + delta * 8);
 
 func _physics_process(delta):
 	grounded -= delta
@@ -60,6 +81,15 @@ func _physics_process(delta):
 		grounded = COYOTETIME
 	if Input.is_action_just_pressed("move_jump"):
 		jump = JUMPBUFFER
+		
+	if (is_on_floor() or is_on_ceiling()) and abs(velocityY) > 100:
+		$Sounds/audioLand.play()
+		lengthStrech = -1
+	
+	if inputDirection.x > 0:
+		movingRight = true
+	if inputDirection.x < 0:
+		movingRight = false
 	
 	inputDirection = inputDirection.normalized()
 	inputDirection *= RUNSPEED if Input.is_action_pressed("move_sprint") else WALKSPEED
@@ -76,6 +106,9 @@ func _physics_process(delta):
 			velocityY = calcJumpForce(JUMPHEIGHT)
 			gravity = JUMPGRAVITY
 			jumpedThisFrame = true
+			$Sounds/audioJump.play()
+			grounded = 0
+			lengthStrech = 1
 	else:
 		velocityY -= gravity * delta
 		accelY = gravity
@@ -87,18 +120,20 @@ func _physics_process(delta):
 	if(get_slide_count() > 0):
 		lastWallNormal = get_slide_collision(0).normal
 	
-	if Input.is_action_just_pressed("move_jump") and grounded <= 0 and is_on_wall():
+	if Input.is_action_just_pressed("move_jump") and grounded < -0.1 and is_on_wall():
 		if canWalljump(inputDirection.normalized(), lastWallNormal):
 			var jumpForce := calcJumpForce(WALLKICKHEIGHT)
 			accelY = 0
 			velocityY = jumpForce
 			velocity2D = Vector2(lastWallNormal.x, lastWallNormal.z).normalized() * jumpForce
 			gravity = JUMPGRAVITY
+			$Sounds/audioJump.play()
 	
 	if(jump >= 0 && trampolinetime >= 0):
 		velocityY = calcJumpForce(TRAMPOLINEBOOST);
 		gravity = JUMPGRAVITY;
 		jumpedThisFrame = true
+		lengthStrech = 1
 	
 	var velocity := Vector3(velocity2D.x, velocityY + accelY * delta, velocity2D.y) * SPEED_SCALE
 	velocity = move_and_slide(velocity, Vector3(0, 1, 0))
