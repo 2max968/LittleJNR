@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Sprites/Player/Blue.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/3D/Player3D.gd" type="Script" id=2]
@@ -13,6 +13,9 @@
 [ext_resource path="res://Scripts/Effects/ShadowCaster3D.gd" type="Script" id=11]
 
 [sub_resource type="QuadMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=11]
+albedo_color = Color( 0.0509804, 0.486275, 0, 1 )
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 0.500301, 0.5036, 1 )
@@ -32,6 +35,9 @@ albedo_color = Color( 0.313726, 0.313726, 0.313726, 1 )
 
 [sub_resource type="BoxShape" id=5]
 
+[sub_resource type="SpatialMaterial" id=12]
+albedo_color = Color( 1, 0.494118, 0, 1 )
+
 [sub_resource type="CylinderShape" id=7]
 height = 1.6
 radius = 1.6
@@ -47,6 +53,7 @@ shader = ExtResource( 5 )
 [node name="Ground" type="MeshInstance" parent="."]
 transform = Transform( 20, 0, 0, 0, -8.74228e-07, 1, 0, -20, -4.37114e-08, 0, 0, 0 )
 mesh = SubResource( 1 )
+material/0 = SubResource( 11 )
 
 [node name="StaticBody" type="StaticBody" parent="Ground"]
 
@@ -118,12 +125,20 @@ __meta__ = {
 transform = Transform( 1, 0, 0, 0, 0.887743, 0.460339, 0, -0.460339, 0.887743, 0, 11.1032, 18.7522 )
 
 [node name="ShadowCaster" type="Spatial" parent="Player3D"]
+visible = false
 script = ExtResource( 11 )
 
 [node name="DropShadow" type="MeshInstance" parent="Player3D/ShadowCaster"]
 transform = Transform( 3.2, 0, 0, 0, -1.39876e-07, 1, 0, -3.2, -4.37114e-08, 0, 0, 0 )
 mesh = SubResource( 9 )
 material/0 = SubResource( 10 )
+
+[node name="SpotLight" type="SpotLight" parent="Player3D"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.12943, 0 )
+light_negative = true
+light_bake_mode = 0
+spot_range = 50.5511
+spot_angle = 22.0567
 
 [node name="Cube" type="StaticBody" parent="."]
 transform = Transform( 8.2311, 0, 0, 0, 7.10525, 0, 0, 0, 11.8255, 16.4047, 0, 0 )
@@ -141,6 +156,16 @@ transform = Transform( 8.2311, 0, 0, 0, 17.01, 0, 0, 0, 11.8255, -16.9837, 5.712
 mesh = SubResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Cube2"]
+shape = SubResource( 5 )
+
+[node name="Cube3" type="StaticBody" parent="."]
+transform = Transform( 26.5563, 0, 0, 0, 17.01, 0, 0, 0, 1.55457, 2.98123, 5.7125, -12.6712 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Cube3"]
+material_override = SubResource( 12 )
+mesh = SubResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Cube3"]
 shape = SubResource( 5 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
