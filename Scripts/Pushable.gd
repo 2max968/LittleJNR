@@ -5,6 +5,8 @@ var targetX : float
 var yvelocity := 0.0
 var playerInRange := false
 var pushLeft : bool
+var vlimitNode : Node2D
+var moving := false
 
 const XSPEED := 128 * 2
 const GRAVITY := 750.0 * 3
@@ -14,6 +16,7 @@ func _init():
 
 func _ready():
 	targetX = position.x
+	vlimitNode = get_tree().get_root().find_node("VLimit", true, false)
 
 func _physics_process(delta):
 	var vel := Vector2(0, 0)
@@ -23,14 +26,22 @@ func _physics_process(delta):
 	else:
 		yvelocity = 0
 		vel.y = 0
-		vel.x = (targetX - position.x) / delta
-		if vel.x > XSPEED: vel.x = XSPEED
-		if vel.x < -XSPEED: vel.x = -XSPEED
+		vel.x = 0
+		if moving:
+			if abs(targetX - position.x) < 1:
+				moving = false
+			vel.x = (targetX - position.x) / delta
+			if vel.x > XSPEED: vel.x = XSPEED
+			if vel.x < -XSPEED: vel.x = -XSPEED
 	move_and_slide(vel, Vector2(0, -1))
+	
+	if global_position.y > vlimitNode.global_position.y:
+		self.queue_free()
 	
 func _process(_delta):
 	if playerInRange and Input.is_action_just_pressed("move_sprint"):
 		var snapX := round(position.x / 32.0 - 0.5) * 32.0 + 16
+		moving = true
 		if pushLeft:
 			targetX = snapX - 32
 		else:

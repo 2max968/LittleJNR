@@ -31,6 +31,7 @@ var movingRight := true;
 var lengthStrech := 0.0
 
 func _ready():
+	
 	pass
 
 func _process(delta):
