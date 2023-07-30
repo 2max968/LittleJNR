@@ -61,3 +61,9 @@ func _on_PushAreas_body_exited(body):
 	if body is Player:
 		playerInRange = false
 		Config.showTouchSprint -= 1
+
+
+func _on_DamageArea_body_entered(body):
+	if body.has_method("Damage"):
+		queue_free()
+		body.Damage(1)

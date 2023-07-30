@@ -53,6 +53,11 @@ _global_script_classes=[ {
 "class": "Pushable",
 "language": "GDScript",
 "path": "res://Scripts/Pushable.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "TransformationBird",
+"language": "GDScript",
+"path": "res://Scripts/TransformationBird.gd"
 } ]
 _global_script_class_icons={
 "ColoredPlatform": "",
@@ -63,7 +68,8 @@ _global_script_class_icons={
 "PatrolingEnemy3D": "res://Sprites/Enemies/RedSlime.png",
 "Player": "res://Sprites/Player/Blue.png",
 "Player3D": "res://Sprites/Player/Red.png",
-"Pushable": "res://Sprites/Crate.png"
+"Pushable": "res://Sprites/Crate.png",
+"TransformationBird": ""
 }
 
 [application]
@@ -201,10 +207,6 @@ game_cheat={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":10,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
-
-[input_devices]
-
-pointing/emulate_touch_from_mouse=true
 
 [physics]
 
