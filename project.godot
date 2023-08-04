@@ -39,7 +39,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/PatrolingEnemy3D.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "Player_Base",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Scripts/Player.gd"
@@ -50,11 +50,16 @@ _global_script_classes=[ {
 "path": "res://Scripts/3D/Player3D.gd"
 }, {
 "base": "KinematicBody2D",
+"class": "Player_Base",
+"language": "GDScript",
+"path": "res://Scripts/Player_Base.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "Pushable",
 "language": "GDScript",
 "path": "res://Scripts/Pushable.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "Player_Base",
 "class": "TransformationBird",
 "language": "GDScript",
 "path": "res://Scripts/TransformationBird.gd"
@@ -68,6 +73,7 @@ _global_script_class_icons={
 "PatrolingEnemy3D": "res://Sprites/Enemies/RedSlime.png",
 "Player": "res://Sprites/Player/Blue.png",
 "Player3D": "res://Sprites/Player/Red.png",
+"Player_Base": "res://Sprites/Player/Blue.png",
 "Pushable": "res://Sprites/Crate.png",
 "TransformationBird": ""
 }

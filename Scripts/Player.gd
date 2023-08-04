@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Player_Base
 class_name Player, "res://Sprites/Player/Blue.png"
 
 const JUMPGRAVITY = 750.0;
@@ -16,7 +16,6 @@ const JUMPHEIGHT = 128.0;
 const WALLKICKHEIGHT = JUMPHEIGHT * .75;
 const TRAMPOLINEBOUNCE = 64.0;
 const TRAMPOLINEBOOST = JUMPHEIGHT * 1.5;
-const INVINCIBLETIME = 1.0;
 
 var velocity = Vector2(0,0);
 var current_gravity = FALLGRAVITY;
@@ -29,9 +28,7 @@ var hlimitNode : Node2D;
 var yScale = 1.0;
 var yScaleA = 1.0;
 var lengthStrech : float;
-var health : int = 3;
 var color : String;
-var invincible = -1;
 var colors = ["blue", "green", "red"];
 var worldColor : String;
 var up = Vector2(0,-1);
@@ -260,9 +257,6 @@ func _physics_process(delta):
 func calcJumpForce(jumpHeight : float, gravity : float = JUMPGRAVITY):
 	return sqrt(2 * gravity * jumpHeight);
 
-func Kill():
-	get_tree().call_group("levelControl", "die");
-
 func jumpParticles():
 	var instance = jumpParticlesPrefab.instance();
 	$"..".add_child(instance);
@@ -276,14 +270,9 @@ func walkParticles():
 	instance.emitting = true;
 
 func Damage(amount : int):
-	if(invincible <= 0):
-		health = max(0, health - amount);
-		invincible = INVINCIBLETIME;
-	get_tree().call_group("playerstate", "Health", health);
+	BaseDamage(amount)
 	velocity *= -1;
 	velocity = velocity / velocity.length() * 512;
-	if(health <= 0):
-		Kill();
 
 func JumpOnEnemy(new_color : String):
 	Trampoline();

@@ -1,14 +1,11 @@
-extends KinematicBody2D
+extends Player_Base
 class_name TransformationBird
 
 
 const GRAVITY := 1400.0
-const INVINCIBLETIME := 1.0
 const JUMPFORCE := 500.0
 
 var velocity := Vector2(0, 0)
-var invincible := 0.0
-var health : int = 3
 var targetscale := 1.0
 
 func _ready():
@@ -57,9 +54,4 @@ func Kill():
 	get_tree().call_group("levelControl", "die");
 	
 func Damage(amount : int):
-	if(invincible <= 0):
-		health = max(0, health - amount);
-		invincible = INVINCIBLETIME;
-	get_tree().call_group("playerstate", "Health", health);
-	if(health <= 0):
-		Kill();
+	BaseDamage(amount)
