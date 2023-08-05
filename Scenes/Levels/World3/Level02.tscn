@@ -1,0 +1,318 @@
+[gd_scene load_steps=44 format=2]
+
+[ext_resource path="res://Prefabs/LevelBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Tilesets/Tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Sprites/Transformer.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Transformer2.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/WaterfallWide.png" type="Texture" id=6]
+[ext_resource path="res://Materials/Rainbow.tres" type="Material" id=7]
+[ext_resource path="res://Sprites/Particle.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Finish.png" type="Texture" id=9]
+[ext_resource path="res://Scripts/Goal.gd" type="Script" id=10]
+[ext_resource path="res://Sprites/WaterfallWideTop.png" type="Texture" id=11]
+[ext_resource path="res://Tilesets/BlueOn.tres" type="TileSet" id=12]
+[ext_resource path="res://Scripts/AnimationSync.gd" type="Script" id=13]
+[ext_resource path="res://Sprites/BgrMountains/sky.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/BgrMountains/mountains.png" type="Texture" id=15]
+[ext_resource path="res://Scripts/Background/BgrStickBottom.gd" type="Script" id=16]
+[ext_resource path="res://Sprites/Background/ForestDark.png" type="Texture" id=17]
+[ext_resource path="res://Scripts/Transformer.gd" type="Script" id=18]
+[ext_resource path="res://Prefabs/RainbowSlime.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Prefabs/TransformationBird.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Shaders/CRTEffect.tres" type="Shader" id=24]
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 32, 16 )
+
+[sub_resource type="Gradient" id=15]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 11 )
+region = Rect2( 48, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 11 )
+region = Rect2( 96, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 11 )
+region = Rect2( 144, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 11 )
+region = Rect2( 192, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 11 )
+region = Rect2( 240, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 11 )
+region = Rect2( 288, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 11 )
+region = Rect2( 336, 0, 48, 16 )
+
+[sub_resource type="SpriteFrames" id=28]
+animations = [ {
+"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 6 )
+region = Rect2( 48, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 6 )
+region = Rect2( 96, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 6 )
+region = Rect2( 144, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 6 )
+region = Rect2( 192, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 6 )
+region = Rect2( 240, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 6 )
+region = Rect2( 288, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 6 )
+region = Rect2( 336, 0, 48, 16 )
+
+[sub_resource type="SpriteFrames" id=37]
+animations = [ {
+"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=40]
+extents = Vector2( 7.5, 30 )
+
+[sub_resource type="ShaderMaterial" id=39]
+shader = ExtResource( 24 )
+shader_param/overlay = true
+shader_param/scanlines_opacity = 0.4
+shader_param/scanlines_width = 0.25
+shader_param/grille_opacity = 0.3
+shader_param/resolution = Vector2( 640, 480 )
+shader_param/pixelate = true
+shader_param/roll = false
+shader_param/roll_speed = 8.0
+shader_param/roll_size = 0.0
+shader_param/roll_variation = 1.8
+shader_param/distort_intensity = 0.05
+shader_param/noise_opacity = 0.4
+shader_param/noise_speed = 5.0
+shader_param/static_noise_intensity = 0.06
+shader_param/aberration = 0.03
+shader_param/brightness = 1.4
+shader_param/discolor = true
+shader_param/warp_amount = 0.022
+shader_param/clip_warp = false
+shader_param/vignette_intensity = 0.4
+shader_param/vignette_opacity = 0.042
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Level" type="Node2D" parent="."]
+modulate = Color( 0.717647, 0.717647, 0.717647, 1 )
+position = Vector2( 0, 256 )
+
+[node name="HLimit" type="Node2D" parent="Level"]
+position = Vector2( 3712, 0 )
+
+[node name="VLimit" type="Node2D" parent="Level"]
+position = Vector2( 0, 512 )
+
+[node name="Player" parent="Level" instance=ExtResource( 3 )]
+position = Vector2( 88, 445 )
+
+[node name="Blue" type="TileMap" parent="Level"]
+tile_set = ExtResource( 12 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="TileMap" type="TileMap" parent="Level"]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 655383, 8, 0, 655389, 8, 0, 720917, 5, 0, 720918, 5, 2, 720922, 5, 3, 720923, 5, 4, 720924, 5, 4, 720925, 5, 4, 720926, 5, 5, 786433, 8, 0, 786437, 8, 0, 786440, 8, 0, 786442, 8, 0, 786452, 8, 0, 786453, 5, 65536, 786454, 5, 65537, 786455, 5, 1, 786456, 5, 131076, 786457, 5, 131077, 786458, 5, 65539, 786459, 5, 65540, 786460, 5, 65540, 786461, 5, 65540, 786462, 5, 65541, 786463, 5, 1, 786464, 5, 2, 851975, 5, 3, 851976, 5, 4, 851977, 5, 4, 851978, 5, 4, 851979, 5, 5, 851987, 5, 3, 851988, 5, 4, 851989, 5, 65536, 851990, 5, 65537, 851991, 5, 65537, 851992, 5, 65537, 851993, 5, 65537, 851994, 5, 65537, 851995, 5, 65537, 851996, 5, 65537, 851997, 5, 65537, 851998, 5, 65537, 851999, 5, 65537, 852000, 5, 65538, 852082, 8, 0, 917504, 5, 0, 917505, 5, 1, 917506, 5, 1, 917507, 5, 1, 917508, 5, 1, 917509, 5, 1, 917510, 5, 1, 917511, 5, 65539, 917512, 5, 65540, 917513, 5, 65540, 917514, 5, 65540, 917515, 5, 65541, 917516, 5, 1, 917517, 5, 1, 917518, 5, 1, 917519, 5, 1, 917520, 5, 1, 917521, 5, 1, 917522, 5, 1, 917523, 5, 65539, 917524, 5, 65540, 917525, 5, 65536, 917526, 5, 65537, 917527, 5, 65537, 917528, 5, 65537, 917529, 5, 65537, 917530, 5, 65537, 917531, 5, 65537, 917532, 5, 65537, 917533, 5, 65537, 917534, 5, 65537, 917535, 5, 65537, 917536, 5, 65538, 917609, 6, 0, 917614, 7, 0, 983040, 5, 65536, 983041, 5, 65537, 983042, 5, 65537, 983043, 5, 65537, 983044, 5, 65537, 983045, 5, 65537, 983046, 5, 65537, 983047, 5, 65537, 983048, 5, 65537, 983049, 5, 65537, 983050, 5, 65537, 983051, 5, 65537, 983052, 5, 65537, 983053, 5, 65537, 983054, 5, 65537, 983055, 5, 65537, 983056, 5, 65537, 983057, 5, 65537, 983058, 5, 65537, 983059, 5, 65537, 983060, 5, 65537, 983061, 5, 65536, 983062, 5, 65537, 983063, 5, 65537, 983064, 5, 65537, 983065, 5, 65537, 983066, 5, 65537, 983067, 5, 65537, 983068, 5, 65537, 983069, 5, 65537, 983070, 5, 65537, 983071, 5, 65537, 983072, 5, 65538, 983136, 5, 0, 983137, 5, 1, 983138, 5, 1, 983139, 5, 1, 983140, 5, 1, 983141, 5, 1, 983142, 5, 1, 983143, 5, 1, 983144, 5, 1, 983145, 5, 1, 983146, 5, 131075, 983147, 5, 131075, 983148, 5, 131075, 983149, 5, 131075, 983150, 5, 131075, 983151, 5, 1, 983152, 5, 1, 983153, 5, 1, 983154, 5, 1, 983155, 5, 1 )
+
+[node name="Goal" type="Area2D" parent="Level"]
+position = Vector2( 3584, 448 )
+script = ExtResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Goal"]
+position = Vector2( 32, 16 )
+shape = SubResource( 14 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Level/Goal"]
+position = Vector2( 32, 16 )
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Level/Goal"]
+position = Vector2( 32, 32 )
+lifetime = 1.4
+texture = ExtResource( 8 )
+emission_shape = 2
+emission_rect_extents = Vector2( 32, 1 )
+gravity = Vector2( 0, -50 )
+color_ramp = SubResource( 15 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Waterfall1" type="Node2D" parent="Level"]
+modulate = Color( 1, 1, 1, 0.694118 )
+position = Vector2( 800, 384 )
+script = ExtResource( 13 )
+
+[node name="Top" type="AnimatedSprite" parent="Level/Waterfall1"]
+scale = Vector2( 4, 4 )
+frames = SubResource( 28 )
+frame = 2
+playing = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Level/Waterfall1"]
+position = Vector2( 0, 64 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 37 )
+frame = 4
+playing = true
+
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="Level/Waterfall1"]
+position = Vector2( 0, 128 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 37 )
+frame = 4
+playing = true
+
+[node name="Transformer" type="Node2D" parent="Level"]
+position = Vector2( 712, 320 )
+script = ExtResource( 18 )
+TransformedObject = ExtResource( 20 )
+
+[node name="Transformer" type="Sprite" parent="Level/Transformer"]
+material = ExtResource( 7 )
+position = Vector2( 8, 0 )
+z_index = 1
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Transformer2" type="Sprite" parent="Level/Transformer"]
+material = ExtResource( 7 )
+position = Vector2( 8, 0 )
+z_index = -1
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Level/Transformer"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level/Transformer/StaticBody2D"]
+polygon = PoolVector2Array( -16, 32, -12, 30, 8, 30, 12, 32 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Level/Transformer/StaticBody2D"]
+polygon = PoolVector2Array( -16, -32, -12, -30, 8, -30, 12, -32 )
+
+[node name="Area2D" type="Area2D" parent="Level/Transformer"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Transformer/Area2D"]
+position = Vector2( -0.5, 0 )
+shape = SubResource( 40 )
+
+[node name="Splash1" type="CPUParticles2D" parent="."]
+position = Vector2( 800, 776 )
+amount = 1024
+lifetime = 0.5
+preprocess = 1.0
+lifetime_randomness = 0.5
+emission_shape = 2
+emission_rect_extents = Vector2( 75, 1 )
+direction = Vector2( 0, -1 )
+spread = 15.0
+gravity = Vector2( 0, 400 )
+initial_velocity = 200.0
+initial_velocity_random = 1.0
+scale_amount = 5.0
+scale_amount_random = 1.0
+color = Color( 0.788235, 0.913725, 0.941176, 1 )
+
+[node name="LevelBase" parent="." instance=ExtResource( 1 )]
+position = Vector2( 120, 80 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource( 16 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0, 0 )
+motion_mirroring = Vector2( 800, 600 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+modulate = Color( 0.6107, 0.62, 0.5084, 1 )
+texture = ExtResource( 14 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.05, 0.05 )
+motion_mirroring = Vector2( 800, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+texture = ExtResource( 15 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.4, 0.4 )
+motion_mirroring = Vector2( 800, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+texture = ExtResource( 17 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource( 39 )
+margin_right = 800.0
+margin_bottom = 450.0
+
+[node name="RainbowSlime" parent="." instance=ExtResource( 19 )]
+position = Vector2( 920, 640 )
+
+[connection signal="body_entered" from="Level/Goal" to="Level/Goal" method="_on_Goal_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Sounds/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://Sounds/step0.wav" type="AudioStream" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://Sprites/Player/Blue.png" type="Texture" id=8]
 [ext_resource path="res://Scripts/Unmodulated.gd" type="Script" id=9]
 [ext_resource path="res://Sprites/Player/BlueOutline.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Light256.png" type="Texture" id=11]
 
 [sub_resource type="ShaderMaterial" id=29]
 shader = ExtResource( 6 )
@@ -59,15 +58,6 @@ script = ExtResource( 9 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="Light2D" type="Light2D" parent="RotationPivot/Sprites/SpriteRainbow"]
-texture = ExtResource( 11 )
-texture_scale = 0.5
-energy = 4.87
-shadow_enabled = true
-shadow_gradient_length = 1.0
-shadow_filter = 5
-shadow_filter_smooth = 12.9
 
 [node name="HitIndicator" type="Sprite" parent="RotationPivot/Sprites"]
 visible = false
