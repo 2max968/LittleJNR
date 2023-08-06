@@ -6,8 +6,12 @@ const GRAVITY := 1400.0
 const JUMPFORCE := 500.0
 
 var targetscale := 1.0
+var vlimitNode : Node2D;
+var hlimitNode : Node2D;
 
 func _ready():
+	vlimitNode = get_tree().get_root().find_node("VLimit", true, false);
+	hlimitNode = get_tree().get_root().find_node("HLimit", true, false);
 	var camera := get_tree().get_root().find_node("Camera", true, false);
 	if camera != null:
 		camera.followObject(self);
@@ -40,6 +44,11 @@ func _physics_process(delta):
 	
 	if global_position.x < 0:
 		velocity.x = abs(velocity.x)
+	if global_position.x > hlimitNode.global_position.x:
+		velocity.x = -abs(velocity.x)
+		
+	if global_position.y > vlimitNode.global_position.y + 16:
+		Kill()
 	
 	if Input.is_action_just_pressed("move_jump") or Input.is_action_just_pressed("move_jump_up"):
 		velocity.y = -JUMPFORCE

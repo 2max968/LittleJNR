@@ -136,6 +136,7 @@ shader_param/vignette_intensity = 0.4
 shader_param/vignette_opacity = 0.042
 
 [node name="Node2D" type="Node2D"]
+position = Vector2( 0, -1 )
 
 [node name="Level" type="Node2D" parent="."]
 modulate = Color( 0.717647, 0.717647, 0.717647, 1 )
@@ -199,21 +200,21 @@ script = ExtResource( 13 )
 [node name="Top" type="AnimatedSprite" parent="Level/Waterfall1"]
 scale = Vector2( 4, 4 )
 frames = SubResource( 28 )
-frame = 3
+frame = 4
 playing = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Level/Waterfall1"]
 position = Vector2( 0, 64 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 5
+frame = 6
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="Level/Waterfall1"]
 position = Vector2( 0, 128 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 5
+frame = 6
 playing = true
 
 [node name="Transformer" type="Node2D" parent="Level"]
@@ -221,7 +222,13 @@ position = Vector2( 712, 320 )
 script = ExtResource( 18 )
 TransformedObject = ExtResource( 20 )
 
-[node name="Transformer" type="Sprite" parent="Level/Transformer"]
+[node name="On" type="Node2D" parent="Level/Transformer"]
+visible = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Transformer" type="Sprite" parent="Level/Transformer/On"]
 material = ExtResource( 7 )
 position = Vector2( 8, 0 )
 z_index = 1
@@ -230,8 +237,29 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Transformer2" type="Sprite" parent="Level/Transformer"]
+[node name="Transformer2" type="Sprite" parent="Level/Transformer/On"]
 material = ExtResource( 7 )
+position = Vector2( 8, 0 )
+z_index = -1
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Off" type="Node2D" parent="Level/Transformer"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Transformer" type="Sprite" parent="Level/Transformer/Off"]
+position = Vector2( 8, 0 )
+z_index = 1
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Transformer2" type="Sprite" parent="Level/Transformer/Off"]
 position = Vector2( 8, 0 )
 z_index = -1
 texture = ExtResource( 5 )
