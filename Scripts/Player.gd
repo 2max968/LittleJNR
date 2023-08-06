@@ -17,7 +17,6 @@ const WALLKICKHEIGHT = JUMPHEIGHT * .75;
 const TRAMPOLINEBOUNCE = 64.0;
 const TRAMPOLINEBOOST = JUMPHEIGHT * 1.5;
 
-var velocity = Vector2(0,0);
 var current_gravity = FALLGRAVITY;
 var jumping = -1;
 var grounded = -1;

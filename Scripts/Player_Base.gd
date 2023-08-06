@@ -5,6 +5,8 @@ const INVINCIBLETIME = 1.0;
 
 var health : int = 3;
 var invincible = -1;
+var movementRight := true
+var velocity = Vector2(0,0)
 
 func BaseDamage(amount : int):
 	if(invincible <= 0):

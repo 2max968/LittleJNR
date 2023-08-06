@@ -199,21 +199,21 @@ script = ExtResource( 13 )
 [node name="Top" type="AnimatedSprite" parent="Level/Waterfall1"]
 scale = Vector2( 4, 4 )
 frames = SubResource( 28 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Level/Waterfall1"]
 position = Vector2( 0, 64 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 4
+frame = 5
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="Level/Waterfall1"]
 position = Vector2( 0, 128 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 4
+frame = 5
 playing = true
 
 [node name="Transformer" type="Node2D" parent="Level"]

@@ -5,14 +5,19 @@ class_name TransformationBird
 const GRAVITY := 1400.0
 const JUMPFORCE := 500.0
 
-var velocity := Vector2(0, 0)
 var targetscale := 1.0
 
 func _ready():
 	var camera := get_tree().get_root().find_node("Camera", true, false);
 	if camera != null:
 		camera.followObject(self);
-	velocity.x = 256
+	
+	if movementRight:
+		velocity.x = 256
+	else:
+		velocity.x = -256
+	
+	invincible = 1
 
 func _process(delta):
 	if targetscale < $Sprites.scale.x:
@@ -21,7 +26,7 @@ func _process(delta):
 		$Sprites.scale.x = min(targetscale, $Sprites.scale.x + delta * 10)
 
 func _physics_process(delta):
-	invincible -= 1
+	invincible -= delta
 	velocity.y += GRAVITY * delta
 	if is_on_floor():
 		Damage(1)
@@ -32,6 +37,9 @@ func _physics_process(delta):
 	
 	if is_on_wall():
 		velocity.x *= -1
+	
+	if global_position.x < 0:
+		velocity.x = abs(velocity.x)
 	
 	if Input.is_action_just_pressed("move_jump") or Input.is_action_just_pressed("move_jump_up"):
 		velocity.y = -JUMPFORCE
