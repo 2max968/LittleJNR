@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/DamageArea.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Platforms/ThornsV.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=40]
+extents = Vector2( 8, 16 )
+
+[sub_resource type="RectangleShape2D" id=41]
+extents = Vector2( 4, 16 )
+
+[sub_resource type="RectangleShape2D" id=42]
+extents = Vector2( 4, 16 )
+
+[node name="ThornsV" type="StaticBody2D"]
+position = Vector2( 1280, 209 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 40 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="DamageArea" type="Area2D" parent="."]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2( 12, 0 )
+shape = SubResource( 41 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2( -12, 0 )
+shape = SubResource( 42 )
+__meta__ = {
+"_edit_lock_": true
+}

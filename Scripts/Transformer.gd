@@ -21,6 +21,7 @@ func bodyEntered(body : Node):
 		cooldown = 1.0
 		var nPl : Player_Base = TransformedObject.instance()
 		nPl.movementRight = body.velocity.x > 0
+		nPl.health = body.health
 		body.get_parent().add_child(nPl)
 		nPl.global_position = body.global_position
 		body.queue_free()
@@ -28,3 +29,5 @@ func bodyEntered(body : Node):
 func SetColor(c : String):
 	if c == "rainbow":
 		enabled = true
+		$On.visible = true
+		$Off.visible = false

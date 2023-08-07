@@ -4,6 +4,7 @@
 code = "shader_type canvas_item;
 
 uniform vec2 pixelsize = vec2(0, 0);
+uniform float saturation = 1.0;
 
 vec3 rgb2hsv(vec3 c)
 {
@@ -42,6 +43,7 @@ void fragment()
 	}
 	
 	hsv.x = mod(hsv.x + (uv.y + uv.x) / 4. - TIME / 4., 1);
+	hsv.y *= saturation;
 	vec3 rgb = hsv2rgb(hsv);
 	COLOR = vec4(rgb.rgb, tColor.a);
 }"

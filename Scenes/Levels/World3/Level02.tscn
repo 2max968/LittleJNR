@@ -1,12 +1,12 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Prefabs/LevelBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tilesets/Tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Sprites/Transformer.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Transformer2.png" type="Texture" id=5]
+[ext_resource path="res://Prefabs/Transformer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/ThornsV.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Sprites/WaterfallWide.png" type="Texture" id=6]
-[ext_resource path="res://Materials/Rainbow.tres" type="Material" id=7]
+[ext_resource path="res://Prefabs/ThornsH.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Sprites/Particle.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Finish.png" type="Texture" id=9]
 [ext_resource path="res://Scripts/Goal.gd" type="Script" id=10]
@@ -17,13 +17,11 @@
 [ext_resource path="res://Sprites/BgrMountains/mountains.png" type="Texture" id=15]
 [ext_resource path="res://Scripts/Background/BgrStickBottom.gd" type="Script" id=16]
 [ext_resource path="res://Sprites/Background/ForestDark.png" type="Texture" id=17]
-[ext_resource path="res://Scripts/Transformer.gd" type="Script" id=18]
 [ext_resource path="res://Prefabs/RainbowSlime.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Prefabs/TransformationBird.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Shaders/CRTEffect.tres" type="Shader" id=24]
 
 [sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 32, 16 )
+extents = Vector2( 32, 1.99999 )
 
 [sub_resource type="Gradient" id=15]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
@@ -108,9 +106,6 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=40]
-extents = Vector2( 7.5, 30 )
-
 [sub_resource type="ShaderMaterial" id=39]
 shader = ExtResource( 24 )
 shader_param/overlay = true
@@ -143,7 +138,7 @@ modulate = Color( 0.717647, 0.717647, 0.717647, 1 )
 position = Vector2( 0, 256 )
 
 [node name="HLimit" type="Node2D" parent="Level"]
-position = Vector2( 3712, 0 )
+position = Vector2( 3200, 1 )
 
 [node name="VLimit" type="Node2D" parent="Level"]
 position = Vector2( 0, 512 )
@@ -160,14 +155,16 @@ format = 1
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( 655383, 8, 0, 655389, 8, 0, 720917, 5, 0, 720918, 5, 2, 720922, 5, 3, 720923, 5, 4, 720924, 5, 4, 720925, 5, 4, 720926, 5, 5, 786433, 8, 0, 786437, 8, 0, 786440, 8, 0, 786442, 8, 0, 786452, 8, 0, 786453, 5, 65536, 786454, 5, 65537, 786455, 5, 1, 786456, 5, 131076, 786457, 5, 131077, 786458, 5, 65539, 786459, 5, 65540, 786460, 5, 65540, 786461, 5, 65540, 786462, 5, 65541, 786463, 5, 1, 786464, 5, 2, 851975, 5, 3, 851976, 5, 4, 851977, 5, 4, 851978, 5, 4, 851979, 5, 5, 851987, 5, 3, 851988, 5, 4, 851989, 5, 65536, 851990, 5, 65537, 851991, 5, 65537, 851992, 5, 65537, 851993, 5, 65537, 851994, 5, 65537, 851995, 5, 65537, 851996, 5, 65537, 851997, 5, 65537, 851998, 5, 65537, 851999, 5, 65537, 852000, 5, 65538, 852082, 8, 0, 917504, 5, 0, 917505, 5, 1, 917506, 5, 1, 917507, 5, 1, 917508, 5, 1, 917509, 5, 1, 917510, 5, 1, 917511, 5, 65539, 917512, 5, 65540, 917513, 5, 65540, 917514, 5, 65540, 917515, 5, 65541, 917516, 5, 1, 917517, 5, 1, 917518, 5, 1, 917519, 5, 1, 917520, 5, 1, 917521, 5, 1, 917522, 5, 1, 917523, 5, 65539, 917524, 5, 65540, 917525, 5, 65536, 917526, 5, 65537, 917527, 5, 65537, 917528, 5, 65537, 917529, 5, 65537, 917530, 5, 65537, 917531, 5, 65537, 917532, 5, 65537, 917533, 5, 65537, 917534, 5, 65537, 917535, 5, 65537, 917536, 5, 65538, 917609, 6, 0, 917614, 7, 0, 983040, 5, 65536, 983041, 5, 65537, 983042, 5, 65537, 983043, 5, 65537, 983044, 5, 65537, 983045, 5, 65537, 983046, 5, 65537, 983047, 5, 65537, 983048, 5, 65537, 983049, 5, 65537, 983050, 5, 65537, 983051, 5, 65537, 983052, 5, 65537, 983053, 5, 65537, 983054, 5, 65537, 983055, 5, 65537, 983056, 5, 65537, 983057, 5, 65537, 983058, 5, 65537, 983059, 5, 65537, 983060, 5, 65537, 983061, 5, 65536, 983062, 5, 65537, 983063, 5, 65537, 983064, 5, 65537, 983065, 5, 65537, 983066, 5, 65537, 983067, 5, 65537, 983068, 5, 65537, 983069, 5, 65537, 983070, 5, 65537, 983071, 5, 65537, 983072, 5, 65538, 983136, 5, 0, 983137, 5, 1, 983138, 5, 1, 983139, 5, 1, 983140, 5, 1, 983141, 5, 1, 983142, 5, 1, 983143, 5, 1, 983144, 5, 1, 983145, 5, 1, 983146, 5, 131075, 983147, 5, 131075, 983148, 5, 131075, 983149, 5, 131075, 983150, 5, 131075, 983151, 5, 1, 983152, 5, 1, 983153, 5, 1, 983154, 5, 1, 983155, 5, 1 )
+tile_data = PoolIntArray( -524247, 5, 65536, -524246, 5, 65538, -524219, 5, 65536, -524218, 5, 65538, -458711, 5, 65536, -458710, 5, 65538, -458683, 5, 65536, -458682, 5, 65538, -393175, 5, 65536, -393174, 5, 65538, -393147, 5, 65536, -393146, 5, 65538, -327639, 5, 65536, -327638, 5, 65538, -327611, 5, 65536, -327610, 5, 65538, -262103, 5, 65536, -262102, 5, 65538, -262075, 5, 65536, -262074, 5, 65538, -196567, 5, 65536, -196566, 5, 65538, -196539, 5, 65536, -196538, 5, 65538, -131031, 5, 65536, -131030, 5, 65538, -131003, 5, 65536, -131002, 5, 65538, -65495, 5, 65536, -65494, 5, 65538, -65472, 5, 0, -65471, 5, 65541, -65470, 5, 2, -65469, 5, 0, -65468, 5, 1, -65467, 5, 1, -65466, 5, 1, -65465, 5, 1, -65464, 5, 2, 40, 5, 0, 41, 5, 1, 42, 5, 1, 43, 5, 2, 64, 5, 65536, 65, 5, 65537, 66, 5, 65538, 67, 5, 131072, 68, 5, 131073, 69, 5, 131073, 70, 5, 131073, 71, 5, 131073, 72, 5, 131074, 65576, 5, 131072, 65577, 5, 131073, 65578, 5, 131073, 65579, 5, 131074, 65600, 5, 131072, 65601, 5, 131073, 65602, 5, 131074, 524328, 5, 0, 524329, 5, 1, 524330, 5, 1, 524331, 5, 2, 589864, 5, 65536, 589865, 5, 65537, 589866, 5, 65537, 589867, 5, 65538, 589888, 5, 0, 589889, 5, 65541, 589890, 5, 2, 655383, 8, 0, 655389, 8, 0, 655400, 5, 65536, 655401, 5, 65537, 655402, 5, 65537, 655403, 5, 65538, 655424, 5, 65536, 655425, 5, 65537, 655426, 5, 65538, 655427, 5, 0, 655428, 5, 1, 655429, 5, 1, 655430, 5, 1, 655431, 5, 1, 655432, 5, 1, 655433, 5, 1, 655434, 5, 1, 655435, 5, 1, 655436, 5, 1, 655437, 5, 1, 655438, 5, 1, 655439, 5, 1, 655440, 5, 1, 655441, 5, 2, 720917, 5, 0, 720918, 5, 2, 720922, 5, 3, 720923, 5, 4, 720924, 5, 4, 720925, 5, 4, 720926, 5, 5, 720936, 5, 65536, 720937, 5, 65537, 720938, 5, 65537, 720939, 5, 65538, 720960, 5, 65536, 720961, 5, 65537, 720962, 5, 65538, 720963, 5, 131072, 720964, 5, 131073, 720965, 5, 131073, 720966, 5, 131073, 720967, 5, 131073, 720968, 5, 131073, 720969, 5, 131073, 720970, 5, 131073, 720971, 5, 131073, 720972, 5, 131073, 720973, 5, 131073, 720974, 5, 131073, 720975, 5, 131073, 720976, 5, 131073, 720977, 5, 131074, 786433, 8, 0, 786437, 8, 0, 786440, 8, 0, 786442, 8, 0, 786452, 8, 0, 786453, 5, 65536, 786454, 5, 65537, 786455, 5, 1, 786456, 5, 131076, 786457, 5, 131077, 786458, 5, 65539, 786459, 5, 65540, 786460, 5, 65540, 786461, 5, 65540, 786462, 5, 65541, 786463, 5, 1, 786464, 5, 2, 786472, 5, 65536, 786473, 5, 65537, 786474, 5, 65537, 786475, 5, 65538, 786496, 5, 65536, 786497, 5, 65537, 786498, 5, 65538, 786510, 5, 0, 786511, 5, 1, 786512, 5, 2, 851975, 5, 3, 851976, 5, 4, 851977, 5, 4, 851978, 5, 4, 851979, 5, 5, 851987, 5, 3, 851988, 5, 4, 851989, 5, 65536, 851990, 5, 65537, 851991, 5, 65537, 851992, 5, 65537, 851993, 5, 65537, 851994, 5, 65537, 851995, 5, 65537, 851996, 5, 65537, 851997, 5, 65537, 851998, 5, 65537, 851999, 5, 65537, 852000, 5, 65538, 852008, 5, 65536, 852009, 5, 65537, 852010, 5, 65537, 852011, 5, 65538, 852032, 5, 65536, 852033, 5, 65537, 852034, 5, 65538, 852046, 5, 65536, 852047, 5, 65537, 852048, 5, 65538, 917504, 5, 0, 917505, 5, 1, 917506, 5, 1, 917507, 5, 1, 917508, 5, 1, 917509, 5, 1, 917510, 5, 1, 917511, 5, 65539, 917512, 5, 65540, 917513, 5, 65540, 917514, 5, 65540, 917515, 5, 65541, 917516, 5, 1, 917517, 5, 1, 917518, 5, 1, 917519, 5, 1, 917520, 5, 1, 917521, 5, 1, 917522, 5, 1, 917523, 5, 65539, 917524, 5, 65540, 917525, 5, 65536, 917526, 5, 65537, 917527, 5, 65537, 917528, 5, 65537, 917529, 5, 65537, 917530, 5, 65537, 917531, 5, 65537, 917532, 5, 65537, 917533, 5, 65537, 917534, 5, 65537, 917535, 5, 65537, 917536, 5, 65538, 917544, 5, 65536, 917545, 5, 65537, 917546, 5, 65537, 917547, 5, 65538, 917568, 5, 65536, 917569, 5, 65537, 917570, 5, 65538, 917582, 5, 65536, 917583, 5, 65537, 917584, 5, 65538, 983040, 5, 65536, 983041, 5, 65537, 983042, 5, 65537, 983043, 5, 65537, 983044, 5, 65537, 983045, 5, 65537, 983046, 5, 65537, 983047, 5, 65537, 983048, 5, 65537, 983049, 5, 65537, 983050, 5, 65537, 983051, 5, 65537, 983052, 5, 65537, 983053, 5, 65537, 983054, 5, 65537, 983055, 5, 65537, 983056, 5, 65537, 983057, 5, 65537, 983058, 5, 65537, 983059, 5, 65537, 983060, 5, 65537, 983061, 5, 65536, 983062, 5, 65537, 983063, 5, 65537, 983064, 5, 65537, 983065, 5, 65537, 983066, 5, 65537, 983067, 5, 65537, 983068, 5, 65537, 983069, 5, 65537, 983070, 5, 65537, 983071, 5, 65537, 983072, 5, 65538, 983080, 5, 65536, 983081, 5, 65537, 983082, 5, 65537, 983083, 5, 65538, 983104, 5, 65536, 983105, 5, 65537, 983106, 5, 65538, 983118, 5, 65536, 983119, 5, 65537, 983120, 5, 65538 )
 
 [node name="Goal" type="Area2D" parent="Level"]
-position = Vector2( 3584, 448 )
+position = Vector2( 2816, 513 )
+rotation = -1.5708
+scale = Vector2( 12, 12 )
 script = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Goal"]
-position = Vector2( 32, 16 )
+position = Vector2( 32, 30 )
 shape = SubResource( 14 )
 __meta__ = {
 "_edit_lock_": true
@@ -200,89 +197,414 @@ script = ExtResource( 13 )
 [node name="Top" type="AnimatedSprite" parent="Level/Waterfall1"]
 scale = Vector2( 4, 4 )
 frames = SubResource( 28 )
-frame = 4
+frame = 7
 playing = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Level/Waterfall1"]
 position = Vector2( 0, 64 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 6
+frame = 1
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="Level/Waterfall1"]
 position = Vector2( 0, 128 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 6
+frame = 1
 playing = true
 
-[node name="Transformer" type="Node2D" parent="Level"]
-position = Vector2( 712, 320 )
-script = ExtResource( 18 )
-TransformedObject = ExtResource( 20 )
+[node name="Transformer" parent="Level" instance=ExtResource( 4 )]
 
-[node name="On" type="Node2D" parent="Level/Transformer"]
-visible = false
+[node name="thorns1" type="Node2D" parent="Level"]
+position = Vector2( 1296, -239 )
+
+[node name="ThornsV" parent="Level/thorns1" instance=ExtResource( 5 )]
+position = Vector2( 0, 224 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Transformer" type="Sprite" parent="Level/Transformer/On"]
-material = ExtResource( 7 )
-position = Vector2( 8, 0 )
-z_index = 1
-texture = ExtResource( 4 )
+[node name="ThornsV2" parent="Level/thorns1" instance=ExtResource( 5 )]
+position = Vector2( 0, 192 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Transformer2" type="Sprite" parent="Level/Transformer/On"]
-material = ExtResource( 7 )
-position = Vector2( 8, 0 )
-z_index = -1
-texture = ExtResource( 5 )
+[node name="ThornsV3" parent="Level/thorns1" instance=ExtResource( 5 )]
+position = Vector2( 0, 160 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Off" type="Node2D" parent="Level/Transformer"]
+[node name="ThornsV4" parent="Level/thorns1" instance=ExtResource( 5 )]
+position = Vector2( 0, 128 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Transformer" type="Sprite" parent="Level/Transformer/Off"]
-position = Vector2( 8, 0 )
-z_index = 1
-texture = ExtResource( 4 )
+[node name="ThornsV5" parent="Level/thorns1" instance=ExtResource( 5 )]
+position = Vector2( 0, 96 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Transformer2" type="Sprite" parent="Level/Transformer/Off"]
-position = Vector2( 8, 0 )
-z_index = -1
-texture = ExtResource( 5 )
+[node name="ThornsV6" parent="Level/thorns1" instance=ExtResource( 5 )]
+position = Vector2( 0, 64 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Level/Transformer"]
+[node name="ThornsV7" parent="Level/thorns1" instance=ExtResource( 5 )]
+position = Vector2( 0, 32 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level/Transformer/StaticBody2D"]
-polygon = PoolVector2Array( -16, 32, -12, 30, 8, 30, 12, 32 )
+[node name="ThornsV8" parent="Level/thorns1" instance=ExtResource( 5 )]
+position = Vector2( 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Level/Transformer/StaticBody2D"]
-polygon = PoolVector2Array( -16, -32, -12, -30, 8, -30, 12, -32 )
+[node name="thorns2" type="Node2D" parent="Level"]
+position = Vector2( 1392, -239 )
 
-[node name="Area2D" type="Area2D" parent="Level/Transformer"]
+[node name="ThornsV" parent="Level/thorns2" instance=ExtResource( 5 )]
+position = Vector2( 0, 224 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Transformer/Area2D"]
-position = Vector2( -0.5, 0 )
-shape = SubResource( 40 )
+[node name="ThornsV2" parent="Level/thorns2" instance=ExtResource( 5 )]
+position = Vector2( 0, 192 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsV3" parent="Level/thorns2" instance=ExtResource( 5 )]
+position = Vector2( 0, 160 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsV4" parent="Level/thorns2" instance=ExtResource( 5 )]
+position = Vector2( 0, 128 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsV5" parent="Level/thorns2" instance=ExtResource( 5 )]
+position = Vector2( 0, 96 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsV6" parent="Level/thorns2" instance=ExtResource( 5 )]
+position = Vector2( 0, 64 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsV7" parent="Level/thorns2" instance=ExtResource( 5 )]
+position = Vector2( 0, 32 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsV8" parent="Level/thorns2" instance=ExtResource( 5 )]
+position = Vector2( 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="thorns3" type="Node2D" parent="Level"]
+position = Vector2( 1424, 25 )
+
+[node name="ThornsH" parent="Level/thorns3" instance=ExtResource( 7 )]
+position = Vector2( 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH2" parent="Level/thorns3" instance=ExtResource( 7 )]
+position = Vector2( 32, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH3" parent="Level/thorns3" instance=ExtResource( 7 )]
+position = Vector2( 64, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH4" parent="Level/thorns3" instance=ExtResource( 7 )]
+position = Vector2( 96, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH5" parent="Level/thorns3" instance=ExtResource( 7 )]
+position = Vector2( 128, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH6" parent="Level/thorns3" instance=ExtResource( 7 )]
+position = Vector2( 160, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH7" parent="Level/thorns3" instance=ExtResource( 7 )]
+position = Vector2( 192, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH8" parent="Level/thorns3" instance=ExtResource( 7 )]
+position = Vector2( 224, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH9" parent="Level/thorns3" instance=ExtResource( 7 )]
+position = Vector2( 256, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH10" parent="Level/thorns3" instance=ExtResource( 7 )]
+position = Vector2( 288, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="thorns4" type="Node2D" parent="Level"]
+position = Vector2( 1744, 25 )
+
+[node name="ThornsH" parent="Level/thorns4" instance=ExtResource( 7 )]
+position = Vector2( 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH2" parent="Level/thorns4" instance=ExtResource( 7 )]
+position = Vector2( 32, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH3" parent="Level/thorns4" instance=ExtResource( 7 )]
+position = Vector2( 64, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH4" parent="Level/thorns4" instance=ExtResource( 7 )]
+position = Vector2( 96, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH5" parent="Level/thorns4" instance=ExtResource( 7 )]
+position = Vector2( 128, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH6" parent="Level/thorns4" instance=ExtResource( 7 )]
+position = Vector2( 160, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH7" parent="Level/thorns4" instance=ExtResource( 7 )]
+position = Vector2( 192, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH8" parent="Level/thorns4" instance=ExtResource( 7 )]
+position = Vector2( 224, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH9" parent="Level/thorns4" instance=ExtResource( 7 )]
+position = Vector2( 256, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH10" parent="Level/thorns4" instance=ExtResource( 7 )]
+position = Vector2( 288, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="thorns5" type="Node2D" parent="Level"]
+position = Vector2( 1424, 345 )
+
+[node name="ThornsH" parent="Level/thorns5" instance=ExtResource( 7 )]
+position = Vector2( 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH2" parent="Level/thorns5" instance=ExtResource( 7 )]
+position = Vector2( 32, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH3" parent="Level/thorns5" instance=ExtResource( 7 )]
+position = Vector2( 64, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH4" parent="Level/thorns5" instance=ExtResource( 7 )]
+position = Vector2( 96, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH5" parent="Level/thorns5" instance=ExtResource( 7 )]
+position = Vector2( 128, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH6" parent="Level/thorns5" instance=ExtResource( 7 )]
+position = Vector2( 160, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH7" parent="Level/thorns5" instance=ExtResource( 7 )]
+position = Vector2( 192, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH8" parent="Level/thorns5" instance=ExtResource( 7 )]
+position = Vector2( 224, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH9" parent="Level/thorns5" instance=ExtResource( 7 )]
+position = Vector2( 256, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH10" parent="Level/thorns5" instance=ExtResource( 7 )]
+position = Vector2( 288, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="thorns6" type="Node2D" parent="Level"]
+position = Vector2( 1744, 345 )
+
+[node name="ThornsH" parent="Level/thorns6" instance=ExtResource( 7 )]
+position = Vector2( 0, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH2" parent="Level/thorns6" instance=ExtResource( 7 )]
+position = Vector2( 32, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH3" parent="Level/thorns6" instance=ExtResource( 7 )]
+position = Vector2( 64, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH4" parent="Level/thorns6" instance=ExtResource( 7 )]
+position = Vector2( 96, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH5" parent="Level/thorns6" instance=ExtResource( 7 )]
+position = Vector2( 128, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH6" parent="Level/thorns6" instance=ExtResource( 7 )]
+position = Vector2( 160, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH7" parent="Level/thorns6" instance=ExtResource( 7 )]
+position = Vector2( 192, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH8" parent="Level/thorns6" instance=ExtResource( 7 )]
+position = Vector2( 224, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH9" parent="Level/thorns6" instance=ExtResource( 7 )]
+position = Vector2( 256, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsH10" parent="Level/thorns6" instance=ExtResource( 7 )]
+position = Vector2( 288, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ThornsV" parent="Level" instance=ExtResource( 5 )]
+position = Vector2( 2096, 273 )
+
+[node name="ThornsV2" parent="Level" instance=ExtResource( 5 )]
+position = Vector2( 2096, 241 )
+
+[node name="ThornsV3" parent="Level" instance=ExtResource( 5 )]
+position = Vector2( 2096, 209 )
+
+[node name="ThornsV7" parent="Level" instance=ExtResource( 5 )]
+position = Vector2( 2576, 305 )
+
+[node name="ThornsV8" parent="Level" instance=ExtResource( 5 )]
+position = Vector2( 2576, 273 )
+
+[node name="ThornsV9" parent="Level" instance=ExtResource( 5 )]
+position = Vector2( 2576, 241 )
+
+[node name="ThornsV10" parent="Level" instance=ExtResource( 5 )]
+position = Vector2( 2576, 209 )
+
+[node name="ThornsV11" parent="Level" instance=ExtResource( 5 )]
+position = Vector2( 2576, 177 )
+
+[node name="ThornsV12" parent="Level" instance=ExtResource( 5 )]
+position = Vector2( 2576, 145 )
+
+[node name="ThornsV4" parent="Level" instance=ExtResource( 5 )]
+position = Vector2( 2272, 113 )
+
+[node name="ThornsV5" parent="Level" instance=ExtResource( 5 )]
+position = Vector2( 2272, 81 )
+
+[node name="ThornsV6" parent="Level" instance=ExtResource( 5 )]
+position = Vector2( 2272, 49 )
 
 [node name="Splash1" type="CPUParticles2D" parent="."]
 position = Vector2( 800, 776 )

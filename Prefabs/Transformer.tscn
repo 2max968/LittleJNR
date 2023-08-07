@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scripts/Transformer.gd" type="Script" id=1]
+[ext_resource path="res://Prefabs/TransformationBird.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Shaders/Rainbow.tres" type="Shader" id=3]
+[ext_resource path="res://Sprites/Transformer.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Transformer2.png" type="Texture" id=5]
+
+[sub_resource type="ShaderMaterial" id=41]
+shader = ExtResource( 3 )
+shader_param/pixelsize = Vector2( 0.125, 0.063 )
+shader_param/saturation = 1.5
+
+[sub_resource type="RectangleShape2D" id=40]
+extents = Vector2( 7.5, 30 )
+
+[node name="Transformer" type="Node2D"]
+position = Vector2( 712, 320 )
+script = ExtResource( 1 )
+TransformedObject = ExtResource( 2 )
+
+[node name="On" type="Node2D" parent="."]
+visible = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Transformer" type="Sprite" parent="On"]
+material = SubResource( 41 )
+position = Vector2( 8, 0 )
+z_index = 1
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Transformer2" type="Sprite" parent="On"]
+material = SubResource( 41 )
+position = Vector2( 8, 0 )
+z_index = -1
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Off" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Transformer" type="Sprite" parent="Off"]
+position = Vector2( 8, 0 )
+z_index = 1
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Transformer2" type="Sprite" parent="Off"]
+position = Vector2( 8, 0 )
+z_index = -1
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( -16, 32, -12, 30, 8, 30, 12, 32 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( -16, -32, -12, -30, 8, -30, 12, -32 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -0.5, 0 )
+shape = SubResource( 40 )

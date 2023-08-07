@@ -1,7 +1,7 @@
 extends Area2D
 
 func _on_Goal_body_entered(body):
-	if(body is Player):
+	if(body is Player_Base):
 		var currentName = get_tree().current_scene.filename;
 		var num = currentName.substr(currentName.length() - 7, 2).to_int();
 		var newNum = num + 1;

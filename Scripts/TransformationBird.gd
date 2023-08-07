@@ -33,11 +33,11 @@ func _physics_process(delta):
 	invincible -= delta
 	velocity.y += GRAVITY * delta
 	if is_on_floor():
-		Damage(1)
+		#Damage(1)
 		velocity.y = -JUMPFORCE
 	if is_on_ceiling():
 		velocity.y = abs(velocity.y)
-		Damage(1)
+		#Damage(1)
 	
 	if is_on_wall():
 		velocity.x *= -1

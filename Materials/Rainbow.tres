@@ -5,3 +5,4 @@
 [resource]
 shader = ExtResource( 1 )
 shader_param/pixelsize = Vector2( 0.125, 0.125 )
+shader_param/saturation = 1.0

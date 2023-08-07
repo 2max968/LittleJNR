@@ -36,6 +36,7 @@ var lastRotation = 0;
 var oldPosition : Vector2
 var oddFrame := false
 var jumpedThisFrame := false
+export var initColor := "blue";
 
 var jumpParticlesPrefab = preload("res://Prefabs/JumpParticles.tscn");
 var walkParticlesPrefab = preload("res://Prefabs/WalkParticles.tscn");
@@ -58,7 +59,7 @@ func _ready():
 	var camera := get_tree().get_root().find_node("Camera", true, false);
 	if camera != null:
 		camera.followObject(self);
-	get_tree().call_group("colorhandler", "SetColor", "blue");
+	get_tree().call_group("colorhandler", "SetColor", initColor);
 
 func _process(delta):
 	oddFrame = not oddFrame
@@ -182,12 +183,12 @@ func _physics_process(delta):
 		lengthStrech = 1;
 		jumpParticles();
 		jumpedThisFrame = true
-		if(color == "rainbow"):
-			var cind = colors.find(worldColor);
-			cind += 1;
-			if(cind >= colors.size()):
-				cind = 0;
-			get_tree().call_group("colorhandler", "SetColor", colors[cind]);
+		#if(color == "rainbow"):
+		#	var cind = colors.find(worldColor);
+		#	cind += 1;
+		#	if(cind >= colors.size()):
+		#		cind = 0;
+		#	get_tree().call_group("colorhandler", "SetColor", colors[cind]);
 	
 	# Walljump
 	if(!is_on_floor() && is_on_wall() && jumping >= 0):
