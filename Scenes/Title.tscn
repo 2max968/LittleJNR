@@ -49,3 +49,9 @@ margin_bottom = 446.0
 text = "texttexttexttext"
 align = 2
 script = ExtResource( 4 )
+
+[node name="LblUser" type="Label" parent="CanvasLayer"]
+margin_left = 320.0
+margin_top = 216.0
+margin_right = 448.0
+margin_bottom = 256.0

@@ -20,6 +20,10 @@ func _ready():
 				startWorld = value
 			elif key == "level":
 				startLevel = value
+	
+	var user = JavaScript.eval("if(typeof Itch !== 'undefined'){return Itch.user.username;}return null;")
+	if user != null:
+		$CanvasLayer/LblUser.text = user
 
 func _process(_delta):
 	if(Input.is_action_just_pressed("ui_touchinp") or Input.is_action_just_pressed("ui_accept")):
