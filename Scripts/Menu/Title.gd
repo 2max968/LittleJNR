@@ -8,6 +8,13 @@ func _ready():
 	size.x = size.y / 9 * 16;
 	OS.window_size = size;
 	
+	var args := OS.get_cmdline_args()
+	for i in len(args):
+		if args[i] == "--play" and i < len(args) - 1:
+			var demoFile := args[i + 1]
+			#var fl := File.new()
+			#fl.open(demoFile, File.READ)
+	
 	var httpArgs = JavaScript.eval("window.location.search")
 	if httpArgs != null:
 		if httpArgs.begins_with("?"):
