@@ -2,16 +2,20 @@ extends Control
 
 var startWorld : String = ""
 var startLevel : String = ""
+var startPath : String = ""
 
 func _ready():
 	var size := OS.window_size;
 	size.x = size.y / 9 * 16;
 	OS.window_size = size;
 	
-	var args := OS.get_cmdline_args()
-	for i in len(args):
-		if args[i] == "--play" and i < len(args) - 1:
-			var demoFile := args[i + 1]
+	RecordParser.parseDemo("tmp.demo")
+	if RecordParser.demoLoaded:
+		startPath = RecordParser.levelPath
+	#var args := OS.get_cmdline_args()
+	#for i in len(args):
+	#	if args[i] == "--play" and i < len(args) - 1:
+	#		var demoFile := args[i + 1]
 			#var fl := File.new()
 			#fl.open(demoFile, File.READ)
 	
@@ -27,10 +31,6 @@ func _ready():
 				startWorld = value
 			elif key == "level":
 				startLevel = value
-	
-	var user = JavaScript.eval("if(typeof Itch !== 'undefined'){return Itch.user.username;}return null;")
-	if user != null:
-		$CanvasLayer/LblUser.text = user
 
 func _process(_delta):
 	if(Input.is_action_just_pressed("ui_touchinp") or Input.is_action_just_pressed("ui_accept")):
@@ -41,6 +41,8 @@ func _process(_delta):
 			level = "res://Scenes/Levels/World1/Level01.tscn"
 		if startWorld != "" and startLevel != "":
 			level = "res://Scenes/Levels/" + startWorld + "/" + startLevel + ".tscn"
+		if startPath != "":
+			level = startPath
 		var error := get_tree().change_scene(level)
 		if error != OK:
 			get_tree().change_scene("res://Scenes/LevelSelect.tscn")

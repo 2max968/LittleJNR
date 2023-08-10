@@ -93,6 +93,7 @@ config/windows_native_icon="res://Sprites/Icon/Icon.ico"
 
 Config="*res://Scripts/Config.gd"
 Savegame="*res://Scripts/Savegame.gd"
+RecordParser="*res://Scripts/Classes/RecordParser.gd"
 
 [debug]
 
