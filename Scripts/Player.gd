@@ -107,7 +107,7 @@ func _physics_process(delta):
 	var move_right = "move_right";
 	var jump_alt = "move_jump_up";
 	if(inpAng == 2):
-		move_left = "move_right";
+		move_left = "move_right"
 		move_right = "move_left";
 		jump_alt = "move_jump_down";
 	if(inpAng == 1):

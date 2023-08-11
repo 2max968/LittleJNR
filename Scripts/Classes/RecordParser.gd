@@ -7,6 +7,8 @@ var actionList := []
 func parseDemo(path : String):
 	var file := File.new()
 	file.open(path, File.READ)
+	if not file.is_open():
+		return
 	
 	var inHeader := false
 	var inContent := false

@@ -9,9 +9,9 @@ func _ready():
 	size.x = size.y / 9 * 16;
 	OS.window_size = size;
 	
-	RecordParser.parseDemo("tmp.demo")
-	if RecordParser.demoLoaded:
-		startPath = RecordParser.levelPath
+	#RecordParser.parseDemo("tmp.demo")
+	#if RecordParser.demoLoaded:
+	#	startPath = RecordParser.levelPath
 	#var args := OS.get_cmdline_args()
 	#for i in len(args):
 	#	if args[i] == "--play" and i < len(args) - 1:

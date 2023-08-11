@@ -59,7 +59,14 @@ func storeFile(var filename):
 
 func finishLevel(newLevel : String):
 	if not RecordParser.demoLoaded:
-		storeFile("tmp.demo")
+		var path := get_tree().current_scene.filename
+		var worldName := LevelProperties.GetWorldName(path)
+		var levelName := LevelProperties.GetLevelName(path)
+		var dir := Directory.new()
+		var dpath := "user://demos/"
+		if not dir.dir_exists(dpath):
+			dir.make_dir(dpath)
+		storeFile(dpath + worldName + "." + levelName + ".demo")
 	else:
 		RecordParser.demoLoaded = false
 		for action in pressedActions:
