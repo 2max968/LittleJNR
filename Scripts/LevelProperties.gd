@@ -73,3 +73,39 @@ static func GetLevelNames(world : String) -> Array:
 		filename = dir.get_next();
 	dir.list_dir_end();
 	return levels
+
+static func GetWorldDescription(world : String) -> String:
+	var path := "res://Scenes/Levels/" + world + "/0_world.tres"
+	var df := File.new()
+	if not df.file_exists(path):
+		return ""
+	var cfg = ConfigFile.new()
+	cfg.load(path)
+	return cfg.get_value("World", "name", "")
+
+static func padZero(value : int, digits : int) -> String:
+	var text := str(value)
+	for i in range(len(text), digits):
+		text = "0" + text
+	return text
+
+static func GetLevelCount(worldName : String):
+	var ind := 1
+	var fl := File.new()
+	while true:
+		var path := "res://Scenes/Levels/" + worldName + "/Level" + padZero(ind, 2) + ".tscn"
+		ind += 1
+		if not fl.file_exists(path):
+			return ind - 1
+	
+static func GetLevelDisplayName(worldName : String, levelName : String) -> String:
+	var dotInd := levelName.find_last(".")
+	if dotInd >= 0:
+		levelName = levelName.substr(0, dotInd)
+	var path := "res://Scenes/Levels/" + worldName + "/0_world.tres"
+	var fileAccess := File.new()
+	if not fileAccess.file_exists(path):
+		return levelName
+	var cfg := ConfigFile.new()
+	cfg.load(path)
+	return cfg.get_value(levelName, "name", levelName)

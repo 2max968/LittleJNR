@@ -13,20 +13,22 @@ func bodyEntered(body : Node):
 		if textview != null:
 			textview.queue_free()
 		textview = CanvasLayer.new()
-		var pn = Panel.new()
-		var lbl = Label.new()
+		var pn := Panel.new()
+		var lbl := RichTextLabel.new()
 		pn.add_child(lbl)
 		textview.add_child(pn)
-		lbl.text = text
-		pn.rect_size = Vector2(200,100)
-		var x : float = (get_viewport().size.x - pn.rect_size.x) / 2
-		var y : float = (get_viewport().size.y - pn.rect_size.y) / 2
+		lbl.bbcode_enabled = true
+		lbl.bbcode_text = "[center]" + text
+		pn.rect_size = Vector2(800 - 32,100)
+		var y : float = 16
+		var x : float = 16
 		pn.rect_position = Vector2(x,y)
 		lbl.rect_size = pn.rect_size
-		lbl.align = Label.ALIGN_CENTER
-		lbl.valign = Label.VALIGN_CENTER
-		lbl.autowrap = true
+		#lbl.align = Label.ALIGN_CENTER
+		#lbl.valign = Label.VALIGN_CENTER
+		#lbl.autowrap = true
 		lbl.rect_size = pn.rect_size
+		lbl.margin_top = 8
 		get_parent().add_child(textview)
 
 func bodyExited(body : Node):
