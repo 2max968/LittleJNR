@@ -109,3 +109,14 @@ static func GetLevelDisplayName(worldName : String, levelName : String) -> Strin
 	var cfg := ConfigFile.new()
 	cfg.load(path)
 	return cfg.get_value(levelName, "name", levelName)
+
+static func GetLevelTimes() -> Dictionary:
+	var dict := {}
+	var cfg := ConfigFile.new()
+	cfg.load("user://Savegame.ini")
+	var keys := cfg.get_section_keys("Times")
+	for key in keys:
+		var value = cfg.get_value("Times", key, "")
+		var vi := float(value)
+		dict[key] = vi
+	return dict

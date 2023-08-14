@@ -38,7 +38,7 @@ func _on_btnRestart_pressed():
 
 func _on_btnExit_pressed():
 	get_tree().paused = false;
-	get_tree().change_scene("res://Scenes/LevelSelect.tscn");
+	get_tree().change_scene("res://Scenes/NLevelSelect.tscn");
 
 
 func _on_Menu_item_selected(index):

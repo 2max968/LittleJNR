@@ -114,7 +114,7 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=38]
 extents = Vector2( 16, 16 )
 
-[sub_resource type="Shader" id=18]
+[sub_resource type="Shader" id=40]
 code = "shader_type canvas_item;
 
 uniform vec2 scale;
@@ -143,9 +143,9 @@ void fragment()
 }"
 
 [sub_resource type="ShaderMaterial" id=19]
-shader = SubResource( 18 )
+shader = SubResource( 40 )
 shader_param/scale = Vector2( 116, 2.01563 )
-shader_param/y_zoom = 0.33371
+shader_param/y_zoom = 1.5874
 shader_param/reflection_scale = 0.75
 shader_param/color = Color( 0.00392157, 0.235294, 0.352941, 0.364706 )
 shader_param/noiseTexture = ExtResource( 4 )
@@ -290,21 +290,19 @@ script = ExtResource( 13 )
 [node name="Top" type="AnimatedSprite" parent="Level/Waterfall1"]
 scale = Vector2( 4, 4 )
 frames = SubResource( 28 )
-frame = 7
+frame = 6
 playing = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Level/Waterfall1"]
 position = Vector2( 0, 64 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 1
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="Level/Waterfall1"]
 position = Vector2( 0, 128 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 1
 playing = true
 
 [node name="Waterfall2" type="Node2D" parent="Level"]
@@ -315,7 +313,7 @@ script = ExtResource( 13 )
 [node name="Top" type="AnimatedSprite" parent="Level/Waterfall2"]
 scale = Vector2( 4, 4 )
 frames = SubResource( 28 )
-frame = 7
+frame = 6
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -325,7 +323,6 @@ __meta__ = {
 position = Vector2( 0, 64 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -335,7 +332,6 @@ __meta__ = {
 position = Vector2( 0, 128 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -345,12 +341,14 @@ __meta__ = {
 position = Vector2( 0, 192 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
+frame = 7
 playing = true
 
 [node name="AnimatedSprite4" type="AnimatedSprite" parent="Level/Waterfall2"]
 position = Vector2( 0, 256 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
+frame = 7
 playing = true
 
 [node name="BlueSlime" parent="Level" instance=ExtResource( 19 )]

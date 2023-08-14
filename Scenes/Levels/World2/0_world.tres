@@ -4,3 +4,12 @@ name = "Cave"
 
 [Level01]
 background = "res://Sprites/Background/Black.png"
+
+[Lebel02]
+name = "Push the box"
+
+[Level03]
+name = "Color splash"
+
+[Level04]
+name = "Breaking catwalk"

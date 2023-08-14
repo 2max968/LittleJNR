@@ -45,7 +45,7 @@ func _process(_delta):
 			level = startPath
 		var error := get_tree().change_scene(level)
 		if error != OK:
-			get_tree().change_scene("res://Scenes/LevelSelect.tscn")
+			get_tree().change_scene("res://Scenes/nLevelSelect.tscn")
 	
 	
 	if (Input.is_action_just_pressed("game_cheat")):
