@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scripts/Background/BgrStickBottom.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Background/BgrScrollingLayer.gd" type="Script" id=2]
+[ext_resource path="res://Sounds/thunder/thunder3.wav" type="AudioStream" id=3]
+[ext_resource path="res://Sprites/Background/PlainsFarMountains/Sky.png" type="Texture" id=4]
+[ext_resource path="res://Sounds/thunder/thunder2.wav" type="AudioStream" id=5]
+[ext_resource path="res://Sounds/thunder/thunder1.wav" type="AudioStream" id=6]
+[ext_resource path="res://Sprites/Background/PlainsFarMountains/Clouds.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/Effects/Lightnings.gd" type="Script" id=8]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+script = ExtResource( 1 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+modulate = Color( 0.196078, 0.196078, 0.196078, 1 )
+motion_scale = Vector2( 0, 0 )
+motion_mirroring = Vector2( 800, 450 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer"]
+texture = ExtResource( 4 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+modulate = Color( 0.168627, 0.211765, 0.254902, 1 )
+motion_scale = Vector2( 0.05, 0.05 )
+motion_offset = Vector2( 0, -128 )
+motion_mirroring = Vector2( 800, 0 )
+script = ExtResource( 2 )
+Scroll = Vector2( 3, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer2"]
+texture = ExtResource( 7 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+modulate = Color( 0.317647, 0.317647, 0.317647, 1 )
+motion_scale = Vector2( 0.1, 0.1 )
+motion_mirroring = Vector2( 800, 0 )
+script = ExtResource( 2 )
+Scroll = Vector2( -3, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer3"]
+texture = ExtResource( 7 )
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
+modulate = Color( 0.0823529, 0.0823529, 0.117647, 1 )
+motion_scale = Vector2( 0.2, 0.2 )
+motion_offset = Vector2( 0, 64 )
+motion_mirroring = Vector2( 800, 0 )
+script = ExtResource( 2 )
+Scroll = Vector2( 5, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer4"]
+texture = ExtResource( 7 )
+
+[node name="Thunderstorm" type="Node" parent="."]
+script = ExtResource( 8 )
+enlightedLayers = [ NodePath("../ParallaxLayer"), NodePath("../ParallaxLayer2"), NodePath("../ParallaxLayer3"), NodePath("../ParallaxLayer4") ]
+thunderSounds = [ NodePath("AudioStreamPlayer"), NodePath("AudioStreamPlayer2"), NodePath("AudioStreamPlayer3") ]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Thunderstorm"]
+stream = ExtResource( 6 )
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="Thunderstorm"]
+stream = ExtResource( 5 )
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="Thunderstorm"]
+stream = ExtResource( 3 )

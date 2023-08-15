@@ -1,79 +1,17 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Tilesets/Tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://Prefabs/Decoration/BgrThunderstorm.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Prefabs/LevelBase.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scripts/Background/BgrStickBottom.gd" type="Script" id=11]
 [ext_resource path="res://Scripts/TilemapReplacer.gd" type="Script" id=13]
-[ext_resource path="res://Sprites/Background/PlainsFarMountains/Clouds.png" type="Texture" id=15]
-[ext_resource path="res://Sprites/Background/PlainsFarMountains/Sky.png" type="Texture" id=16]
 [ext_resource path="res://Tilesets/GreenOn.tres" type="TileSet" id=17]
 [ext_resource path="res://Tilesets/RedOn.tres" type="TileSet" id=18]
 [ext_resource path="res://Tilesets/BlueOn.tres" type="TileSet" id=19]
-[ext_resource path="res://Scripts/Background/BgrScrollingLayer.gd" type="Script" id=20]
-[ext_resource path="res://Scripts/Effects/Lightnings.gd" type="Script" id=23]
-[ext_resource path="res://Sounds/thunder/thunder1.wav" type="AudioStream" id=24]
-[ext_resource path="res://Sounds/thunder/thunder2.wav" type="AudioStream" id=25]
-[ext_resource path="res://Sounds/thunder/thunder3.wav" type="AudioStream" id=26]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-script = ExtResource( 11 )
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-modulate = Color( 0.196078, 0.196078, 0.196078, 1 )
-motion_scale = Vector2( 0, 0 )
-motion_mirroring = Vector2( 800, 450 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
-texture = ExtResource( 16 )
-
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-modulate = Color( 0.168627, 0.211765, 0.254902, 1 )
-motion_scale = Vector2( 0.05, 0.05 )
-motion_offset = Vector2( 0, -128 )
-motion_mirroring = Vector2( 800, 0 )
-script = ExtResource( 20 )
-Scroll = Vector2( 3, 0 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
-texture = ExtResource( 15 )
-
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
-modulate = Color( 0.317647, 0.317647, 0.317647, 1 )
-motion_scale = Vector2( 0.1, 0.1 )
-motion_mirroring = Vector2( 800, 0 )
-script = ExtResource( 20 )
-Scroll = Vector2( -3, 0 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
-texture = ExtResource( 15 )
-
-[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
-modulate = Color( 0.0823529, 0.0823529, 0.117647, 1 )
-motion_scale = Vector2( 0.2, 0.2 )
-motion_offset = Vector2( 0, 64 )
-motion_mirroring = Vector2( 800, 0 )
-script = ExtResource( 20 )
-Scroll = Vector2( 5, 0 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
-texture = ExtResource( 15 )
-
-[node name="Thunderstorm" type="Node" parent="ParallaxBackground"]
-script = ExtResource( 23 )
-enlightedLayers = [ NodePath("../ParallaxLayer"), NodePath("../ParallaxLayer2"), NodePath("../ParallaxLayer3"), NodePath("../ParallaxLayer4") ]
-thunderSounds = [ NodePath("AudioStreamPlayer"), NodePath("AudioStreamPlayer2"), NodePath("AudioStreamPlayer3") ]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ParallaxBackground/Thunderstorm"]
-stream = ExtResource( 24 )
-
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="ParallaxBackground/Thunderstorm"]
-stream = ExtResource( 25 )
-
-[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="ParallaxBackground/Thunderstorm"]
-stream = ExtResource( 26 )
+[node name="ParallaxBackground" parent="." instance=ExtResource( 2 )]
 
 [node name="LevelBase" parent="." instance=ExtResource( 7 )]
 

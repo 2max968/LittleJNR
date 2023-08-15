@@ -140,7 +140,6 @@ position = Vector2( 0, -1 )
 
 [node name="Level" type="Node2D" parent="."]
 modulate = Color( 0.717647, 0.717647, 0.717647, 1 )
-position = Vector2( 0, 256 )
 
 [node name="HLimit" type="Node2D" parent="Level"]
 position = Vector2( 800, -255 )
@@ -449,7 +448,7 @@ script = ExtResource( 13 )
 [node name="Top" type="AnimatedSprite" parent="Level/Waterfall1"]
 scale = Vector2( 4, 4 )
 frames = SubResource( 28 )
-frame = 3
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -459,7 +458,7 @@ __meta__ = {
 position = Vector2( 0, 64 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 5
+frame = 7
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -469,7 +468,7 @@ __meta__ = {
 position = Vector2( 0, 128 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 5
+frame = 7
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -479,7 +478,7 @@ __meta__ = {
 position = Vector2( 0, 192 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 4
+frame = 6
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -493,7 +492,7 @@ script = ExtResource( 13 )
 [node name="Top" type="AnimatedSprite" parent="Level/Waterfall2"]
 scale = Vector2( 4, 4 )
 frames = SubResource( 28 )
-frame = 2
+frame = 4
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -503,7 +502,7 @@ __meta__ = {
 position = Vector2( 0, 64 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 4
+frame = 6
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -513,7 +512,7 @@ __meta__ = {
 position = Vector2( 0, 128 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 4
+frame = 6
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -523,7 +522,7 @@ __meta__ = {
 position = Vector2( 0, 192 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 3
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -533,7 +532,7 @@ __meta__ = {
 position = Vector2( 0, 256 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 3
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -543,7 +542,7 @@ __meta__ = {
 position = Vector2( 0, 320 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 2
+frame = 4
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -806,7 +805,7 @@ __meta__ = {
 }
 
 [node name="Splash1" type="CPUParticles2D" parent="."]
-position = Vector2( 352, 6369 )
+position = Vector2( 352, 6121 )
 amount = 1024
 lifetime = 0.5
 preprocess = 1.0
