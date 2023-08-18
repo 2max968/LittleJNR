@@ -26,9 +26,9 @@ func _physics_process(delta):
 	time -= delta
 	while(time < 0):
 		time += interval
-		if len(instances) < max_instances:
+		if len(instances) < max_instances or max_instances == 0:
 			var obj := prefab_scene.instance()
+			get_parent().add_child(obj)
 			obj.global_position = global_position
 			obj.global_rotation = global_rotation
-			get_parent().add_child(obj)
 			instances.append(obj)

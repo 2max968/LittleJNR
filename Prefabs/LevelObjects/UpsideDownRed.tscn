@@ -5,7 +5,6 @@
 [ext_resource path="res://Sprites/UpsideDownRedOff.png" type="Texture" id=3]
 
 [node name="UpsideDownRed" type="Node2D"]
-position = Vector2( 640, 480 )
 script = ExtResource( 1 )
 rect = Rect2( 0, 0, 64, 64 )
 color = "red"

@@ -1,0 +1,277 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://Prefabs/LevelBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Tilesets/Tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Sprites/Noise.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Icon/32.png" type="Texture" id=5]
+[ext_resource path="res://Prefabs/ThornsV.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scripts/Effects/ReflectiveWater.gd" type="Script" id=7]
+[ext_resource path="res://Sprites/Particle.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Finish.png" type="Texture" id=9]
+[ext_resource path="res://Scripts/Goal.gd" type="Script" id=10]
+[ext_resource path="res://Prefabs/ThornsH.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Tilesets/BlueOn.tres" type="TileSet" id=12]
+[ext_resource path="res://Sprites/BgrMountains/sky.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/BgrMountains/mountains.png" type="Texture" id=15]
+[ext_resource path="res://Scripts/Background/BgrStickBottom.gd" type="Script" id=16]
+[ext_resource path="res://Sprites/Background/ForestDark.png" type="Texture" id=17]
+[ext_resource path="res://Scripts/Spawner.gd" type="Script" id=18]
+[ext_resource path="res://Prefabs/BlueSlime.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Scripts/LevelObjects/PresetObjects.gd" type="Script" id=21]
+[ext_resource path="res://Shaders/CRTEffect.tres" type="Shader" id=24]
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 32, 16 )
+
+[sub_resource type="Gradient" id=15]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="Shader" id=40]
+code = "shader_type canvas_item;
+
+uniform vec2 scale;
+uniform float y_zoom;
+uniform float reflection_scale;
+uniform vec4 color : hint_color = vec4(1,1,1,0);
+
+uniform sampler2D noiseTexture;
+
+void fragment()
+{
+	// Texture displacement
+	//vec2 textDisp = (texture(noiseTexture, UV * scale * 2.0 + TIME * y_zoom * vec2(0.15, 0.2)).rg
+	//				+ texture(noiseTexture, UV * scale * 2.0 + TIME * y_zoom * vec2(0.2, -0.15)).rg) / scale / 64.0 * y_zoom;
+	
+	// Reflexion:
+	float uv_height = SCREEN_PIXEL_SIZE.y / TEXTURE_PIXEL_SIZE.y;
+	vec2 rs_uv = vec2(SCREEN_UV.x, SCREEN_UV.y + uv_height * UV.y * scale.y * y_zoom / reflection_scale * 2.0);
+	float displace_x = round(UV.y / scale.y * 32.0) * scale.y / 32.0;
+	float displace_y = displace_x;
+	rs_uv.x += sin((displace_x + TIME) * 3.1415 * 2.0) / scale.x / 10.0;
+	rs_uv.y += cos((displace_y + TIME) * 3.1415 * 2.0) / scale.x / 10.0;
+	//rs_uv += textDisp;
+	vec4 ref_color = texture(SCREEN_TEXTURE, rs_uv);
+	COLOR = vec4(ref_color.rgb * (1.0-color.a) + color.rgb * color.a, ref_color.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=19]
+shader = SubResource( 40 )
+shader_param/scale = Vector2( 116, 2.01563 )
+shader_param/y_zoom = 0.210224
+shader_param/reflection_scale = 0.75
+shader_param/color = Color( 0.00392157, 0.235294, 0.352941, 0.364706 )
+shader_param/noiseTexture = ExtResource( 4 )
+
+[sub_resource type="RectangleShape2D" id=41]
+extents = Vector2( 1952, 32 )
+
+[sub_resource type="ShaderMaterial" id=39]
+shader = ExtResource( 24 )
+shader_param/overlay = true
+shader_param/scanlines_opacity = 0.4
+shader_param/scanlines_width = 0.25
+shader_param/grille_opacity = 0.3
+shader_param/resolution = Vector2( 640, 480 )
+shader_param/pixelate = true
+shader_param/roll = false
+shader_param/roll_speed = 8.0
+shader_param/roll_size = 0.0
+shader_param/roll_variation = 1.8
+shader_param/distort_intensity = 0.05
+shader_param/noise_opacity = 0.4
+shader_param/noise_speed = 5.0
+shader_param/static_noise_intensity = 0.06
+shader_param/aberration = 0.03
+shader_param/brightness = 1.4
+shader_param/discolor = true
+shader_param/warp_amount = 0.022
+shader_param/clip_warp = false
+shader_param/vignette_intensity = 0.4
+shader_param/vignette_opacity = 0.042
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Level" type="Node2D" parent="."]
+modulate = Color( 0.717647, 0.717647, 0.717647, 1 )
+position = Vector2( 0, 256 )
+
+[node name="HLimit" type="Node2D" parent="Level"]
+position = Vector2( 3712, 0 )
+
+[node name="VLimit" type="Node2D" parent="Level"]
+position = Vector2( 0, 576 )
+
+[node name="Player" parent="Level" instance=ExtResource( 3 )]
+position = Vector2( 216, 384 )
+
+[node name="Blue" type="TileMap" parent="Level"]
+tile_set = ExtResource( 12 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="TileMapBgr" type="TileMap" parent="Level"]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 0
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 983043, 5, 65536, 983044, 5, 65537, 983045, 5, 65537, 983046, 5, 65537, 983047, 5, 65537, 983048, 5, 65537, 983049, 5, 65537, 983050, 5, 65538, 983068, 5, 65536, 983069, 5, 65537, 983070, 5, 65537, 983071, 5, 65537, 983072, 5, 65537, 983073, 5, 65537, 983074, 5, 65537, 983075, 5, 65537, 983076, 5, 65537, 983077, 5, 65537, 983078, 5, 65537, 983079, 5, 65538, 983092, 5, 65536, 983093, 5, 65538, 983107, 5, 65536, 983108, 5, 65537, 983109, 5, 65537, 983110, 5, 65537, 983111, 5, 65537, 983112, 5, 65537, 983113, 5, 65538, 983114, 5, 1, 983115, 5, 1, 983116, 5, 1, 983117, 5, 2, 983125, 5, 0, 983126, 5, 2, 983135, 5, 0, 983136, 5, 1, 983137, 5, 2, 983150, 5, 65536, 983151, 5, 65537, 983152, 5, 65537, 983153, 5, 65537, 983154, 5, 65537, 983155, 5, 65538 )
+
+[node name="TileMap" type="TileMap" parent="Level"]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 720900, 5, 3, 720901, 5, 4, 720902, 5, 4, 720903, 5, 4, 720904, 5, 4, 720905, 5, 5, 720965, 5, 0, 720966, 5, 1, 720967, 5, 1, 720968, 5, 1, 720969, 5, 2, 786435, 5, 0, 786436, 5, 1, 786437, 5, 65539, 786438, 5, 65540, 786439, 5, 65541, 786440, 5, 1, 786441, 5, 1, 786442, 5, 2, 786460, 5, 0, 786461, 5, 1, 786462, 5, 1, 786463, 5, 1, 786464, 5, 1, 786465, 5, 1, 786466, 5, 1, 786467, 5, 1, 786468, 5, 1, 786469, 5, 1, 786470, 5, 1, 786471, 5, 2, 786501, 5, 65536, 786502, 5, 65537, 786503, 5, 65537, 786504, 5, 65537, 786505, 5, 65538, 851971, 5, 65536, 851972, 5, 65537, 851973, 5, 65537, 851974, 5, 65537, 851975, 5, 65537, 851976, 5, 65537, 851977, 5, 65537, 851978, 5, 65538, 851996, 5, 65536, 851997, 5, 65537, 851998, 5, 65537, 851999, 5, 65537, 852000, 5, 65537, 852001, 5, 65537, 852002, 5, 65537, 852003, 5, 65537, 852004, 5, 65537, 852005, 5, 65537, 852006, 5, 65537, 852007, 5, 65538, 852037, 5, 65536, 852038, 5, 65537, 852039, 5, 65537, 852040, 5, 65537, 852041, 5, 65538, 917507, 5, 65536, 917508, 5, 65537, 917509, 5, 65537, 917510, 5, 65537, 917511, 5, 65537, 917512, 5, 65537, 917513, 5, 65537, 917514, 5, 65538, 917532, 5, 65536, 917533, 5, 65537, 917534, 5, 65537, 917535, 5, 65537, 917536, 5, 65537, 917537, 5, 65537, 917538, 5, 65537, 917539, 5, 65537, 917540, 5, 65537, 917541, 5, 65537, 917542, 5, 65537, 917543, 5, 65538, 917556, 5, 0, 917557, 5, 2, 917571, 5, 0, 917572, 5, 1, 917573, 5, 65537, 917574, 5, 65537, 917575, 5, 65537, 917576, 5, 65537, 917577, 5, 65538, 917614, 5, 0, 917615, 5, 1, 917616, 5, 1, 917617, 5, 1, 917618, 5, 1, 917619, 5, 2 )
+
+[node name="Goal" type="Area2D" parent="Level"]
+position = Vector2( 3648, 417 )
+script = ExtResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Goal"]
+position = Vector2( 32, 16 )
+shape = SubResource( 14 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Level/Goal"]
+position = Vector2( 32, 16 )
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Level/Goal"]
+position = Vector2( 32, 32 )
+lifetime = 1.4
+texture = ExtResource( 8 )
+emission_shape = 2
+emission_rect_extents = Vector2( 32, 1 )
+gravity = Vector2( 0, -50 )
+color_ramp = SubResource( 15 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BlueSlime" parent="Level" instance=ExtResource( 19 )]
+position = Vector2( 1040, 384 )
+
+[node name="BlueSlime2" parent="Level" instance=ExtResource( 19 )]
+position = Vector2( 1704, 449 )
+
+[node name="ThornsV5" parent="Level" instance=ExtResource( 6 )]
+position = Vector2( 2752, 464 )
+
+[node name="ThornsV6" parent="Level" instance=ExtResource( 6 )]
+position = Vector2( 2752, 448 )
+
+[node name="ThornsV7" parent="Level" instance=ExtResource( 6 )]
+position = Vector2( 2752, 416 )
+
+[node name="ThornsH" parent="Level" instance=ExtResource( 11 )]
+position = Vector2( 2384, 464 )
+
+[node name="ThornsH2" parent="Level" instance=ExtResource( 11 )]
+position = Vector2( 2416, 464 )
+
+[node name="ThornsH3" parent="Level" instance=ExtResource( 11 )]
+position = Vector2( 2448, 464 )
+
+[node name="ThornsH4" parent="Level" instance=ExtResource( 11 )]
+position = Vector2( 2480, 464 )
+
+[node name="ThornsH5" parent="Level" instance=ExtResource( 11 )]
+position = Vector2( 3056, 472 )
+
+[node name="ThornsH6" parent="Level" instance=ExtResource( 11 )]
+position = Vector2( 3088, 472 )
+
+[node name="ThornsH7" parent="Level" instance=ExtResource( 11 )]
+position = Vector2( 3120, 472 )
+
+[node name="Water" type="StaticBody2D" parent="Level"]
+position = Vector2( 1856, 543.75 )
+collision_layer = 256
+collision_mask = 256
+constant_linear_velocity = Vector2( -128, 0 )
+
+[node name="Water" type="Sprite" parent="Level/Water"]
+pause_mode = 2
+material = SubResource( 19 )
+scale = Vector2( 116, 2.01563 )
+texture = ExtResource( 5 )
+script = ExtResource( 7 )
+water_color = Color( 0.00392157, 0.235294, 0.352941, 0.364706 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Level/Water/Water"]
+visible = false
+amount = 50
+local_coords = false
+texture = ExtResource( 8 )
+emission_shape = 2
+emission_rect_extents = Vector2( 16, 16 )
+gravity = Vector2( 0, 0 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Water"]
+position = Vector2( 96, 0.25 )
+shape = SubResource( 41 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Spawner" type="Node2D" parent="Level"]
+position = Vector2( 3840, 511 )
+script = ExtResource( 18 )
+interval = 3.0
+prefab = "res://Prefabs/LevelObjects/Log.tscn"
+max_instances = 0
+
+[node name="PresetObjects" type="Node2D" parent="Level"]
+position = Vector2( 3840, 511 )
+script = ExtResource( 21 )
+prefabPath = "res://Prefabs/LevelObjects/Log.tscn"
+movementSpeed = -128.0
+spawnrate = 3.0
+
+[node name="LevelBase" parent="." instance=ExtResource( 1 )]
+position = Vector2( 120, 80 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource( 16 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0, 0 )
+motion_mirroring = Vector2( 800, 600 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+modulate = Color( 0.6107, 0.62, 0.5084, 1 )
+texture = ExtResource( 14 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.05, 0.05 )
+motion_mirroring = Vector2( 800, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+texture = ExtResource( 15 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.4, 0.4 )
+motion_mirroring = Vector2( 800, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+texture = ExtResource( 17 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource( 39 )
+margin_right = 800.0
+margin_bottom = 450.0
+
+[connection signal="body_entered" from="Level/Goal" to="Level/Goal" method="_on_Goal_body_entered"]
+[connection signal="item_rect_changed" from="Level/Water/Water" to="Level/Water/Water" method="_on_Water_item_rect_changed"]

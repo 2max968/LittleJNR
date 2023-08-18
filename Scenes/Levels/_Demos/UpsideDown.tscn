@@ -18,7 +18,7 @@
 [ext_resource path="res://Tilesets/BlueOn.tres" type="TileSet" id=19]
 [ext_resource path="res://Sprites/Platforms/BlueSpikyOff.png" type="Texture" id=21]
 [ext_resource path="res://Sprites/Platforms/BlueSpikyOn.png" type="Texture" id=22]
-[ext_resource path="res://Prefabs/UpsideDownRed.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Prefabs/LevelObjects/UpsideDownRed.tscn" type="PackedScene" id=23]
 
 [sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 80, 16 )

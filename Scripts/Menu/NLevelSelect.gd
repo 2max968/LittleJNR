@@ -19,6 +19,7 @@ func _ready():
 	$"%Camera2D".position.x = targetCamX
 	$"%PnStart/BtnStart".grab_focus()
 	get_tree().paused = false;
+	$"%LstLevels".grab_focus()
 	
 func _process(delta):
 	if $"%PnLevelSelect".visible:
