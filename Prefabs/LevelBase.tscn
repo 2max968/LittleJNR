@@ -280,7 +280,7 @@ position = Vector2( 16, 304 )
 normal = ExtResource( 18 )
 pressed = ExtResource( 21 )
 passby_press = true
-action = "move_left"
+action = "touch_left"
 
 [node name="BtnRight" type="TouchScreenButton" parent="CanvasLayer/TouchButtons"]
 modulate = Color( 1, 1, 1, 0.352941 )
@@ -288,7 +288,7 @@ position = Vector2( 144, 304 )
 normal = ExtResource( 19 )
 pressed = ExtResource( 23 )
 passby_press = true
-action = "move_right"
+action = "touch_right"
 
 [node name="BtnJump" type="TouchScreenButton" parent="CanvasLayer/TouchButtons"]
 modulate = Color( 1, 1, 1, 0.352941 )

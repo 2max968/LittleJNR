@@ -50,7 +50,7 @@ func _physics_process(delta):
 	if global_position.y > vlimitNode.global_position.y + 16:
 		Kill()
 	
-	if Input.is_action_just_pressed("move_jump") or Input.is_action_just_pressed("move_jump_up"):
+	if Inp.IsActionJustPressed(Inp.MOVE_JUMP | Inp.MOVE_JUMP_UP):
 		velocity.y = -JUMPFORCE
 	
 	move_and_slide(velocity, Vector2(0, -1))

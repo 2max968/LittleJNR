@@ -39,7 +39,7 @@ func _physics_process(delta):
 		self.queue_free()
 	
 func _process(_delta):
-	if playerInRange and Input.is_action_just_pressed("move_sprint"):
+	if playerInRange and Inp.IsActionJustPressed(Inp.MOVE_SPRINT):
 		var snapX := round(position.x / 32.0 - 0.5) * 32.0 + 16
 		moving = true
 		if pushLeft:

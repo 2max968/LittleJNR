@@ -1,8 +1,8 @@
 extends Node2D
 
-var inputActions := ["move_jump", "move_left", "move_right", "move_sprint", 
-					"move_up", "move_down", "move_jump_up", "move_jump_down", 
-					"move_jump_right", "move_jump_left"]
+#var inputActions := ["move_jump", "move_left", "move_right", "move_sprint", 
+#					"move_up", "move_down", "move_jump_up", "move_jump_down", 
+#					"move_jump_right", "move_jump_left"]
 					
 var frameCounter : int = 0
 var lines := []
@@ -11,32 +11,33 @@ var pressedActions := []
 
 func _init():
 	add_to_group("levelControl")
-	process_priority = -10
+	process_priority = -9
 
 func _physics_process(delta):
 	if RecordParser.demoLoaded:
+		
 		if demoIndex < len(RecordParser.actionList):
 			var dFrame : int = RecordParser.actionList[demoIndex].frame
 			if frameCounter == dFrame:
 				for _action in RecordParser.actionList[demoIndex].actions:
 					var action : String = _action
 					if(action[0] == "+"):
-						Input.action_press(action.substr(1))
+						Inp.ActionPress(action.substr(1))
 						pressedActions.append(action.substr(1))
 					elif(action[0] == "-"):
-						Input.action_release(action.substr(1))
+						Inp.ActionRelease(action.substr(1))
 						var ind := pressedActions.find(action.substr(1))
 						if ind >= 0:
 							pressedActions.remove(pressedActions.find(action.substr(1)))
 				demoIndex += 1
 	else:
 		var events := []
-		for action in inputActions:
-			if frameCounter == 0 and Input.is_action_pressed(action):
+		for action in Inp.GetInputActionList():
+			if frameCounter == 0 and Inp.IsActionPressedStr(action):
 				events.append("+" + action)
-			elif Input.is_action_just_pressed(action):
+			elif Inp.IsActionJustPressedStr(action):
 				events.append("+" + action)
-			if Input.is_action_just_released(action):
+			if Inp.IsActionJustReleasedStr(action):
 				events.append("-" + action)
 		
 		if(len(events) > 0):
@@ -70,4 +71,4 @@ func finishLevel(newLevel : String):
 	else:
 		RecordParser.demoLoaded = false
 		for action in pressedActions:
-			Input.action_release(action)
+			Inp.ActionRelease(action)

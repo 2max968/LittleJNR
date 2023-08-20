@@ -59,7 +59,7 @@ func _physics_process(delta):
 	else:
 		disable -= delta
 		if player != null:
-			if Input.is_action_just_pressed("move_jump"):
+			if Inp.IsActionJustPressed(Inp.MOVE_JUMP):
 				cannonball.global_position = global_position
 				cannonball.visible = true
 				shooting = true

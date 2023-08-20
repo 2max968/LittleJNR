@@ -103,21 +103,21 @@ func _physics_process(delta):
 	# Set inputs depending of current rotation
 	var inpAng = getDir($RotationPivot.rotation_degrees);
 	var real_up = Vector2(sin($RotationPivot.rotation), -cos($RotationPivot.rotation));
-	var move_left = "move_left";
-	var move_right = "move_right";
-	var jump_alt = "move_jump_up";
+	var move_left := Inp.MOVE_LEFT
+	var move_right := Inp.MOVE_RIGHT
+	var jump_alt := Inp.MOVE_JUMP_UP
 	if(inpAng == 2):
-		move_left = "move_right"
-		move_right = "move_left";
-		jump_alt = "move_jump_down";
+		move_left = Inp.MOVE_RIGHT
+		move_right = Inp.MOVE_LEFT
+		jump_alt = Inp.MOVE_JUMP_DOWN
 	if(inpAng == 1):
-		move_left = "move_up";
-		move_right = "move_down";
-		jump_alt = "move_jump_right";
+		move_left = Inp.MOVE_UP
+		move_right = Inp.MOVE_DOWN
+		jump_alt = Inp.MOVE_JUMP_RIGHT
 	if(inpAng == 3):
-		move_left = "move_down";
-		move_right = "move_up";
-		jump_alt = "move_jump_left";
+		move_left = Inp.MOVE_DOWN
+		move_right = Inp.MOVE_UP
+		jump_alt = Inp.MOVE_JUMP_LEFT
 	
 	# Set maximum speed for falling
 	var terminalvelocity = TERMINALVELOCITY;
@@ -126,7 +126,7 @@ func _physics_process(delta):
 	grounded -= delta;
 	invincible -= delta;
 	trampolinetime -= delta;
-	if(Input.is_action_just_pressed("move_jump") || Input.is_action_just_pressed(jump_alt)):
+	if(Inp.IsActionJustPressed(Inp.MOVE_JUMP) || Inp.IsActionJustPressed(jump_alt)):
 		jumping = JUMPBUFFER;
 	if(is_on_floor()):
 		grounded = COYOTETIME;
@@ -152,22 +152,22 @@ func _physics_process(delta):
 		# Stop player on wall
 		velocity.x = 0;
 		# Make maximum fall speed slower at walls
-		if(Input.is_action_pressed(move_left) != Input.is_action_pressed(move_right)):
+		if(Inp.IsActionPressed(move_left) != Inp.IsActionPressed(move_right)):
 			terminalvelocity = WALLSLIDEVELOCITY;
 	
 	# Set movement maximum speed
 	var movespeed = WALKSPEED;
-	if(Input.is_action_pressed("move_sprint")):
+	if(Inp.IsActionPressed(Inp.MOVE_SPRINT)):
 		movespeed = RUNSPEED;
 	
 	# Move player
 	var targetX = 0;
-	if(Input.is_action_pressed(move_left)):
+	if(Inp.IsActionPressed(move_left)):
 		targetX = -movespeed;
 		yScale = -1;
 		if(velocity.x > 0):
 			friction *= STOP_FRICTION_FACTOR;
-	elif(Input.is_action_pressed(move_right)):
+	elif(Inp.IsActionPressed(move_right)):
 		targetX = movespeed;
 		yScale = 1;
 		if(velocity.x < 0):
@@ -194,8 +194,8 @@ func _physics_process(delta):
 	if(!is_on_floor() && is_on_wall() && jumping >= 0):
 		jumping = -1;
 		
-		var ileft = Input.is_action_pressed(move_left);
-		var iright = Input.is_action_pressed(move_right);
+		var ileft = Inp.IsActionPressed(move_left);
+		var iright = Inp.IsActionPressed(move_right);
 		if(ileft && !iright):
 			var jumpforce = calcJumpForce(WALLKICKHEIGHT);
 			accel = Vector2(0,0);
@@ -211,7 +211,7 @@ func _physics_process(delta):
 			lengthStrech = 1;
 			$Sounds/audioJump.play();
 		
-	if(!(Input.is_action_pressed("move_jump") || Input.is_action_pressed(jump_alt)) || velocity.y >= 0):
+	if(!Inp.IsActionPressed(Inp.MOVE_JUMP | jump_alt) || velocity.y >= 0):
 		current_gravity = FALLGRAVITY;
 	
 	if(jumping >= 0 && trampolinetime >= 0):
