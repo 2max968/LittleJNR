@@ -19,6 +19,14 @@ func _ready():
 	vlimitNode = get_tree().get_root().find_node("VLimit", true, false)
 
 func _physics_process(delta):
+	if playerInRange and Inp.IsActionJustPressed(Inp.MOVE_SPRINT):
+		var snapX := round(position.x / 32.0 - 0.5) * 32.0 + 16
+		moving = true
+		if pushLeft:
+			targetX = snapX - 32
+		else:
+			targetX = snapX + 32
+	
 	var vel := Vector2(0, 0)
 	if not is_on_floor():
 		yvelocity += GRAVITY * delta
@@ -39,13 +47,7 @@ func _physics_process(delta):
 		self.queue_free()
 	
 func _process(_delta):
-	if playerInRange and Inp.IsActionJustPressed(Inp.MOVE_SPRINT):
-		var snapX := round(position.x / 32.0 - 0.5) * 32.0 + 16
-		moving = true
-		if pushLeft:
-			targetX = snapX - 32
-		else:
-			targetX = snapX + 32
+	pass
 
 func _on_PushAreas_body_entered(body):
 	if body is Player:

@@ -20,6 +20,7 @@ const ANALOG_THRESH_OFF := 0.4
 
 var digitalInputMask : int = 0
 var analogInputMask : int = 0
+var internalInputMask : int = 0
 var currentInputMask : int = 0
 var lastInputMask : int = 0
 var lastAnalogX : float = 0
@@ -72,7 +73,10 @@ func _physics_process(delta):
 	lastAnalogX = analogX
 	lastAnalogY = analogY
 	
-	currentInputMask = digitalInputMask | analogInputMask
+	if RecordParser.demoLoaded:
+		currentInputMask = internalInputMask
+	else:
+		currentInputMask = digitalInputMask | analogInputMask
 
 func MaskOf(action : String) -> int:
 	return 1 << INPUT_ACTIONS.find(action)
@@ -100,8 +104,8 @@ func IsActionJustReleased(mask : int) -> bool:
 
 func ActionPress(action : String):
 	var ind := INPUT_ACTIONS.find(action)
-	currentInputMask |= (1 << ind)
+	internalInputMask |= (1 << ind)
 
 func ActionRelease(action : String):
 	var ind := INPUT_ACTIONS.find(action)
-	currentInputMask &= ~(1 << ind)
+	internalInputMask &= ~(1 << ind)

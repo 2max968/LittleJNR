@@ -23,6 +23,8 @@ func _ready():
 	
 func _process(delta):
 	if $"%PnLevelSelect".visible:
+		var lvlInd : int = $"%LstLevels".get_selected_items()[0]
+		
 		if Input.is_action_just_pressed("ui_left"):
 			if selectedIndex > 0:
 				selectedIndex -= 1
@@ -33,7 +35,6 @@ func _process(delta):
 				selectWorld(selectedIndex)
 		
 		if Input.is_action_just_pressed("ui_accept"):
-			var lvlInd : int = $"%LstLevels".get_selected_items()[0]
 			var path : String = "res://Scenes/Levels/" + worlds[selectedIndex] + "/" + levels[lvlInd]
 			get_tree().change_scene(path)
 			
@@ -41,6 +42,12 @@ func _process(delta):
 			$"%PnStart".visible = true
 			$"%PnLevelSelect".visible = false
 			$"%PnStart/BtnStart".grab_focus()
+			
+		if Input.is_action_just_pressed("ui_extra"):
+			var path : String = "user://demos/" + worlds[selectedIndex] + ".Level" + LevelProperties.padZero(lvlInd+1, 2) + ".demo"
+			RecordParser.parseDemo(path)
+			if RecordParser.demoLoaded:
+				get_tree().change_scene(RecordParser.levelPath)
 	
 	$"%Camera2D".position.x = lerp($"%Camera2D".position.x, targetCamX, delta * 5)
 

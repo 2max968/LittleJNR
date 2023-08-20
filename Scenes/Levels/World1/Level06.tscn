@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Tilesets/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Sprites/Particle.png" type="Texture" id=12]
 [ext_resource path="res://Sprites/Finish.png" type="Texture" id=13]
 [ext_resource path="res://Scripts/Goal.gd" type="Script" id=14]
+[ext_resource path="res://Prefabs/LevelObjects/UpsideDownGreen.tscn" type="PackedScene" id=15]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 32, 16 )
@@ -393,6 +394,246 @@ position = Vector2( 2048, 256 )
 
 [node name="UpsideDownRed101" parent="Level/UpsideDown" instance=ExtResource( 8 )]
 position = Vector2( 2048, 192 )
+
+[node name="UpsideDownRed114" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1504, 289 )
+
+[node name="UpsideDownRed115" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1568, 289 )
+
+[node name="UpsideDownRed116" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1568, 353 )
+
+[node name="UpsideDownRed117" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1504, 353 )
+
+[node name="UpsideDownRed118" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1504, 417 )
+
+[node name="UpsideDownRed119" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1568, 417 )
+
+[node name="UpsideDownRed120" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1568, 481 )
+
+[node name="UpsideDownRed121" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1504, 481 )
+
+[node name="UpsideDownRed122" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1632, 416 )
+
+[node name="UpsideDownRed123" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1696, 416 )
+
+[node name="UpsideDownRed124" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1696, 480 )
+
+[node name="UpsideDownRed125" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1632, 480 )
+
+[node name="UpsideDownRed126" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1632, 288 )
+
+[node name="UpsideDownRed127" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1696, 288 )
+
+[node name="UpsideDownRed128" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1696, 352 )
+
+[node name="UpsideDownRed129" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1632, 352 )
+
+[node name="UpsideDownRed130" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1760, 289 )
+
+[node name="UpsideDownRed131" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1824, 289 )
+
+[node name="UpsideDownRed132" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1824, 353 )
+
+[node name="UpsideDownRed133" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1760, 353 )
+
+[node name="UpsideDownRed134" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1760, 417 )
+
+[node name="UpsideDownRed135" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1824, 417 )
+
+[node name="UpsideDownRed136" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1824, 481 )
+
+[node name="UpsideDownRed137" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1760, 481 )
+
+[node name="UpsideDownRed138" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1760, 168 )
+
+[node name="UpsideDownRed139" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1824, 168 )
+
+[node name="UpsideDownRed140" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1824, 232 )
+
+[node name="UpsideDownRed141" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1760, 232 )
+
+[node name="UpsideDownRed142" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1632, 168 )
+
+[node name="UpsideDownRed143" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1696, 168 )
+
+[node name="UpsideDownRed144" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1696, 232 )
+
+[node name="UpsideDownRed145" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1632, 232 )
+
+[node name="UpsideDownRed146" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1504, 168 )
+
+[node name="UpsideDownRed147" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1568, 168 )
+
+[node name="UpsideDownRed148" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1568, 232 )
+
+[node name="UpsideDownRed149" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1504, 232 )
+
+[node name="UpsideDownRed150" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1760, 40 )
+
+[node name="UpsideDownRed151" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1824, 40 )
+
+[node name="UpsideDownRed152" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1824, 104 )
+
+[node name="UpsideDownRed153" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1760, 104 )
+
+[node name="UpsideDownRed154" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1632, 40 )
+
+[node name="UpsideDownRed155" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1696, 40 )
+
+[node name="UpsideDownRed156" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1696, 104 )
+
+[node name="UpsideDownRed157" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1632, 104 )
+
+[node name="UpsideDownRed158" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1504, 40 )
+
+[node name="UpsideDownRed159" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1568, 40 )
+
+[node name="UpsideDownRed162" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1760, -24 )
+
+[node name="UpsideDownRed163" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1824, -24 )
+
+[node name="UpsideDownRed168" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1888, 289 )
+
+[node name="UpsideDownRed169" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1888, 353 )
+
+[node name="UpsideDownRed170" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1888, 417 )
+
+[node name="UpsideDownRed171" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1888, 481 )
+
+[node name="UpsideDownRed172" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1888, 168 )
+
+[node name="UpsideDownRed173" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1888, 232 )
+
+[node name="UpsideDownRed174" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1888, 40 )
+
+[node name="UpsideDownRed175" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1888, 104 )
+
+[node name="UpsideDownRed176" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1888, -24 )
+
+[node name="UpsideDownRed177" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1952, 289 )
+
+[node name="UpsideDownRed178" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1952, 353 )
+
+[node name="UpsideDownRed179" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1952, 417 )
+
+[node name="UpsideDownRed180" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1952, 481 )
+
+[node name="UpsideDownRed181" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1952, 168 )
+
+[node name="UpsideDownRed182" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1952, 232 )
+
+[node name="UpsideDownRed183" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1952, 40 )
+
+[node name="UpsideDownRed184" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1952, 104 )
+
+[node name="UpsideDownRed185" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1952, -24 )
+
+[node name="UpsideDownRed164" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1632, -24 )
+
+[node name="UpsideDownRed165" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1696, -24 )
+
+[node name="UpsideDownRed166" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1504, -24 )
+
+[node name="UpsideDownRed167" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1568, -24 )
+
+[node name="UpsideDownRed186" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1760, -88 )
+
+[node name="UpsideDownRed187" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1824, -88 )
+
+[node name="UpsideDownRed188" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1888, -88 )
+
+[node name="UpsideDownRed189" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1952, -88 )
+
+[node name="UpsideDownRed190" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1632, -88 )
+
+[node name="UpsideDownRed191" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1696, -88 )
+
+[node name="UpsideDownRed192" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1504, -88 )
+
+[node name="UpsideDownRed193" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1568, -88 )
+
+[node name="UpsideDownRed160" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1568, 104 )
+
+[node name="UpsideDownRed161" parent="Level/UpsideDown" instance=ExtResource( 15 )]
+position = Vector2( 1504, 104 )
 
 [node name="Player" parent="Level" instance=ExtResource( 2 )]
 position = Vector2( 80, 480 )

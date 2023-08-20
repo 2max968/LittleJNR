@@ -125,7 +125,7 @@ void fragment()
 [sub_resource type="ShaderMaterial" id=39]
 shader = SubResource( 18 )
 shader_param/scale = Vector2( 25, 2.25781 )
-shader_param/y_zoom = 0.793701
+shader_param/y_zoom = 1.68179
 shader_param/reflection_scale = 0.75
 shader_param/color = Color( 0.00392157, 0.235294, 0.352941, 0.364706 )
 shader_param/noiseTexture = ExtResource( 9 )
@@ -167,7 +167,7 @@ script = ExtResource( 4 )
 [node name="Top" type="AnimatedSprite" parent="Node2D/Waterfall1"]
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 3
+frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -177,7 +177,7 @@ __meta__ = {
 position = Vector2( 0, 64 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 38 )
-frame = 5
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -187,7 +187,7 @@ __meta__ = {
 position = Vector2( 0, 128 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 38 )
-frame = 5
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -307,19 +307,32 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = -31.0
-margin_right = -4.0
+margin_right = -48.0
 margin_bottom = -7.0
 focus_mode = 0
 text = "Back"
 script = ExtResource( 13 )
 ActionName = "ui_cancel"
 
+[node name="btnShowReplay" type="Button" parent="CanvasLayer/PnLevelSelect"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -31.0
+margin_right = 40.0
+margin_bottom = -7.0
+text = "Replay"
+script = ExtResource( 13 )
+ActionName = "ui_extra"
+
 [node name="btnSelect" type="Button" parent="CanvasLayer/PnLevelSelect"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
+margin_left = 48.0
 margin_top = -32.0
 margin_right = -8.0
 margin_bottom = -8.0
