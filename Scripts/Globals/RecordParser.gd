@@ -1,6 +1,7 @@
 extends Node
 
 var demoLoaded := false
+var demoStarted := false
 var levelPath : String = ""
 var actionList := []
 
@@ -29,6 +30,7 @@ func parseDemo(path : String):
 				if key == "level":
 					levelPath = value
 					demoLoaded = true
+					demoStarted = false
 		elif inContent:
 			var pos := line.find(":")
 			if pos >= 0:

@@ -13,6 +13,12 @@ func _init():
 	add_to_group("levelControl")
 	process_priority = -9
 
+func _ready():
+	if RecordParser.demoStarted:
+		RecordParser.demoLoaded = false
+	else:
+		RecordParser.demoStarted = true
+
 func _physics_process(delta):
 	if RecordParser.demoLoaded:
 		
@@ -72,3 +78,4 @@ func finishLevel(newLevel : String):
 		RecordParser.demoLoaded = false
 		for action in pressedActions:
 			Inp.ActionRelease(action)
+			
