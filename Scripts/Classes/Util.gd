@@ -9,7 +9,17 @@ static func FindNodeOfType(node : Node, type : String, level : int = 0) -> Node:
 	if node.is_class(type):
 		return node
 	for child in node.get_children():
-		var nd = FindNodeOfType(child, type, level + 1)
+		var nd := FindNodeOfType(child, type, level + 1)
+		if nd != null:
+			return nd
+	return null
+
+static func FindPlayer(node : Node) -> Player_Base:
+	if node is Player_Base:
+		var ply : Player_Base = node
+		return ply
+	for child in node.get_children():
+		var nd := FindPlayer(child)
 		if nd != null:
 			return nd
 	return null

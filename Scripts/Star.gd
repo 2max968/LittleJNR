@@ -13,7 +13,7 @@ func _on_Star_body_entered(body):
 		
 func _process(delta):
 	if following:
-		var fObj : Player_Base = Util.FindNodeOfType(get_tree().root, "Player_Base")
+		var fObj : Player_Base = Util.FindPlayer(get_tree().root)
 		if fObj != null:
 			var target := fObj.global_position + Vector2(0, -32)
 			var distance := (target - global_position).length()
