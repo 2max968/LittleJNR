@@ -18,3 +18,4 @@ func BaseDamage(amount : int):
 
 func Kill():
 	get_tree().call_group("levelControl", "die");
+

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Other/dogicapixel.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/Menu/NLevelSelect.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Sprites/BgrMountains/Full.png" type="Texture" id=11]
 [ext_resource path="res://Sprites/Background/ForestMountains.png" type="Texture" id=12]
 [ext_resource path="res://Scripts/Menu/ActionButton.gd" type="Script" id=13]
+[ext_resource path="res://Sprites/Star.png" type="Texture" id=14]
 
 [sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 5 )
@@ -125,7 +126,7 @@ void fragment()
 [sub_resource type="ShaderMaterial" id=39]
 shader = SubResource( 18 )
 shader_param/scale = Vector2( 25, 2.25781 )
-shader_param/y_zoom = 1.68179
+shader_param/y_zoom = 0.629961
 shader_param/reflection_scale = 0.75
 shader_param/color = Color( 0.00392157, 0.235294, 0.352941, 0.364706 )
 shader_param/noiseTexture = ExtResource( 9 )
@@ -139,6 +140,10 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=40]
 size = 48
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=41]
+size = 24
 font_data = ExtResource( 1 )
 
 [node name="Control" type="Control"]
@@ -323,6 +328,8 @@ margin_left = -40.0
 margin_top = -31.0
 margin_right = 40.0
 margin_bottom = -7.0
+focus_mode = 0
+enabled_focus_mode = 0
 text = "Replay"
 script = ExtResource( 13 )
 ActionName = "ui_extra"
@@ -362,6 +369,34 @@ custom_fonts/font = SubResource( 40 )
 text = "<"
 script = ExtResource( 13 )
 ActionName = "ui_left"
+
+[node name="PnNoStars" type="Panel" parent="CanvasLayer/PnLevelSelect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -48.0
+margin_top = -48.0
+margin_right = 48.0
+margin_bottom = 48.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PnLevelSelect/PnNoStars"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -16.0
+margin_top = 8.0
+margin_right = 16.0
+margin_bottom = 40.0
+texture = ExtResource( 14 )
+
+[node name="LblStars" type="Label" parent="CanvasLayer/PnLevelSelect/PnNoStars"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -48.0
+custom_fonts/font = SubResource( 41 )
+text = "x/y"
+align = 1
 
 [node name="PnStart" type="Panel" parent="CanvasLayer"]
 unique_name_in_owner = true

@@ -120,3 +120,12 @@ static func GetLevelTimes() -> Dictionary:
 		var vi := float(value)
 		dict[key] = vi
 	return dict
+
+static func getWorldCost(world : String) -> int:
+	var path := "res://Scenes/Levels/" + world + "/0_world.tres"
+	var df := File.new()
+	if not df.file_exists(path):
+		return 0
+	var cfg = ConfigFile.new()
+	cfg.load(path)
+	return cfg.get_value("World", "cost", 0)
