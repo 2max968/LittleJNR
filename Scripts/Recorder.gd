@@ -8,6 +8,7 @@ var frameCounter : int = 0
 var lines := []
 var demoIndex := 0
 var pressedActions := []
+var bestTime : float = NAN
 
 func _init():
 	add_to_group("levelControl")
@@ -18,6 +19,11 @@ func _ready():
 		RecordParser.demoLoaded = false
 	else:
 		RecordParser.demoStarted = true
+	
+	var path := get_tree().current_scene.filename
+	var worldName := LevelProperties.GetWorldName(path)
+	var levelName := LevelProperties.GetLevelName(path)
+	bestTime = Savegame.getTime(worldName, levelName)
 
 func _physics_process(delta):
 	if RecordParser.demoLoaded:
@@ -60,20 +66,24 @@ func storeFile(var filename):
 	file.store_line("#HEADER")
 	var lvlName := get_tree().current_scene.filename
 	file.store_line("level:" + lvlName)
+	file.store_line("time:" + str($"../CanvasLayer/LblTimer".time))
 	file.store_line("#LOG")
 	for line in lines:
 		file.store_line(line)
 
 func finishLevel(newLevel : String):
 	if not RecordParser.demoLoaded:
+		var levelTime : float = $"../CanvasLayer/LblTimer".time
+		
 		var path := get_tree().current_scene.filename
 		var worldName := LevelProperties.GetWorldName(path)
 		var levelName := LevelProperties.GetLevelName(path)
-		var dir := Directory.new()
-		var dpath := "user://demos/"
-		if not dir.dir_exists(dpath):
-			dir.make_dir(dpath)
-		storeFile(dpath + worldName + "." + levelName + ".demo")
+		if is_nan(bestTime) or levelTime <= bestTime:
+			var dir := Directory.new()
+			var dpath := "user://demos/"
+			if not dir.dir_exists(dpath):
+				dir.make_dir(dpath)
+			storeFile(dpath + worldName + "." + levelName + ".demo")
 	else:
 		RecordParser.demoLoaded = false
 		for action in pressedActions:
