@@ -37,6 +37,7 @@ var oldPosition : Vector2
 var oddFrame := false
 var jumpedThisFrame := false
 export var initColor := "blue";
+export var catchCamera := true
 
 var jumpParticlesPrefab = preload("res://Prefabs/JumpParticles.tscn");
 var walkParticlesPrefab = preload("res://Prefabs/WalkParticles.tscn");
@@ -57,7 +58,7 @@ func _ready():
 	vlimitNode = get_tree().get_root().find_node("VLimit", true, false);
 	hlimitNode = get_tree().get_root().find_node("HLimit", true, false);
 	var camera := get_tree().get_root().find_node("Camera", true, false);
-	if camera != null:
+	if camera != null and catchCamera:
 		camera.followObject(self);
 	get_tree().call_group("colorhandler", "SetColor", initColor);
 
@@ -234,7 +235,8 @@ func _physics_process(delta):
 	var _up = Vector2(sin(_rot), -cos(_rot));
 	oldPosition = global_position
 	var snap := Vector2.DOWN * 16 if is_on_floor() and not jumpedThisFrame else Vector2.ZERO
-	var actualMovement = move_and_slide_with_snap(.5 * _accel * delta + _vel, snap, _up);
+	var _scale := global_scale.x
+	var actualMovement = move_and_slide_with_snap((.5 * _accel * delta + _vel) * _scale, snap, _up) / _scale;
 	velocity += accel * delta;
 	if(is_on_floor()):
 		steptime -= abs(actualMovement.x) * delta;
