@@ -40,8 +40,8 @@ func _physics_process(delta):
 		velocity.x = -WALKSPEED;
 		
 	var space_state = get_world_2d().direct_space_state;
-	var posLeft = global_position + Vector2(-17,0);
-	var posRight = global_position + Vector2(17,0);
+	var posLeft = global_position + Vector2(-17,0) * global_scale;
+	var posRight = global_position + Vector2(17,0) * global_scale;
 	var resultLeft = space_state.intersect_ray(posLeft, posLeft + Vector2(0,1), [self], 1);
 	var resultRight = space_state.intersect_ray(posRight, posRight + Vector2(0,1), [self], 1);
 	
@@ -51,7 +51,7 @@ func _physics_process(delta):
 		if(resultRight.empty()):
 			direction = DIRECTION.LEFT;
 	
-	move_and_slide(.5 * accel * delta + velocity, Vector2(0,-1));
+	move_and_slide((.5 * accel * delta + velocity) * global_scale, Vector2(0,-1));
 	velocity += accel * delta;
 
 func _on_Body_body_entered(body):
