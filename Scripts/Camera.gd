@@ -31,7 +31,16 @@ func _ready():
 
 func _process(_delta : float):
 	if ObjectToFollow != null:
-		global_position = ObjectToFollow.global_position
+		global_position = getGlobalPosition(ObjectToFollow)
 	
 func followObject(node : Node2D):
 	ObjectToFollow = node;
+
+static func getGlobalPosition(node: Node2D) -> Vector2:
+	var pos := node.global_position
+	var parent := node.get_parent()
+	while parent != null:
+		if parent is ParallaxBackground:
+			pos -= parent.scroll_offset
+		parent = parent.get_parent()
+	return pos

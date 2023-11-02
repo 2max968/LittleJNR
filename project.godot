@@ -24,10 +24,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/GravitationField.gd"
 }, {
-"base": "Node",
+"base": "ParallaxLayer",
 "class": "LevelLayer",
 "language": "GDScript",
-"path": "res://Scripts/LevelLayer.gd"
+"path": "res://Scripts/LayerAutoScale.gd"
 }, {
 "base": "Node2D",
 "class": "LevelProperties",

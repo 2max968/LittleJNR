@@ -1,9 +1,23 @@
-extends Node
+extends ParallaxLayer
 class_name LevelLayer
 
-export var LayerIndex := 0
+export var ScaleFactor : float = 1.0
+export var ZeroX := false
+export var ZeroY := true
+export var LayerIndex : int = 0
+
+func _init():
+	pass
 
 func _ready():
+	$Node2D.scale = Vector2(ScaleFactor, ScaleFactor)
+	self.motion_scale = Vector2(ScaleFactor, ScaleFactor)
+	
+	if ZeroX:
+		$Node2D.global_position.x = 0
+	if ZeroY:
+		$Node2D.global_position.y = 0
+	
 	setCollision(self)
 
 func setCollision(node: Node):
