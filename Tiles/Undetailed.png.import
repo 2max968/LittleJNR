@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TileCave.png-01a82cf2731045a0e49cfa745dbcd7e5.stex"
+path="res://.import/Undetailed.png-9aef00a9d178b6fbf9237d0d83892a0c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tiles/TileCave.png"
-dest_files=[ "res://.import/TileCave.png-01a82cf2731045a0e49cfa745dbcd7e5.stex" ]
+source_file="res://Tiles/Undetailed.png"
+dest_files=[ "res://.import/Undetailed.png-9aef00a9d178b6fbf9237d0d83892a0c.stex" ]
 
 [params]
 
