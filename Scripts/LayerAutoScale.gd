@@ -10,6 +10,9 @@ func _init():
 	pass
 
 func _ready():
+	var vlimitNode := get_tree().get_root().find_node("VLimit", true, false);
+	var hlimitNode := get_tree().get_root().find_node("HLimit", true, false);
+	
 	$Node2D.scale = Vector2(ScaleFactor, ScaleFactor)
 	self.motion_scale = Vector2(ScaleFactor, ScaleFactor)
 	
@@ -17,11 +20,13 @@ func _ready():
 		$Node2D.global_position.x = 0
 	if ZeroY:
 		$Node2D.global_position.y = 0
+		
+	$Node2D.global_position.y += vlimitNode.global_position.y - ScaleFactor * vlimitNode.global_position.y - (1-ScaleFactor)*128
 	
 	setCollision(self)
 
 func setCollision(node: Node):
-	if node is CollisionObject2D:
+	if node is CollisionObject2D or node is TileMap:
 		var mask := unifyMask(node.collision_mask)
 		var layer := unifyMask(node.collision_layer)
 		node.collision_mask = mask << (LayerIndex * 4)
