@@ -21,7 +21,7 @@ func _ready():
 	if ZeroY:
 		$Node2D.global_position.y = 0
 		
-	$Node2D.global_position.y += vlimitNode.global_position.y - ScaleFactor * vlimitNode.global_position.y - (1-ScaleFactor)*128
+	$Node2D.global_position.y += vlimitNode.global_position.y - ScaleFactor * vlimitNode.global_position.y #- (1-ScaleFactor)*128
 	
 	setCollision(self)
 
