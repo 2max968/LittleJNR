@@ -6,15 +6,16 @@ var ply : Player_Base = null
 var animationFrame : float = -1
 var teleportIn : float = NAN
 var targetDoor: Node2D
+var useKey : int = 0
 
 func _ready():
 	connect("body_entered", self, "bodyEntered")
 	connect("body_exited", self, "bodyLeave")
-	add_to_group("door_" + DoorGroup)
+	add_to_group("door#" + DoorGroup)
 
 func _physics_process(delta):
-	if Inp.IsActionJustPressed(Inp.MOVE_SPRINT) and ply != null:
-		var doors := get_tree().get_nodes_in_group("door_" + DoorGroup)
+	if Inp.IsActionJustPressed(useKey) and ply != null:
+		var doors := get_tree().get_nodes_in_group("door#" + DoorGroup)
 		var size := doors.size()
 		var ind := doors.find(self)
 		ind = (ind + 1) % size
@@ -64,6 +65,7 @@ func _process(delta):
 func bodyEntered(body : Node):
 	if body is Player_Base:
 		ply = body
+		useKey = ply.GetUseKey()
 	
 func bodyLeave(body : Node):
 	if body == ply:

@@ -19,13 +19,22 @@ func _ready():
 	vlimitNode = get_tree().get_root().find_node("VLimit", true, false)
 
 func _physics_process(delta):
-	if playerInRange and Inp.IsActionJustPressed(Inp.MOVE_SPRINT):
+	if playerInRange and pushLeft and Inp.IsActionJustPressed(Inp.MOVE_LEFT):
 		var snapX := round(position.x / 32.0 - 0.5) * 32.0 + 16
 		moving = true
-		if pushLeft:
-			targetX = snapX - 32
-		else:
-			targetX = snapX + 32
+		targetX = snapX - 32
+	if playerInRange and not pushLeft and Inp.IsActionJustPressed(Inp.MOVE_RIGHT):
+		var snapX := round(position.x / 32.0 - 0.5) * 32.0 + 16
+		moving = true
+		targetX = snapX + 32
+		
+#	if playerInRange and Inp.IsActionJustPressed(Inp.MOVE_SPRINT):
+#		var snapX := round(position.x / 32.0 - 0.5) * 32.0 + 16
+#		moving = true
+#		if pushLeft:
+#			targetX = snapX - 32
+#		else:
+#			targetX = snapX + 32
 	
 	var vel := Vector2(0, 0)
 	if not is_on_floor():

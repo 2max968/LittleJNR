@@ -107,18 +107,22 @@ func _physics_process(delta):
 	var move_left := Inp.MOVE_LEFT
 	var move_right := Inp.MOVE_RIGHT
 	var jump_alt := Inp.MOVE_JUMP_UP
+	useKey = Inp.MOVE_DOWN
 	if(inpAng == 2):
 		move_left = Inp.MOVE_RIGHT
 		move_right = Inp.MOVE_LEFT
 		jump_alt = Inp.MOVE_JUMP_DOWN
+		useKey = Inp.MOVE_UP
 	if(inpAng == 1):
 		move_left = Inp.MOVE_UP
 		move_right = Inp.MOVE_DOWN
 		jump_alt = Inp.MOVE_JUMP_RIGHT
+		useKey = Inp.MOVE_LEFT
 	if(inpAng == 3):
 		move_left = Inp.MOVE_DOWN
 		move_right = Inp.MOVE_UP
 		jump_alt = Inp.MOVE_JUMP_LEFT
+		useKey = Inp.MOVE_RIGHT
 	
 	# Set maximum speed for falling
 	var terminalvelocity = TERMINALVELOCITY;

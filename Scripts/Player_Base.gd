@@ -7,6 +7,7 @@ var health : int = 3;
 var invincible = -1;
 var movementRight := true
 var velocity = Vector2(0,0)
+var useKey : int = Inp.MOVE_DOWN
 
 func BaseDamage(amount : int):
 	if(invincible <= 0):
@@ -19,3 +20,5 @@ func BaseDamage(amount : int):
 func Kill():
 	get_tree().call_group("levelControl", "die");
 
+func GetUseKey() -> int:
+	return useKey
