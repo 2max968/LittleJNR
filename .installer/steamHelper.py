@@ -2,11 +2,10 @@ import typing
 import io
 import json
 import os
-from typing import Any
 import psutil
-import subprocess
 
 ENCODING = "utf-8"
+steampath = None
 
 def readVdf(r: io.BufferedReader) -> typing.Tuple[str, object]:
     type = r.read(1)
@@ -88,14 +87,40 @@ def parseShortcuts(path: str) -> typing.Dict:
         return {key: dict}     
 
 def writeShortcuts(path: str, shortcuts: dict):
+    writer = io.BytesIO()
+    writeVdf(writer, None, shortcuts)
     with open(path, "wb") as f:
-        writeVdf(f, None, shortcuts)
+        f.write(writer.getbuffer())
+        pass
 
 def getSteamFolder() -> str:
+    global steampath
+
     if os.name == "nt":
-        return "C:\\Program Files (x86)\\Steam\\"
+        if steampath != None:
+            return steampath
+        import winreg
+        reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
+        try:
+            key = winreg.OpenKey(reg, "SOFTWARE\\Valve\\Steam")
+            steampath, _ = winreg.QueryValueEx(key, "InstallPath")
+            key.Close()
+        except EnvironmentError:
+            try:
+                key = winreg.OpenKey(reg, "SOFTWARE\\Wow6432Node\\Valve\\Steam")
+                steampath, _ = winreg.QueryValueEx(key, "InstallPath")
+                key.Close()
+            except EnvironmentError as ex:
+                print(ex)
+                steampath = None
+        reg.Close()
+        return steampath
     elif os.name == "posix":
-        raise Exception()
+        if steampath == None:
+            path = os.path.expanduser("~/.steam/steam")
+            if os.path.exists(path):
+                steampath = path
+        return steampath
     else:
         raise Exception()
 
@@ -121,31 +146,20 @@ class User:
     def __init__(self, steamFolder:str, uid: str) -> None:
         self.steamFolder = steamFolder
         self.uid = uid
+        self.PersonaName = f"NoName ({uid})"
+
+        path = os.path.join(self.steamFolder, "userdata", self.uid, "config", "localconfig.vdf")
+        with open(path, "r", errors="replace", encoding="utf-8") as f:
+            while True:
+                line = f.readline()
+                if line == None or line == '':
+                    break
+                elements = [s for s in line.split("\t") if s.strip() != '']
+                if len(elements) >= 2 and elements[0].strip('"') == "PersonaName":
+                    self.PersonaName = elements[1].strip('"\r\n\t')
     
     def getShortcutsPath(self) -> str:
         return os.path.join(self.steamFolder, "userdata", self.uid, "config", "shortcuts.vdf")
-
-class Shortcut:
-    def __init__(self, dict: typing.Dict) -> None:
-        self.dict = dict
-    
-    def AppName(self) -> str:
-        return self.dict["AppName"]
-    
-    def SetAppName(self, val: str):
-        self.dict["AppName"] = val
-
-    def Exe(self) -> str:
-        return self.dict["Exe"]
-    
-    def SetExe(self, val: str):
-        self.dict["Exe"] = val
-    
-    def StartDir(self) -> str:
-        return self.dict["StartDir"]
-    
-    def SetStartDir(self, val: str):
-        self.dict["StartDir"] = val
 
 def getUsers() -> typing.List[User]:
     list = []
@@ -162,7 +176,7 @@ def restartSteam():
     if os.name == "nt":
         PNAME = "steam.exe"
     else:
-        raise Exception()
+        PNAME = "steam"
     
     process = None
     for p in psutil.process_iter(attrs=["pid", "name", "cmdline"]):
@@ -180,11 +194,21 @@ def restartSteam():
     if exe == None:
         exe = os.path.join(getSteamFolder(), PNAME)
 
-    subprocess.Popen(f"\"{exe}\"", creationflags=subprocess.DETACHED_PROCESS)
+    if os.name == "nt":
+        os.system(f"start \"{exe}\"")
+    elif os.name == "posix":
+        os.system(f"nohup \"{exe}\" &")
+    else:
+        raise Exception()
 
 if __name__ == "__main__":
+    if getSteamFolder() == None:
+        print("Steam not installed")
+        exit(-1)
+
     users = getUsers()
     for user in users:
+        print("User:", user.PersonaName)
         dict = parseShortcuts(user.getShortcutsPath())
         enc = json.encoder.JSONEncoder()
         enc.indent = 4
