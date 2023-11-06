@@ -5,6 +5,7 @@ var ObjectToFollow : Node2D;
 var hlimitNode : Node2D;
 var vlimitNode : Node2D;
 var bgrSprite : TextureRect;
+var jump := true
 
 func _init():
 	add_to_group("limits")
@@ -31,7 +32,15 @@ func _ready():
 
 func _process(_delta : float):
 	if ObjectToFollow != null:
-		global_position = getGlobalPosition(ObjectToFollow)
+		var add_pos : Vector2 = ObjectToFollow.get("cameraPosition")
+		var target_pos := getGlobalPosition(ObjectToFollow)
+		if add_pos != null:
+			target_pos += add_pos
+		if jump:
+			global_position = target_pos
+		else:
+			global_position = lerp(global_position, target_pos, 0.1)
+		jump = false
 	
 func followObject(node : Node2D):
 	ObjectToFollow = node;
