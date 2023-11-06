@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://3d/Meshes/Path-1-Path.obj" type="ArrayMesh" id=1]
+
+[sub_resource type="MeshLibrary" id=1]
+item/0/name = ""
+item/0/mesh = ExtResource( 1 )
+item/0/mesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+item/0/shapes = [  ]
+item/0/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = SubResource( 1 )
+cell_size = Vector3( 3.2, 3.2, 3.2 )
+data = {
+"cells": PoolIntArray( 4, 2, 0, 4, 3, 0, 4, 4, 0, 4, 5, 0 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, 0 )
+}

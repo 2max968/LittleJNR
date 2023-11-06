@@ -126,7 +126,7 @@ void fragment()
 [sub_resource type="ShaderMaterial" id=39]
 shader = SubResource( 18 )
 shader_param/scale = Vector2( 25, 2.25781 )
-shader_param/y_zoom = 0.629961
+shader_param/y_zoom = 0.445449
 shader_param/reflection_scale = 0.75
 shader_param/color = Color( 0.00392157, 0.235294, 0.352941, 0.364706 )
 shader_param/noiseTexture = ExtResource( 9 )
@@ -172,7 +172,7 @@ script = ExtResource( 4 )
 [node name="Top" type="AnimatedSprite" parent="Node2D/Waterfall1"]
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 1
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -182,7 +182,7 @@ __meta__ = {
 position = Vector2( 0, 64 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 38 )
-frame = 3
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -192,7 +192,7 @@ __meta__ = {
 position = Vector2( 0, 128 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 38 )
-frame = 3
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true

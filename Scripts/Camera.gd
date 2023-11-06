@@ -23,6 +23,11 @@ func _ready():
 	hlimitNode = get_tree().get_root().find_node("HLimit", true, false);
 	vlimitNode = get_tree().get_root().find_node("VLimit", true, false);
 	
+	if hlimitNode == null or vlimitNode == null:
+		print("HLimit of VLimit not found, deactivating 2D Camera")
+		queue_free()
+		return
+	
 	limit_left = 0
 	limit_top = 0
 	limit_right = hlimitNode.global_position.x
@@ -32,9 +37,9 @@ func _ready():
 
 func _process(_delta : float):
 	if ObjectToFollow != null:
-		var add_pos : Vector2 = ObjectToFollow.get("cameraPosition")
+		var add_pos = ObjectToFollow.get("cameraPosition")
 		var target_pos := getGlobalPosition(ObjectToFollow)
-		if add_pos != null:
+		if add_pos is Vector2:
 			target_pos += add_pos
 		if jump:
 			global_position = target_pos

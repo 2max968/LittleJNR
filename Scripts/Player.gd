@@ -169,13 +169,13 @@ func _physics_process(delta):
 	# Move player
 	var targetX = 0;
 	if(Inp.IsActionPressed(move_left)):
-		#cameraPosition = Vector2(-64, 0)
+		#cameraPosition = Vector2(-128, 0)
 		targetX = -movespeed;
 		yScale = -1;
 		if(velocity.x > 0):
 			friction *= STOP_FRICTION_FACTOR;
 	elif(Inp.IsActionPressed(move_right)):
-		#cameraPosition = Vector2(64, 0)
+		#cameraPosition = Vector2(128, 0)
 		targetX = movespeed;
 		yScale = 1;
 		if(velocity.x < 0):
@@ -245,7 +245,7 @@ func _physics_process(delta):
 	var _scale := global_scale.x
 	var actualMovement = move_and_slide_with_snap((.5 * _accel * delta + _vel) * _scale, snap, _up) / _scale;
 	velocity += accel * delta;
-	cameraPosition = Vector2(velocity.x / abs(targetX) * 128 if targetX != 0 else 0, 0)
+	#cameraPosition = Vector2(velocity.x / abs(targetX) * 128 if targetX != 0 else 0, 0)
 	if(is_on_floor()):
 		steptime -= abs(actualMovement.x) * delta;
 	if(steptime <= 0):
