@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Path-1-Path.png-89d45949fe38f7005f4b86b413946ead.stex"
+path="res://.import/DirtSide.png-07fb8d369e5d61135b40257d2f6468d9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://3d/Meshes/Path-1-Path.png"
-dest_files=[ "res://.import/Path-1-Path.png-89d45949fe38f7005f4b86b413946ead.stex" ]
+source_file="res://3d/MeshSource/DirtSide.png"
+dest_files=[ "res://.import/DirtSide.png-07fb8d369e5d61135b40257d2f6468d9.stex" ]
 
 [params]
 
