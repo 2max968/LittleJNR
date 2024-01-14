@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/TilemapOnOffManager.gd" type="Script" id=2]
@@ -79,6 +79,9 @@ outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 12 )
 
+[sub_resource type="RectangleShape2D" id=17]
+extents = Vector2( 2000, 2000 )
+
 [sub_resource type="ShaderMaterial" id=16]
 shader = ExtResource( 28 )
 
@@ -97,14 +100,13 @@ script = ExtResource( 4 )
 
 [node name="PauseMenu" type="Control" parent="CanvasLayer"]
 pause_mode = 2
-visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 3 )
 
 [node name="Panel2" type="Panel" parent="CanvasLayer/PauseMenu"]
-margin_right = 800.0
-margin_bottom = 450.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 custom_styles/panel = SubResource( 2 )
 
 [node name="Menu" type="Control" parent="CanvasLayer/PauseMenu/Panel2"]
@@ -120,34 +122,38 @@ menuFont = SubResource( 9 )
 spacing = 32
 
 [node name="TouchButtons" type="Control" parent="CanvasLayer/PauseMenu/Panel2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="BtnContinue" type="Button" parent="CanvasLayer/PauseMenu/Panel2/TouchButtons"]
-margin_left = 64.0
-margin_top = 112.0
-margin_right = 256.0
-margin_bottom = 304.0
+margin_left = -312.0
+margin_top = -97.0
+margin_right = -120.0
+margin_bottom = 95.0
 theme = SubResource( 15 )
 icon = ExtResource( 25 )
 icon_align = 1
 expand_icon = true
 
 [node name="BtnReset" type="Button" parent="CanvasLayer/PauseMenu/Panel2/TouchButtons"]
-margin_left = 304.0
-margin_top = 112.0
-margin_right = 496.0
-margin_bottom = 304.0
+margin_left = -88.0
+margin_top = -105.0
+margin_right = 104.0
+margin_bottom = 87.0
 theme = SubResource( 15 )
 icon = ExtResource( 26 )
 icon_align = 1
 expand_icon = true
 
 [node name="BtnExit" type="Button" parent="CanvasLayer/PauseMenu/Panel2/TouchButtons"]
-margin_left = 544.0
-margin_top = 112.0
-margin_right = 736.0
-margin_bottom = 304.0
+margin_left = 144.0
+margin_top = -97.0
+margin_right = 336.0
+margin_bottom = 95.0
 theme = SubResource( 15 )
 icon = ExtResource( 27 )
 icon_align = 1
@@ -223,8 +229,8 @@ KeySlotFull = ExtResource( 10 )
 pause_mode = 2
 visible = false
 material = SubResource( 7 )
-margin_right = 800.0
-margin_bottom = 450.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 14 )
 
 [node name="Menu" type="Control" parent="CanvasLayer/LevelRoll"]
@@ -239,10 +245,12 @@ menuFont = SubResource( 8 )
 spacing = 32
 
 [node name="LblTimer" type="Label" parent="CanvasLayer"]
-margin_left = 140.0
-margin_top = 12.0
-margin_right = 784.0
-margin_bottom = 30.0
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -651.0
+margin_top = 8.0
+margin_right = -7.0
+margin_bottom = 26.0
 custom_fonts/font = SubResource( 5 )
 text = "00.00"
 align = 2
@@ -250,9 +258,11 @@ script = ExtResource( 15 )
 
 [node name="LblBestTime" type="Label" parent="CanvasLayer"]
 visible = false
-margin_left = 140.0
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -651.0
 margin_top = 40.0
-margin_right = 784.0
+margin_right = -7.0
 margin_bottom = 58.0
 custom_fonts/font = SubResource( 5 )
 text = "00.00"
@@ -260,42 +270,22 @@ align = 2
 
 [node name="LblNewBesttime" type="Label" parent="CanvasLayer"]
 visible = false
-margin_left = 140.0
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -651.0
 margin_top = 68.0
-margin_right = 784.0
-margin_bottom = 58.0
+margin_right = -7.0
+margin_bottom = 86.0
 custom_colors/font_color = Color( 0.133333, 1, 0, 1 )
 custom_fonts/font = SubResource( 5 )
 text = "New Best Time"
 align = 2
 
-[node name="TouchButtons" type="Node2D" parent="CanvasLayer"]
+[node name="TouchButtons" type="Control" parent="CanvasLayer"]
 pause_mode = 2
-visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 20 )
-
-[node name="BtnLeft" type="TouchScreenButton" parent="CanvasLayer/TouchButtons"]
-modulate = Color( 1, 1, 1, 0.352941 )
-position = Vector2( 16, 304 )
-normal = ExtResource( 18 )
-pressed = ExtResource( 21 )
-passby_press = true
-action = "touch_left"
-
-[node name="BtnRight" type="TouchScreenButton" parent="CanvasLayer/TouchButtons"]
-modulate = Color( 1, 1, 1, 0.352941 )
-position = Vector2( 144, 304 )
-normal = ExtResource( 19 )
-pressed = ExtResource( 23 )
-passby_press = true
-action = "touch_right"
-
-[node name="BtnJump" type="TouchScreenButton" parent="CanvasLayer/TouchButtons"]
-modulate = Color( 1, 1, 1, 0.352941 )
-position = Vector2( 656, 304 )
-normal = ExtResource( 17 )
-pressed = ExtResource( 22 )
-action = "move_jump"
 
 [node name="BtnSprint" type="TouchScreenButton" parent="CanvasLayer/TouchButtons"]
 visible = false
@@ -307,11 +297,79 @@ normal = ExtResource( 17 )
 pressed = ExtResource( 22 )
 action = "move_sprint"
 
-[node name="BtnMenu" type="TouchScreenButton" parent="CanvasLayer/TouchButtons"]
+[node name="BtnJumpFullscreen" type="TouchScreenButton" parent="CanvasLayer/TouchButtons"]
+visible = false
+shape = SubResource( 17 )
+action = "move_jump"
+
+[node name="BottomLeft" type="Control" parent="CanvasLayer/TouchButtons"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+
+[node name="BtnLeft" type="TouchScreenButton" parent="CanvasLayer/TouchButtons/BottomLeft"]
 modulate = Color( 1, 1, 1, 0.352941 )
-position = Vector2( 405, 8 )
+position = Vector2( 80, -162 )
+normal = ExtResource( 18 )
+pressed = ExtResource( 21 )
+passby_press = true
+action = "touch_left"
+
+[node name="BtnRight" type="TouchScreenButton" parent="CanvasLayer/TouchButtons/BottomLeft"]
+modulate = Color( 1, 1, 1, 0.352941 )
+position = Vector2( 208, -162 )
+normal = ExtResource( 19 )
+pressed = ExtResource( 23 )
+passby_press = true
+action = "touch_right"
+
+[node name="BtnUp" type="TouchScreenButton" parent="CanvasLayer/TouchButtons/BottomLeft"]
+modulate = Color( 1, 1, 1, 0.352941 )
+position = Vector2( 206, -290 )
+rotation = 1.5708
+normal = ExtResource( 18 )
+pressed = ExtResource( 21 )
+passby_press = true
+action = "touch_up"
+
+[node name="BtnDown" type="TouchScreenButton" parent="CanvasLayer/TouchButtons/BottomLeft"]
+modulate = Color( 1, 1, 1, 0.352941 )
+position = Vector2( 206, -162 )
+rotation = 1.5708
+normal = ExtResource( 19 )
+pressed = ExtResource( 23 )
+passby_press = true
+action = "touch_down"
+
+[node name="TopCenter" type="Control" parent="CanvasLayer/TouchButtons"]
+anchor_left = 0.5
+anchor_right = 0.5
+
+[node name="BtnMenu" type="TouchScreenButton" parent="CanvasLayer/TouchButtons/TopCenter"]
+modulate = Color( 1, 1, 1, 0.352941 )
+position = Vector2( 5, 8 )
 normal = ExtResource( 24 )
 action = "game_pause"
+
+[node name="BottomRight" type="Control" parent="CanvasLayer/TouchButtons"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="BtnJump" type="TouchScreenButton" parent="CanvasLayer/TouchButtons/BottomRight"]
+modulate = Color( 1, 1, 1, 0.352941 )
+position = Vector2( -208, -162 )
+normal = ExtResource( 17 )
+pressed = ExtResource( 22 )
+action = "move_jump"
+
+[node name="BtnJump180" type="TouchScreenButton" parent="CanvasLayer/TouchButtons/BottomRight"]
+modulate = Color( 1, 1, 1, 0.352941 )
+position = Vector2( -80, -34 )
+rotation = 3.14159
+normal = ExtResource( 17 )
+pressed = ExtResource( 22 )
+action = "move_jump"
 
 [node name="ColorOverlay" type="CanvasLayer" parent="."]
 layer = 100
@@ -320,22 +378,22 @@ script = ExtResource( 29 )
 [node name="ColorOverlayBlue" type="ColorRect" parent="ColorOverlay"]
 visible = false
 material = SubResource( 16 )
-margin_right = 800.0
-margin_bottom = 450.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 color = Color( 0, 0.788235, 1, 1 )
 
 [node name="ColorOverlayRed" type="ColorRect" parent="ColorOverlay"]
 visible = false
 material = SubResource( 16 )
-margin_right = 800.0
-margin_bottom = 450.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 color = Color( 1, 0.141176, 0, 1 )
 
 [node name="ColorOverlayGreen" type="ColorRect" parent="ColorOverlay"]
 visible = false
 material = SubResource( 16 )
-margin_right = 800.0
-margin_bottom = 450.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 color = Color( 0.545098, 1, 0, 1 )
 
 [node name="Recorder" type="Node2D" parent="."]

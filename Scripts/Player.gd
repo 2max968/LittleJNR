@@ -62,6 +62,7 @@ func _ready():
 	if camera != null and catchCamera:
 		camera.followObject(self);
 	get_tree().call_group("colorhandler", "SetColor", initColor);
+	get_tree().call_group("touchinput", "setInput", "normal")
 
 func _process(delta):
 	oddFrame = not oddFrame
@@ -70,6 +71,15 @@ func _process(delta):
 	if(lastRotation != $RotationPivot.rotation):
 		velocity = rotatevector(velocity, -$RotationPivot.rotation+lastRotation);
 		lastRotation = $RotationPivot.rotation;
+		var rotationInt := int($RotationPivot.rotation / 2.0 / PI * 4 + 0.5)
+		var touchInp := "normal"
+		if rotationInt == 2:
+			touchInp = "180"
+		elif rotationInt == 1:
+			touchInp = "90"
+		elif rotationInt == 3:
+			touchInp = "270"
+		get_tree().call_group("touchinput", "setInput", touchInp)
 	
 	if(yScale < $RotationPivot/Sprites.scale.x):
 		yScaleA = max(yScale, yScaleA - delta * 6);
@@ -84,20 +94,6 @@ func _process(delta):
 		lengthStrech = min(0, lengthStrech + delta * 8);
 	
 	$RotationPivot/Sprites/HitIndicator.visible = invincible > 0 and oddFrame;
-	
-#	if(color == "rainbow"):
-#		if(Input.is_action_just_pressed("move_switchColor1")):
-#			var cind = colors.find(worldColor);
-#			cind += 1;
-#			if(cind >= colors.size()):
-#				cind = 0;
-#			get_tree().call_group("colorhandler", "SetColor", colors[cind]);
-#		if(Input.is_action_just_pressed("move_switchColor2")):
-#			var cind = colors.find(worldColor);
-#			cind -= 1;
-#			if(cind < 0):
-#				cind = colors.size() - 1;
-#			get_tree().call_group("colorhandler", "SetColor", colors[cind]);
 
 func _physics_process(delta):
 	jumpedThisFrame = false
@@ -191,12 +187,6 @@ func _physics_process(delta):
 		lengthStrech = 1;
 		jumpParticles();
 		jumpedThisFrame = true
-		#if(color == "rainbow"):
-		#	var cind = colors.find(worldColor);
-		#	cind += 1;
-		#	if(cind >= colors.size()):
-		#		cind = 0;
-		#	get_tree().call_group("colorhandler", "SetColor", colors[cind]);
 	
 	# Walljump
 	if(!is_on_floor() && is_on_wall() && jumping >= 0):

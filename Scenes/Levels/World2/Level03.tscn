@@ -149,8 +149,8 @@ __meta__ = {
 layer = -100
 
 [node name="BgrBlack" type="ColorRect" parent="BgrBlack"]
-margin_right = 800.0
-margin_bottom = 450.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
 
 [connection signal="body_entered" from="Level/Goal" to="Level/Goal" method="_on_Goal_body_entered"]

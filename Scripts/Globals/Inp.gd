@@ -47,6 +47,10 @@ func _physics_process(delta):
 		digitalInputMask |= MOVE_LEFT | MOVE_SPRINT
 	if Input.is_action_pressed("touch_right"):
 		digitalInputMask |= MOVE_RIGHT | MOVE_SPRINT
+	if Input.is_action_pressed("touch_up"):
+		digitalInputMask |= MOVE_UP | MOVE_SPRINT
+	if Input.is_action_pressed("touch_down"):
+		digitalInputMask |= MOVE_DOWN | MOVE_SPRINT
 	
 	# Read and apply analog inputs
 	var analogX := Input.get_joy_axis(0, JOY_AXIS_0)

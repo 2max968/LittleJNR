@@ -22,6 +22,7 @@ func _ready():
 		velocity.x = -256
 	
 	invincible = 1
+	get_tree().call_group("touchinput", "setInput", "jumpOnly")
 
 func _process(delta):
 	if targetscale < $Sprites.scale.x:

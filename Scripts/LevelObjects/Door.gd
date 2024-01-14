@@ -1,28 +1,28 @@
-extends Area2D
+extends Usable
 
 export var DoorGroup := "door1"
-var ply : Player_Base = null
 
 var animationFrame : float = -1
 var teleportIn : float = NAN
 var targetDoor: Node2D
-var useKey : int = 0
 
 func _ready():
-	connect("body_entered", self, "bodyEntered")
-	connect("body_exited", self, "bodyLeave")
+	._ready()
 	add_to_group("door#" + DoorGroup)
+	connect("used", self, "door_used")
+	
+func door_used(ply: Player_Base):
+	var doors := get_tree().get_nodes_in_group("door#" + DoorGroup)
+	var size := doors.size()
+	var ind := doors.find(self)
+	ind = (ind + 1) % size
+	targetDoor = doors[ind]
+	teleportIn = 0.5
+	openCloseAnimation()
+	targetDoor.openCloseAnimation()
 
 func _physics_process(delta):
-	if Inp.IsActionJustPressed(useKey) and ply != null:
-		var doors := get_tree().get_nodes_in_group("door#" + DoorGroup)
-		var size := doors.size()
-		var ind := doors.find(self)
-		ind = (ind + 1) % size
-		targetDoor = doors[ind]
-		teleportIn = 0.5
-		openCloseAnimation()
-		targetDoor.openCloseAnimation()
+	._physics_process(delta)
 		
 	if not is_nan(teleportIn) and teleportIn <= 0:
 		teleportIn = NAN
@@ -61,15 +61,6 @@ func _process(delta):
 	elif animationFrame > 0:
 		$AnimatedSprite.frame = 0
 		animationFrame = -1
-
-func bodyEntered(body : Node):
-	if body is Player_Base:
-		ply = body
-		useKey = ply.GetUseKey()
-	
-func bodyLeave(body : Node):
-	if body == ply:
-		ply = null
 
 func getAbsoluteZ(node: Node2D) -> int:
 	var z: int = node.z_index
