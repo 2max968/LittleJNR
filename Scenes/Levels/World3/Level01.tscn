@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Prefabs/LevelBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tilesets/Tileset.tres" type="TileSet" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://Shaders/CRTEffect.tres" type="Shader" id=24]
 [ext_resource path="res://Prefabs/LevelObjects/Door.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Prefabs/Star.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Prefabs/LevelObjects/Trampoline.tscn" type="PackedScene" id=27]
 
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 32, 16 )
@@ -147,7 +148,7 @@ void fragment()
 [sub_resource type="ShaderMaterial" id=19]
 shader = SubResource( 40 )
 shader_param/scale = Vector2( 116, 2.01563 )
-shader_param/y_zoom = 1.49831
+shader_param/y_zoom = 1.25992
 shader_param/reflection_scale = 0.75
 shader_param/color = Color( 0.00392157, 0.235294, 0.352941, 0.364706 )
 shader_param/noiseTexture = ExtResource( 4 )
@@ -366,33 +367,8 @@ playing = true
 [node name="BlueSlime" parent="Level" instance=ExtResource( 19 )]
 position = Vector2( 984, 384 )
 
-[node name="Trampoline" type="Node2D" parent="Level"]
+[node name="Trampoline" parent="Level" instance=ExtResource( 27 )]
 position = Vector2( 2368, 256 )
-script = ExtResource( 23 )
-
-[node name="Area2D" type="Area2D" parent="Level/Trampoline"]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Trampoline/Area2D"]
-position = Vector2( 0, -16 )
-shape = SubResource( 38 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Node2D" parent="Level/Trampoline"]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Sprite" parent="Level/Trampoline/Sprite"]
-position = Vector2( 0, -16 )
-texture = ExtResource( 22 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Trampoline2" type="Node2D" parent="Level"]
 position = Vector2( 2560, 320 )
@@ -601,7 +577,6 @@ margin_bottom = 450.0
 position = Vector2( 1536, 440 )
 
 [connection signal="body_entered" from="Level/Goal" to="Level/Goal" method="_on_Goal_body_entered"]
-[connection signal="body_entered" from="Level/Trampoline/Area2D" to="Level/Trampoline" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Level/Trampoline2/Area2D" to="Level/Trampoline2" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Level/Trampoline3/Area2D" to="Level/Trampoline3" method="_on_Area2D_body_entered"]
 [connection signal="body_entered" from="Level/Trampoline4/Area2D" to="Level/Trampoline4" method="_on_Area2D_body_entered"]

@@ -2,9 +2,6 @@ extends CanvasItem
 
 func _init():
 	add_to_group("touchinput")
-	
-func _ready():
-	queue_free()
 
 func _process(_delta):
 	visible = not get_tree().paused and Config.touchInput
