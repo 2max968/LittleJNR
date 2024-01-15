@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/TilemapOnOffManager.gd" type="Script" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://Shaders/ColorOverlay.tres" type="Shader" id=28]
 [ext_resource path="res://Scripts/Effects/ColorOverlay.gd" type="Script" id=29]
 [ext_resource path="res://Scripts/Recorder.gd" type="Script" id=30]
+[ext_resource path="res://Scripts/TouchInput.gd" type="Script" id=31]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 0.658824 )
@@ -370,6 +371,11 @@ rotation = 3.14159
 normal = ExtResource( 17 )
 pressed = ExtResource( 22 )
 action = "move_jump"
+
+[node name="TouchInput" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 31 )
 
 [node name="ColorOverlay" type="CanvasLayer" parent="."]
 layer = 100

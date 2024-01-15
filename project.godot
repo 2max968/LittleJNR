@@ -298,7 +298,7 @@ window/stretch/aspect="keep_height"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/gut/plugin.cfg", "res://addons/rmsmartshape/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/rmsmartshape/plugin.cfg" )
 
 [input]
 
