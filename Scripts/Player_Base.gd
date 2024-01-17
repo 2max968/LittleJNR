@@ -22,3 +22,4 @@ func Kill():
 
 func GetUseKey() -> int:
 	return useKey
+

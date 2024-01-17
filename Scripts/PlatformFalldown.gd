@@ -21,5 +21,5 @@ func _physics_process(delta):
 			position = startPos
 
 func _on_ActivateTrigger_body_entered(body):
-	if body is Player:
+	if body is Player and body.velocity.y >= 0:
 		fall = true
