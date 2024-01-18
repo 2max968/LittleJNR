@@ -1,6 +1,6 @@
 extends Node2D
 
-const ENV_Y := 4160
+const ENV_Y := 118 * 32
 
 func _process(delta):
 	#print("Cam: ", $LevelBase/Camera.global_position.y)
