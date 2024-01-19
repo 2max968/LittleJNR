@@ -1,6 +1,7 @@
 extends Node2D
 
 const ENV_Y := 118 * 32
+const MOUNTAINS_BOTTOM = 109 * 32
 
 func _process(delta):
 	#print("Cam: ", $LevelBase/Camera.global_position.y)
@@ -8,7 +9,8 @@ func _process(delta):
 	
 	if $LevelBase/Camera.global_position.y < ENV_Y:
 		$BackgroundCave/ParallaxBackground.visible = false
-		$BackgroundMountains/ParallaxBackground.visible = true
+		$BgrPlainsMountains.visible = true
+		$BgrPlainsMountains.scroll_base_offset.y = MOUNTAINS_BOTTOM
 	else:
 		$BackgroundCave/ParallaxBackground.visible = true
-		$BackgroundMountains/ParallaxBackground.visible = false
+		$BgrPlainsMountains.visible = false
