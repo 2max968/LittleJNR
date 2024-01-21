@@ -59,7 +59,7 @@ void fragment()
 [sub_resource type="ShaderMaterial" id=19]
 shader = SubResource( 40 )
 shader_param/scale = Vector2( 116, 2.01563 )
-shader_param/y_zoom = 0.471937
+shader_param/y_zoom = 0.629961
 shader_param/reflection_scale = 0.75
 shader_param/color = Color( 0.00392157, 0.235294, 0.352941, 0.364706 )
 shader_param/noiseTexture = ExtResource( 4 )
@@ -193,6 +193,30 @@ texture = ExtResource( 13 )
 
 [node name="Pine33" type="Sprite" parent="Level"]
 position = Vector2( 2176, 352 )
+texture = ExtResource( 13 )
+
+[node name="Pine34" type="Sprite" parent="Level"]
+position = Vector2( 3272, 476 )
+texture = ExtResource( 13 )
+
+[node name="Pine35" type="Sprite" parent="Level"]
+position = Vector2( 3328, 424 )
+texture = ExtResource( 13 )
+
+[node name="Pine36" type="Sprite" parent="Level"]
+position = Vector2( 3392, 448 )
+texture = ExtResource( 13 )
+
+[node name="Pine37" type="Sprite" parent="Level"]
+position = Vector2( 3472, 417 )
+texture = ExtResource( 13 )
+
+[node name="Pine38" type="Sprite" parent="Level"]
+position = Vector2( 3576, 380 )
+texture = ExtResource( 13 )
+
+[node name="Pine39" type="Sprite" parent="Level"]
+position = Vector2( 3712, 416 )
 texture = ExtResource( 13 )
 
 [node name="Pine15" type="Sprite" parent="Level"]
