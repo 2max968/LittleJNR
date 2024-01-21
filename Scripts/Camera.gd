@@ -6,6 +6,7 @@ var hlimitNode : Node2D;
 var vlimitNode : Node2D;
 var bgrSprite : TextureRect;
 var jump := true
+var vieport_size := Vector2(0, 0)
 
 func _init():
 	add_to_group("limits")
@@ -17,6 +18,11 @@ func updateLimits():
 	limit_top = 0
 	limit_right = hlimitNode.global_position.x
 	limit_bottom = vlimitNode.global_position.y
+	
+	if get_viewport_rect().size.x > limit_right - limit_left:
+		var additional_space := get_viewport_rect().size.x - limit_right - limit_left
+		limit_left -= additional_space / 2
+		limit_right += additional_space / 2
 
 func _ready():
 	self.pause_mode = Node.PAUSE_MODE_PROCESS;
@@ -28,14 +34,15 @@ func _ready():
 		queue_free()
 		return
 	
-	limit_left = 0
-	limit_top = 0
-	limit_right = hlimitNode.global_position.x
-	limit_bottom = vlimitNode.global_position.y
+	updateLimits()
 	
 	_process(0)
 
 func _process(_delta : float):
+	if get_viewport_rect().size != vieport_size:
+		vieport_size = get_viewport_rect().size
+		updateLimits()
+		
 	if ObjectToFollow != null:
 		var add_pos = ObjectToFollow.get("cameraPosition")
 		var target_pos := getGlobalPosition(ObjectToFollow)

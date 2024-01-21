@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Prefabs/LevelBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tilesets/Tileset.tres" type="TileSet" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Scripts/Goal.gd" type="Script" id=10]
 [ext_resource path="res://Prefabs/ThornsH.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Tilesets/BlueOn.tres" type="TileSet" id=12]
+[ext_resource path="res://Sprites/Pine2.png" type="Texture" id=13]
 [ext_resource path="res://Sprites/BgrMountains/sky.png" type="Texture" id=14]
 [ext_resource path="res://Sprites/BgrMountains/mountains.png" type="Texture" id=15]
 [ext_resource path="res://Scripts/Background/BgrStickBottom.gd" type="Script" id=16]
@@ -101,6 +102,118 @@ position = Vector2( 3712, 0 )
 
 [node name="VLimit" type="Node2D" parent="Level"]
 position = Vector2( 0, 576 )
+
+[node name="Pine6" type="Sprite" parent="Level"]
+position = Vector2( 360, 416 )
+texture = ExtResource( 13 )
+
+[node name="Pine7" type="Sprite" parent="Level"]
+position = Vector2( 408, 416 )
+texture = ExtResource( 13 )
+
+[node name="Pine8" type="Sprite" parent="Level"]
+position = Vector2( 448, 433 )
+texture = ExtResource( 13 )
+
+[node name="Pine9" type="Sprite" parent="Level"]
+position = Vector2( 504, 424 )
+texture = ExtResource( 13 )
+
+[node name="Pine10" type="Sprite" parent="Level"]
+position = Vector2( 544, 417 )
+texture = ExtResource( 13 )
+
+[node name="Pine11" type="Sprite" parent="Level"]
+position = Vector2( 584, 424 )
+texture = ExtResource( 13 )
+
+[node name="Pine12" type="Sprite" parent="Level"]
+position = Vector2( 696, 424 )
+texture = ExtResource( 13 )
+
+[node name="Pine13" type="Sprite" parent="Level"]
+position = Vector2( 768, 416 )
+texture = ExtResource( 13 )
+
+[node name="Pine14" type="Sprite" parent="Level"]
+position = Vector2( 856, 424 )
+texture = ExtResource( 13 )
+
+[node name="Pine20" type="Sprite" parent="Level"]
+position = Vector2( 968, 392 )
+texture = ExtResource( 13 )
+
+[node name="Pine21" type="Sprite" parent="Level"]
+position = Vector2( 1040, 320 )
+texture = ExtResource( 13 )
+
+[node name="Pine22" type="Sprite" parent="Level"]
+position = Vector2( 1120, 360 )
+texture = ExtResource( 13 )
+
+[node name="Pine23" type="Sprite" parent="Level"]
+position = Vector2( 1208, 304 )
+texture = ExtResource( 13 )
+
+[node name="Pine24" type="Sprite" parent="Level"]
+position = Vector2( 1288, 424 )
+texture = ExtResource( 13 )
+
+[node name="Pine25" type="Sprite" parent="Level"]
+position = Vector2( 1376, 433 )
+texture = ExtResource( 13 )
+
+[node name="Pine26" type="Sprite" parent="Level"]
+position = Vector2( 1504, 417 )
+texture = ExtResource( 13 )
+
+[node name="Pine27" type="Sprite" parent="Level"]
+position = Vector2( 1608, 448 )
+texture = ExtResource( 13 )
+
+[node name="Pine28" type="Sprite" parent="Level"]
+position = Vector2( 1576, 456 )
+texture = ExtResource( 13 )
+
+[node name="Pine29" type="Sprite" parent="Level"]
+position = Vector2( 1784, 417 )
+texture = ExtResource( 13 )
+
+[node name="Pine30" type="Sprite" parent="Level"]
+position = Vector2( 1848, 424 )
+texture = ExtResource( 13 )
+
+[node name="Pine31" type="Sprite" parent="Level"]
+position = Vector2( 1976, 416 )
+texture = ExtResource( 13 )
+
+[node name="Pine32" type="Sprite" parent="Level"]
+position = Vector2( 2032, 424 )
+texture = ExtResource( 13 )
+
+[node name="Pine33" type="Sprite" parent="Level"]
+position = Vector2( 2176, 352 )
+texture = ExtResource( 13 )
+
+[node name="Pine15" type="Sprite" parent="Level"]
+position = Vector2( 8, 456 )
+texture = ExtResource( 13 )
+
+[node name="Pine16" type="Sprite" parent="Level"]
+position = Vector2( 56, 417 )
+texture = ExtResource( 13 )
+
+[node name="Pine17" type="Sprite" parent="Level"]
+position = Vector2( 144, 392 )
+texture = ExtResource( 13 )
+
+[node name="Pine18" type="Sprite" parent="Level"]
+position = Vector2( 224, 296 )
+texture = ExtResource( 13 )
+
+[node name="Pine19" type="Sprite" parent="Level"]
+position = Vector2( 296, 336 )
+texture = ExtResource( 13 )
 
 [node name="Player" parent="Level" instance=ExtResource( 3 )]
 position = Vector2( 216, 384 )
@@ -195,6 +308,9 @@ position = Vector2( 1856, 543.75 )
 collision_layer = 256
 collision_mask = 256
 constant_linear_velocity = Vector2( -128, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Water" type="Sprite" parent="Level/Water"]
 pause_mode = 2
@@ -202,6 +318,9 @@ material = SubResource( 19 )
 scale = Vector2( 116, 2.01563 )
 texture = ExtResource( 5 )
 script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
 water_color = Color( 0.00392157, 0.235294, 0.352941, 0.364706 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Level/Water/Water"]
