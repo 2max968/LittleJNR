@@ -1,0 +1,42 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform vec2 scale;
+uniform float y_zoom;
+uniform float reflection_scale;
+uniform vec4 color : hint_color = vec4(1,1,1,0);
+uniform float camera_position : hint_range(0.0, 1.0, 0.01) = 0.0;
+uniform vec2 size = vec2(64, 64);
+uniform vec2 tiling = vec2(64, 64);
+
+uniform sampler2D noiseTexture;
+uniform sampler2D overlayTexture;
+
+void fragment()
+{
+	float displace_x = round(UV.y / scale.y * 32.0) * scale.y / 32.0;
+	float displace_y = displace_x;
+	
+	vec2 scale_uv = UV;
+	vec2 surf_uv = vec2(scale_uv.x + ((camera_position) * UV.y + (UV.x * UV.y - size.x * tiling.x)), sqrt(scale_uv.y));
+	surf_uv *= size / tiling;
+	surf_uv.x += sin((displace_x + TIME) * 3.1415 * 2.0) / scale.x / 10.0 + (UV.y - 0.5);
+	surf_uv.y += cos((displace_y + TIME) * 3.1415 * 2.0) / scale.x / 10.0;
+	vec4 surf_color = texture(overlayTexture, surf_uv);
+	vec2 surf_displacement = texture(noiseTexture, surf_uv).xy;
+	displace_x += surf_displacement.x;
+	displace_y += surf_displacement.y;
+	
+	// Reflexion:
+	float uv_height = SCREEN_PIXEL_SIZE.y / TEXTURE_PIXEL_SIZE.y;
+	vec2 rs_uv = vec2(SCREEN_UV.x, SCREEN_UV.y + uv_height * UV.y * scale.y * y_zoom / reflection_scale * 2.0);
+	rs_uv.x += sin((displace_x + TIME) * 3.1415 * 2.0) / scale.x / 10.0;
+	rs_uv.y += cos((displace_y + TIME) * 3.1415 * 2.0) / scale.x / 10.0;
+	//rs_uv += textDisp;
+	vec4 ref_color = texture(SCREEN_TEXTURE, rs_uv);
+	COLOR = vec4(ref_color.rgb * (1.0-color.a) + color.rgb * color.a, ref_color.a);
+	
+	COLOR.rgb = mix(COLOR.rgb, surf_color.rgb, surf_color.a * UV.y);
+}"

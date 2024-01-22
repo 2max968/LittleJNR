@@ -116,6 +116,7 @@ shader = ExtResource( 28 )
 script = ExtResource( 2 )
 
 [node name="Camera" type="Camera2D" parent="."]
+unique_name_in_owner = true
 current = true
 script = ExtResource( 1 )
 
@@ -124,6 +125,7 @@ layer = 100
 script = ExtResource( 4 )
 
 [node name="CRT" type="ColorRect" parent="CanvasLayer"]
+visible = false
 material = SubResource( 18 )
 anchor_right = 1.0
 anchor_bottom = 1.0

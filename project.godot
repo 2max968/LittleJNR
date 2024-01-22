@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Camera2D",
+"class": "CamController",
+"language": "GDScript",
+"path": "res://Scripts/Camera.gd"
+}, {
 "base": "Node2D",
 "class": "ColoredPlatform",
 "language": "GDScript",
@@ -220,6 +225,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/Classes/Util.gd"
 } ]
 _global_script_class_icons={
+"CamController": "",
 "ColoredPlatform": "",
 "FallingObject": "",
 "GravitationField": "",

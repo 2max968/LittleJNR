@@ -1,4 +1,5 @@
 extends Camera2D
+class_name CamController
 
 var Position : Vector2;
 var ObjectToFollow : Node2D;
@@ -10,6 +11,7 @@ var vieport_size := Vector2(0, 0)
 
 func _init():
 	add_to_group("limits")
+	add_to_group("camera")
 
 func updateLimits():
 	hlimitNode = get_tree().get_root().find_node("HLimit", true, false);
