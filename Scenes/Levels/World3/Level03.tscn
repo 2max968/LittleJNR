@@ -448,6 +448,7 @@ script = ExtResource( 13 )
 [node name="Top" type="AnimatedSprite" parent="Level/Waterfall1"]
 scale = Vector2( 4, 4 )
 frames = SubResource( 28 )
+frame = 4
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -457,7 +458,7 @@ __meta__ = {
 position = Vector2( 0, 64 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 2
+frame = 6
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -467,7 +468,7 @@ __meta__ = {
 position = Vector2( 0, 128 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 2
+frame = 6
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -477,7 +478,7 @@ __meta__ = {
 position = Vector2( 0, 192 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 1
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -491,7 +492,7 @@ script = ExtResource( 13 )
 [node name="Top" type="AnimatedSprite" parent="Level/Waterfall2"]
 scale = Vector2( 4, 4 )
 frames = SubResource( 28 )
-frame = 7
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -501,7 +502,7 @@ __meta__ = {
 position = Vector2( 0, 64 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 1
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -511,7 +512,7 @@ __meta__ = {
 position = Vector2( 0, 128 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 1
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -521,6 +522,7 @@ __meta__ = {
 position = Vector2( 0, 192 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
+frame = 4
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -530,6 +532,7 @@ __meta__ = {
 position = Vector2( 0, 256 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
+frame = 4
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -539,7 +542,7 @@ __meta__ = {
 position = Vector2( 0, 320 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 37 )
-frame = 7
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true

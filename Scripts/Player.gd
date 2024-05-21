@@ -39,6 +39,7 @@ var jumpedThisFrame := false
 export var initColor := "blue";
 export var catchCamera := true
 var cameraPosition := Vector2(0, 0)
+var currentWall : StaticBody2D = null
 
 var jumpParticlesPrefab = preload("res://Prefabs/JumpParticles.tscn");
 var walkParticlesPrefab = preload("res://Prefabs/WalkParticles.tscn");
@@ -63,6 +64,8 @@ func _ready():
 		camera.followObject(self);
 	get_tree().call_group("colorhandler", "SetColor", initColor);
 	get_tree().call_group("touchinput", "setInput", "normal")
+	$WallDetector.connect("body_entered", self, "wallEnter")
+	$WallDetector.connect("body_exited", self, "wallLeave")
 
 func _process(delta):
 	oddFrame = not oddFrame
@@ -97,6 +100,8 @@ func _process(delta):
 
 func _physics_process(delta):
 	jumpedThisFrame = false
+	
+	var additiveMotion := Vector2(0, 0)
 	
 	# Set inputs depending of current rotation
 	var inpAng = getDir($RotationPivot.rotation_degrees);
@@ -156,6 +161,8 @@ func _physics_process(delta):
 		# Make maximum fall speed slower at walls
 		if(Inp.IsActionPressed(move_left) != Inp.IsActionPressed(move_right)):
 			terminalvelocity = WALLSLIDEVELOCITY;
+			if currentWall != null:
+				additiveMotion += currentWall.constant_linear_velocity
 	
 	# Set movement maximum speed
 	var movespeed = WALKSPEED;
@@ -233,7 +240,7 @@ func _physics_process(delta):
 	oldPosition = global_position
 	var snap := Vector2.DOWN * 16 if is_on_floor() and not jumpedThisFrame else Vector2.ZERO
 	var _scale := global_scale.x
-	var actualMovement = move_and_slide_with_snap((.5 * _accel * delta + _vel) * _scale, snap, _up) / _scale;
+	var actualMovement = move_and_slide_with_snap((.5 * _accel * delta + _vel) * _scale + additiveMotion, snap, _up) / _scale;
 	velocity += accel * delta;
 	#cameraPosition = Vector2(velocity.x / abs(targetX) * 128 if targetX != 0 else 0, 0)
 	if(is_on_floor()):
@@ -332,3 +339,11 @@ func getGravitation():
 			if(rect != null && rect.has_point($RotationPivot.global_position)):
 				return node.getAngle();
 	return defaultRotation;
+
+func wallEnter(body: Node):
+	if body is StaticBody2D:
+		currentWall = body
+
+func wallLeave(body: Node):
+	if body is StaticBody2D and body == currentWall:
+		currentWall = null

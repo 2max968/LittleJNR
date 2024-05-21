@@ -5,15 +5,16 @@ type="StreamTexture"
 path.s3tc="res://.import/Blue-0-Blue.png-c96061ccc3b3d17b8e591b5004d90bd8.s3tc.stex"
 path.etc2="res://.import/Blue-0-Blue.png-c96061ccc3b3d17b8e591b5004d90bd8.etc2.stex"
 path.etc="res://.import/Blue-0-Blue.png-c96061ccc3b3d17b8e591b5004d90bd8.etc.stex"
+path.pvrtc="res://.import/Blue-0-Blue.png-c96061ccc3b3d17b8e591b5004d90bd8.pvrtc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc", "pvrtc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Models/Player/Blue-0-Blue.png"
-dest_files=[ "res://.import/Blue-0-Blue.png-c96061ccc3b3d17b8e591b5004d90bd8.s3tc.stex", "res://.import/Blue-0-Blue.png-c96061ccc3b3d17b8e591b5004d90bd8.etc2.stex", "res://.import/Blue-0-Blue.png-c96061ccc3b3d17b8e591b5004d90bd8.etc.stex" ]
+dest_files=[ "res://.import/Blue-0-Blue.png-c96061ccc3b3d17b8e591b5004d90bd8.s3tc.stex", "res://.import/Blue-0-Blue.png-c96061ccc3b3d17b8e591b5004d90bd8.etc2.stex", "res://.import/Blue-0-Blue.png-c96061ccc3b3d17b8e591b5004d90bd8.etc.stex", "res://.import/Blue-0-Blue.png-c96061ccc3b3d17b8e591b5004d90bd8.pvrtc.stex" ]
 
 [params]
 

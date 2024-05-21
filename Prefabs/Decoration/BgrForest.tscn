@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Background/BgrStickBottom.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Background/ForestDark.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/BgrMountains/sky.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/BgrMountains/mountains.png" type="Texture" id=4]
+
+[node name="BgrForest" type="ParallaxBackground"]
+script = ExtResource( 1 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0, 0 )
+motion_mirroring = Vector2( 1600, 600 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer"]
+modulate = Color( 0.6107, 0.62, 0.5084, 1 )
+texture = ExtResource( 3 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxLayer"]
+modulate = Color( 0.6107, 0.62, 0.5084, 1 )
+position = Vector2( 800, 0 )
+texture = ExtResource( 3 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.05, 0.05 )
+motion_mirroring = Vector2( 3200, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer2"]
+texture = ExtResource( 4 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxLayer2"]
+position = Vector2( 1600, 0 )
+texture = ExtResource( 4 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.4, 0.4 )
+motion_mirroring = Vector2( 3200, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer3"]
+texture = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxLayer3"]
+position = Vector2( 1600, 0 )
+texture = ExtResource( 2 )

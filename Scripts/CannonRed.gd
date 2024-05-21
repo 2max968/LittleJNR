@@ -25,15 +25,13 @@ func _ready():
 	cannonball = $"Node/Cannonball"
 
 func _process(delta):
-	if not Engine.is_editor_hint():
-		return
-	
-	var linePoints := []
-	for i in range(0, 50):
-		var p:= calcCurvePoint(global_rotation, Strength, Vector2(0, 0), i / 10.0)
-		linePoints.append(p)
-	$Node/Preview.global_position = global_position
-	$Node/Preview.points = linePoints
+	if Engine.is_editor_hint():
+		var linePoints := []
+		for i in range(0, 50):
+			var p:= calcCurvePoint(global_rotation, Strength, Vector2(0, 0), i / 10.0)
+			linePoints.append(p)
+		$Node/Preview.global_position = global_position
+		$Node/Preview.points = linePoints
 	
 
 func _physics_process(delta):

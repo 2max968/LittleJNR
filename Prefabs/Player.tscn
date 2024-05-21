@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Sounds/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://Sounds/step0.wav" type="AudioStream" id=2]
@@ -17,6 +17,9 @@ shader_param/Color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="RectangleShape2D" id=30]
 extents = Vector2( 16, 16 )
+
+[sub_resource type="RectangleShape2D" id=31]
+extents = Vector2( 16.2, 10 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
@@ -105,3 +108,9 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -16 )
 shape = SubResource( 30 )
+
+[node name="WallDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallDetector"]
+position = Vector2( 0, -16 )
+shape = SubResource( 31 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://Prefabs/LevelBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tilesets/Tileset.tres" type="TileSet" id=2]
@@ -30,8 +30,86 @@
 [ext_resource path="res://Sprites/WaterfallWideTop.png" type="Texture" id=28]
 [ext_resource path="res://Sprites/Waves.png" type="Texture" id=29]
 [ext_resource path="res://Shaders/ReflectiveWater.tres" type="Shader" id=30]
-[ext_resource path="res://Sprites/WaterfallWide2.png" type="Texture" id=31]
-[ext_resource path="res://Sprites/WaterfallWide2_Displacement.png" type="Texture" id=32]
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 28 )
+region = Rect2( 0, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 28 )
+region = Rect2( 48, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 28 )
+region = Rect2( 96, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 28 )
+region = Rect2( 144, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 28 )
+region = Rect2( 192, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 28 )
+region = Rect2( 240, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 28 )
+region = Rect2( 288, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 28 )
+region = Rect2( 336, 0, 48, 16 )
+
+[sub_resource type="SpriteFrames" id=42]
+animations = [ {
+"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 27 )
+region = Rect2( 0, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 27 )
+region = Rect2( 48, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 27 )
+region = Rect2( 96, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 27 )
+region = Rect2( 144, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 27 )
+region = Rect2( 192, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 27 )
+region = Rect2( 240, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 27 )
+region = Rect2( 288, 0, 48, 16 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 27 )
+region = Rect2( 336, 0, 48, 16 )
+
+[sub_resource type="SpriteFrames" id=43]
+animations = [ {
+"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
 
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 32, 16 )
@@ -89,136 +167,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1, 2 )
 }
 
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 28 )
-region = Rect2( 0, 0, 48, 16 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 28 )
-region = Rect2( 48, 0, 48, 16 )
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 28 )
-region = Rect2( 96, 0, 48, 16 )
-
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 28 )
-region = Rect2( 144, 0, 48, 16 )
-
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 28 )
-region = Rect2( 192, 0, 48, 16 )
-
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 28 )
-region = Rect2( 240, 0, 48, 16 )
-
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 28 )
-region = Rect2( 288, 0, 48, 16 )
-
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 28 )
-region = Rect2( 336, 0, 48, 16 )
-
-[sub_resource type="SpriteFrames" id=42]
-animations = [ {
-"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
-"loop": true,
-"name": "default",
-"speed": 10.0
-} ]
-
-[sub_resource type="Shader" id=44]
-code = "shader_type canvas_item;
-
-uniform sampler2D albedo;
-uniform sampler2D displacementX;
-
-uniform int columns = 8;
-uniform float FPS = 10;
-uniform float displacementFactorX = 8;
-uniform float alpha = 1;
-
-void vertex()
-{
-	
-}
-
-void fragment()
-{
-	float uvy = UV.y;
-	float uvx = mod(UV.x / float(columns), 1);
-	float frame = floor(TIME * FPS);
-	uvx += frame / float(columns);
-	uvx = mod(uvx, 1);
-	vec2 uv = vec2(uvx, uvy);
-	vec4 fg = texture(albedo, uv);
-	
-	vec2 displacement = vec2((texture(displacementX, uv).r - 0.5) * displacementFactorX, 0) * SCREEN_PIXEL_SIZE;
-	vec4 bg = texture(SCREEN_TEXTURE, SCREEN_UV + displacement);
-	COLOR = mix(bg, fg, fg.a*alpha);
-}"
-
-[sub_resource type="ShaderMaterial" id=45]
-shader = SubResource( 44 )
-shader_param/columns = 8
-shader_param/FPS = 10.0
-shader_param/displacementFactorX = 8.0
-shader_param/alpha = 0.5
-shader_param/albedo = ExtResource( 31 )
-shader_param/displacementX = ExtResource( 32 )
-
-[sub_resource type="Gradient" id=47]
-
-[sub_resource type="GradientTexture2D" id=46]
-gradient = SubResource( 47 )
-width = 192
-
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 27 )
-region = Rect2( 0, 0, 48, 16 )
-
-[sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 27 )
-region = Rect2( 48, 0, 48, 16 )
-
-[sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 27 )
-region = Rect2( 96, 0, 48, 16 )
-
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 27 )
-region = Rect2( 144, 0, 48, 16 )
-
-[sub_resource type="AtlasTexture" id=33]
-atlas = ExtResource( 27 )
-region = Rect2( 192, 0, 48, 16 )
-
-[sub_resource type="AtlasTexture" id=34]
-atlas = ExtResource( 27 )
-region = Rect2( 240, 0, 48, 16 )
-
-[sub_resource type="AtlasTexture" id=35]
-atlas = ExtResource( 27 )
-region = Rect2( 288, 0, 48, 16 )
-
-[sub_resource type="AtlasTexture" id=36]
-atlas = ExtResource( 27 )
-region = Rect2( 336, 0, 48, 16 )
-
-[sub_resource type="SpriteFrames" id=43]
-animations = [ {
-"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ) ],
-"loop": true,
-"name": "default",
-"speed": 10.0
-} ]
-
 [sub_resource type="ShaderMaterial" id=41]
 shader = ExtResource( 30 )
 shader_param/scale = Vector2( 42, 4.00782 )
-shader_param/y_zoom = 1.33484
+shader_param/y_zoom = 0.420197
 shader_param/reflection_scale = 0.75
 shader_param/color = Color( 0.00392157, 0.235294, 0.352941, 0.364706 )
 shader_param/camera_position = 0.68
@@ -446,8 +398,451 @@ position = Vector2( 688, 4352 )
 [node name="ThornsH10" parent="Level/Node2D" instance=ExtResource( 19 )]
 position = Vector2( 656, 4352 )
 
+[node name="Waterfall2" type="Node2D" parent="Level"]
+position = Vector2( 544, 6368 )
+script = ExtResource( 26 )
+
+[node name="Top" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 0, -3200 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 42 )
+frame = 5
+playing = true
+
+[node name="AnimatedSprite5" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -120 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite6" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -120 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -2 )
+
+[node name="AnimatedSprite7" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -120 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, 14 )
+
+[node name="AnimatedSprite8" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, 72 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite55" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, 72 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -2 )
+
+[node name="AnimatedSprite56" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, 72 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, 14 )
+
+[node name="AnimatedSprite57" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, 200 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 6
+playing = true
+offset = Vector2( -6, -2 )
+
+[node name="AnimatedSprite58" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, 200 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 6
+playing = true
+offset = Vector2( -6, 14 )
+
+[node name="AnimatedSprite9" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -376 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite10" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -376 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -2 )
+
+[node name="AnimatedSprite11" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -376 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, 14 )
+
+[node name="AnimatedSprite12" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -376 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, 30 )
+
+[node name="AnimatedSprite13" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -632 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite14" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -632 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -2 )
+
+[node name="AnimatedSprite15" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -632 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, 14 )
+
+[node name="AnimatedSprite16" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -632 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, 30 )
+
+[node name="AnimatedSprite17" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -888 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite18" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -888 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -2 )
+
+[node name="AnimatedSprite19" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -888 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, 14 )
+
+[node name="AnimatedSprite20" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -888 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, 30 )
+
+[node name="AnimatedSprite21" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -1144 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite22" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -1144 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -2 )
+
+[node name="AnimatedSprite23" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -1144 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, 14 )
+
+[node name="AnimatedSprite24" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -1144 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, 30 )
+
+[node name="AnimatedSprite25" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -1400 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite26" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -1400 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -2 )
+
+[node name="AnimatedSprite27" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -1400 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, 14 )
+
+[node name="AnimatedSprite28" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -1400 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, 30 )
+
+[node name="AnimatedSprite29" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -1656 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite30" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -1656 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -2 )
+
+[node name="AnimatedSprite31" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -1656 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, 14 )
+
+[node name="AnimatedSprite32" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -1656 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, 30 )
+
+[node name="AnimatedSprite33" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -1912 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite34" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -1912 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -2 )
+
+[node name="AnimatedSprite35" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -1912 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, 14 )
+
+[node name="AnimatedSprite36" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -1912 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, 30 )
+
+[node name="AnimatedSprite37" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -2168 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite41" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -2232 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite42" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -2296 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite43" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -2360 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite44" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -2424 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite45" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -2488 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite46" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -2552 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite47" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -2616 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite48" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -2680 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite49" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -2744 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite50" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -2808 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite51" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -2872 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite52" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -2936 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite53" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -3000 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite54" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -3064 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -18 )
+
+[node name="AnimatedSprite38" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -2168 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, -2 )
+
+[node name="AnimatedSprite39" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -2168 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, 14 )
+
+[node name="AnimatedSprite40" type="AnimatedSprite" parent="Level/Waterfall2"]
+position = Vector2( 24, -2168 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 43 )
+frame = 7
+playing = true
+offset = Vector2( -6, 30 )
+
 [node name="Player" parent="Level" instance=ExtResource( 3 )]
-position = Vector2( 656, 6624 )
+position = Vector2( 128, 6144 )
 
 [node name="Blue" type="TileMap" parent="Level"]
 tile_set = ExtResource( 12 )
@@ -662,444 +1057,6 @@ playback_speed = 0.25
 anims/move = SubResource( 18 )
 script = ExtResource( 14 )
 animationName = "move"
-
-[node name="Waterfall2" type="Node2D" parent="Level"]
-position = Vector2( 544, 6368 )
-script = ExtResource( 26 )
-
-[node name="Top" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 0, -3200 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 42 )
-frame = 4
-playing = true
-
-[node name="Sprite1" type="Sprite" parent="Level/Waterfall2"]
-material = SubResource( 45 )
-position = Vector2( 6, 226 )
-scale = Vector2( 1, 0.999999 )
-texture = SubResource( 46 )
-offset = Vector2( -6, 30 )
-
-[node name="Sprite2" type="Sprite" parent="Level/Waterfall2"]
-material = SubResource( 45 )
-position = Vector2( 6.00001, 162 )
-scale = Vector2( 1, 0.999998 )
-texture = SubResource( 46 )
-offset = Vector2( -6, 30 )
-
-[node name="Sprite3" type="Sprite" parent="Level/Waterfall2"]
-material = SubResource( 45 )
-position = Vector2( 5.99997, 97.9996 )
-scale = Vector2( 1, 1.00001 )
-texture = SubResource( 46 )
-offset = Vector2( -6, 30 )
-
-[node name="Sprite4" type="Sprite" parent="Level/Waterfall2"]
-material = SubResource( 45 )
-position = Vector2( 6, 34.0001 )
-scale = Vector2( 1, 0.999998 )
-texture = SubResource( 46 )
-offset = Vector2( -6, 30 )
-
-[node name="Sprite5" type="Sprite" parent="Level/Waterfall2"]
-material = SubResource( 45 )
-position = Vector2( 5.99999, -29.9998 )
-scale = Vector2( 1, 1 )
-texture = SubResource( 46 )
-offset = Vector2( -6, 30 )
-
-[node name="AnimatedSprite5" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -120 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite6" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -120 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -2 )
-
-[node name="AnimatedSprite7" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -120 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, 14 )
-
-[node name="AnimatedSprite9" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -376 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite10" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -376 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -2 )
-
-[node name="AnimatedSprite11" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -376 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, 14 )
-
-[node name="AnimatedSprite12" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -376 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, 30 )
-
-[node name="AnimatedSprite13" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -632 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite14" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -632 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -2 )
-
-[node name="AnimatedSprite15" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -632 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, 14 )
-
-[node name="AnimatedSprite16" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -632 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, 30 )
-
-[node name="AnimatedSprite17" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -888 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite18" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -888 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -2 )
-
-[node name="AnimatedSprite19" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -888 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, 14 )
-
-[node name="AnimatedSprite20" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -888 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, 30 )
-
-[node name="AnimatedSprite21" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -1144 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite22" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -1144 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -2 )
-
-[node name="AnimatedSprite23" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -1144 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, 14 )
-
-[node name="AnimatedSprite24" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -1144 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, 30 )
-
-[node name="AnimatedSprite25" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -1400 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite26" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -1400 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -2 )
-
-[node name="AnimatedSprite27" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -1400 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, 14 )
-
-[node name="AnimatedSprite28" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -1400 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, 30 )
-
-[node name="AnimatedSprite29" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -1656 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite30" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -1656 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -2 )
-
-[node name="AnimatedSprite31" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -1656 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, 14 )
-
-[node name="AnimatedSprite32" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -1656 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, 30 )
-
-[node name="AnimatedSprite33" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -1912 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite34" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -1912 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -2 )
-
-[node name="AnimatedSprite35" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -1912 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, 14 )
-
-[node name="AnimatedSprite36" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -1912 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, 30 )
-
-[node name="AnimatedSprite37" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -2168 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite41" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -2232 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite42" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -2296 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite43" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -2360 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite44" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -2424 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite45" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -2488 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite46" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -2552 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite47" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -2616 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite48" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -2680 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite49" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -2744 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite50" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -2808 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite51" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -2872 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite52" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -2936 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite53" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -3000 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite54" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -3064 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -18 )
-
-[node name="AnimatedSprite38" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -2168 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, -2 )
-
-[node name="AnimatedSprite39" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -2168 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, 14 )
-
-[node name="AnimatedSprite40" type="AnimatedSprite" parent="Level/Waterfall2"]
-position = Vector2( 24, -2168 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 43 )
-frame = 6
-playing = true
-offset = Vector2( -6, 30 )
 
 [node name="Water" type="Sprite" parent="Level"]
 pause_mode = 2
