@@ -132,6 +132,7 @@ anchor_bottom = 1.0
 
 [node name="PauseMenu" type="Control" parent="CanvasLayer"]
 pause_mode = 2
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
@@ -315,6 +316,7 @@ align = 2
 
 [node name="TouchButtons" type="Control" parent="CanvasLayer"]
 pause_mode = 2
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 20 )

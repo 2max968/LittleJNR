@@ -29,6 +29,18 @@ func _physics_process(delta):
 		if len(instances) < max_instances or max_instances == 0:
 			var obj := prefab_scene.instance()
 			get_parent().add_child(obj)
+			var layer := GetParentLayer()
+			if layer != null:
+				layer.setCollision(obj)
 			obj.global_position = global_position
 			obj.global_rotation = global_rotation
 			instances.append(obj)
+
+func GetParentLayer() -> LevelLayer:
+	var parent : Node = get_parent()
+	while parent != null:
+		if parent is LevelLayer:
+			var layer : LevelLayer = parent
+			return layer
+		parent = parent.get_parent()
+	return null
