@@ -40,6 +40,7 @@ script = ExtResource( 5 )
 period = 1.0
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2( -1092, -604 )
 shape = SubResource( 2 )
 action = "ui_touchinp"
 

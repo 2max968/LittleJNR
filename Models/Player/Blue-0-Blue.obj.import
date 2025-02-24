@@ -13,8 +13,9 @@ dest_files=[ "res://.import/Blue-0-Blue.obj-72163b6a8eeeef5b4d084c7794beab5d.mes
 
 [params]
 
-generate_tangents=true
 scale_mesh=Vector3( 1, 1, 1 )
 offset_mesh=Vector3( 0, 0, 0 )
-octahedral_compression=true
 optimize_mesh_flags=4286
+generate_tangents=true
+vertex_cache_optimization=true
+octahedral_compression=true
