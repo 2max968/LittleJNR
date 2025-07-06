@@ -3,6 +3,7 @@ class_name CamController
 
 var Position : Vector2;
 var ObjectToFollow : Node2D;
+var FollowOffset: Vector2 = Vector2(0, 0)
 var hlimitNode : Node2D;
 var vlimitNode : Node2D;
 var bgrSprite : TextureRect;
@@ -47,7 +48,7 @@ func _process(_delta : float):
 		
 	if ObjectToFollow != null:
 		var add_pos = ObjectToFollow.get("cameraPosition")
-		var target_pos := getGlobalPosition(ObjectToFollow)
+		var target_pos := getGlobalPosition(ObjectToFollow) + FollowOffset
 		if add_pos is Vector2:
 			target_pos += add_pos
 		if jump:
@@ -58,6 +59,11 @@ func _process(_delta : float):
 	
 func followObject(node : Node2D):
 	ObjectToFollow = node;
+	FollowOffset = Vector2(0,0)
+	
+func followObjectOffset(node: Node2D, offset: Vector2):
+	ObjectToFollow = node
+	FollowOffset = offset
 
 static func getGlobalPosition(node: Node2D) -> Vector2:
 	var pos := node.global_position

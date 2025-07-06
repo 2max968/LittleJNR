@@ -63,7 +63,7 @@ func selectWorld(index : int):
 	$"%LblWorldTitle".text = wid + "\n" + LevelProperties.GetWorldDescription(wid)
 	$"%LstLevels".clear()
 	
-	targetCamX = 800 * index
+	targetCamX = 2 * 800 * index
 	
 	if worldCost > starCount:
 		worldActive = false
