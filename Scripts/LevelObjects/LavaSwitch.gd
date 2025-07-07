@@ -1,6 +1,7 @@
 extends Area2D
 
 export var YPosition: float = 10
+export var YPosition2: float = 0
 export var time: float = 1.0
 var activated := false
 
@@ -16,5 +17,5 @@ func body_entered(body: Node):
 			return
 				
 		activated = true
-		get_tree().call_group("lava", "move_step", global_position.y + YPosition * 32, time)
+		get_tree().call_group("lava", "move_step", global_position.y + YPosition * 32, YPosition2 * 32, time)
 		$AnimatedSprite.frame = 1
