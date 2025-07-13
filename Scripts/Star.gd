@@ -7,6 +7,17 @@ var animation : float = 0
 
 func _init():
 	add_to_group("levelControl")
+	
+func _ready():
+	var path := get_tree().current_scene.filename
+	var world := LevelProperties.GetWorldName(path)
+	var level := LevelProperties.GetLevelName(path)
+	if Savegame.getStar(world, level):
+		$Sprite1.visible = false
+		$Sprite2.visible = true
+	else:
+		$Sprite1.visible = true
+		$Sprite2.visible = false
 
 func _on_Star_body_entered(body):
 	if body is Player_Base and not following:
@@ -25,10 +36,12 @@ func _process(delta):
 	
 	if animation > 0:
 		var sx := cos((2 - animation*animation)*2*PI)
-		$Sprite.scale.x = sx
+		$Sprite1.scale.x = sx
+		$Sprite2.scale.x = sx
 		animation -= delta
 	else:
-		$Sprite.scale.x = 1
+		$Sprite1.scale.x = 1
+		$Sprite2.scale.x = 1
 
 func finishLevel(nextScene : String):
 	if following:
