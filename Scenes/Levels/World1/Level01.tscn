@@ -437,6 +437,7 @@ position = Vector2( 120, 80 )
 script = ExtResource( 19 )
 ScaleFactor = 0.5
 LayerIndex = 1
+Offset = Vector2( 0, -128 )
 
 [node name="Node2D" type="Node2D" parent="ParallaxBackground/LevelLayer"]
 modulate = Color( 0.73114, 0.773438, 0.773438, 1 )

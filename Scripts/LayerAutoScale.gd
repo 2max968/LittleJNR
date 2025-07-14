@@ -5,6 +5,7 @@ export var ScaleFactor : float = 1.0
 export var ZeroX := false
 export var ZeroY := true
 export var LayerIndex : int = 0
+export var Offset := Vector2(0, 0)
 
 func _init():
 	pass
@@ -21,7 +22,8 @@ func _ready():
 	if ZeroY:
 		$Node2D.global_position.y = 0
 		
-	$Node2D.global_position.y += vlimitNode.global_position.y - ScaleFactor * vlimitNode.global_position.y #- (1-ScaleFactor)*128
+	$Node2D.global_position.y += vlimitNode.global_position.y - ScaleFactor * vlimitNode.global_position.y
+	$Node2D.global_position += Offset
 	
 	setCollision(self)
 
